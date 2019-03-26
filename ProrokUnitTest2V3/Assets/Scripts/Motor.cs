@@ -26,6 +26,7 @@ public struct Motor
 
     public float GetAngle()
     {
+        /*    Return the actual position of the motor    */
         return MotorJoint.angle;
     }
 }

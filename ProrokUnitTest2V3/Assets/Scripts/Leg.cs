@@ -11,6 +11,7 @@ public struct Leg
     {
         var datas = new Dictionary<string, float>
         {
+            /*    Return the actual angle of the leg's motors    */
             {legBot.Name, legBot.GetAngle()}, {legTop.Name, legTop.GetAngle()}, {shoulder.Name, shoulder.GetAngle()}
         };
         return datas;

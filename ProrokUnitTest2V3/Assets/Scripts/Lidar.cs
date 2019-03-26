@@ -13,11 +13,16 @@ public class Lidar : MonoBehaviour
 
     public GameObject lidar;
 
-    private static IEnumerable<Point> _measures;
+    private static IEnumerable<LidarPoint> _measures;
 
-    public static IEnumerable<Point> GetMeasures()
+    public static IEnumerable<LidarPoint> GetMeasures()
     {
         return _measures;
+    }
+
+    private void Start()
+    {
+        _measures = Scan();
     }
 
     private void Update()
@@ -26,9 +31,12 @@ public class Lidar : MonoBehaviour
   
     }
 
-    private IEnumerable<Point> Scan()
+    private IEnumerable<LidarPoint> Scan()
     {
-        var measures = new List<Point>();
+        /*    Return all the point measured by the Lidar. Each point contain the horizontal angle,
+         *    the vertical angle and the distance between the Lidar and the hit object.
+         */
+        var measures = new List<LidarPoint>();
         var position = lidar.transform.position;
         var lidarDirection = Quaternion.Euler(verticalOffset, horizontalOffset, 0) * lidar.transform.forward;
 
@@ -45,7 +53,7 @@ public class Lidar : MonoBehaviour
                 {
                     Debug.DrawRay(position, direction * rayRange, Color.green);
                 }
-                measures.Add(new Point(hAngle, vAngle, hit.distance));
+                measures.Add(new LidarPoint(hAngle, vAngle, hit.distance));
             }
         }
         return measures;

@@ -1,32 +1,52 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class Controller : MonoBehaviour
 {
-    [FormerlySerializedAs("motorSpeed")] public int speed;
-    [FormerlySerializedAs("motorTorque")] public int torque;
+    public bool demoWalk;
+    public int speed;
+    public int torque;
 
-    [FormerlySerializedAs("prorokUnitTest2")] public ProrokTestUnit2 ProrokTestUnit2;
+    public GameObject generalPurposeSensor;
+    public ProrokTestUnit2 prorokTestUnit2;
 
-    private static IEnumerable<KeyValuePair<string, float>> _motorsDatas;
+    private static IEnumerable<KeyValuePair<string, float>>
+        _motorsDatas; /*    Stores the actual angle of each motors    */
+
+    private static IEnumerable<KeyValuePair<string, float>>
+        _sensorValues; /*    Stores roll, pitch, yaw and  altitude of the robot    */
+
+    void Start()
+    {
+        InitRobot();
+        if (demoWalk) InitWalkDemo();
+        RefreshMotors();
+        RefreshSensorValues();
+        
+    }
+
+    void Update()
+    {
+        if (demoWalk) WalkDemo();
+        RefreshMotors();
+        RefreshSensorValues();
+    }
 
     public static IEnumerable<KeyValuePair<string, float>> GetMotorsDatas()
     {
         return _motorsDatas;
     }
 
-    void Start()
+    private void RefreshSensorValues()
     {
-        InitRobot();
-        InitWalkDemo(); //    <===== DEMO
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        WalkDemo(); //    <===== DEMO
-        RefreshMotors();
+        var newValues = new Dictionary<string, float>();
+        generalPurposeSensor.transform.localRotation.ToAngleAxis(out var angle, out var axis);
+        newValues.Add("roll", angle * axis.z);
+        newValues.Add("pitch", angle * axis.x);
+        newValues.Add("yaw", angle * axis.y);
+        newValues.Add("altitude", generalPurposeSensor.transform.localPosition.y);
+        _sensorValues = newValues;
     }
 
     private static void SetMotorPosition(HingeJoint motor, float position, int speed, int torque, float xMin,
@@ -39,8 +59,8 @@ public class Controller : MonoBehaviour
          */
         var limits = motor.limits;
         position = position % 180;
-        var temp = motor.motor;
-        temp.force = torque;
+        var newMotor = motor.motor;
+        newMotor.force = torque;
         var angle = motor.angle;
         if (((int) position).Equals((int) angle))
         {
@@ -53,7 +73,7 @@ public class Controller : MonoBehaviour
                 motor.limits = limits;
             }
 
-            temp.targetVelocity = 0;
+            newMotor.targetVelocity = 0;
         }
         else
         {
@@ -67,10 +87,10 @@ public class Controller : MonoBehaviour
             }
 
             /*    Chose the right velocity to reach the target position    */
-            temp.targetVelocity = position < angle ? -speed : speed;
+            newMotor.targetVelocity = position < angle ? -speed : speed;
         }
 
-        motor.motor = temp;
+        motor.motor = newMotor;
     }
 
     private static HingeJoint InitMotor(GameObject motor, float xMin, float xMax)
@@ -88,54 +108,66 @@ public class Controller : MonoBehaviour
     {
         /*    Refresh motors positions and update motors datas    */
         /*    Leg Back Right Bot    */
-        SetMotorPosition(ProrokTestUnit2.backRight.legBot.MotorJoint, ProrokTestUnit2.backRight.legBot.targetPosition, speed, torque,
-            ProrokTestUnit2.backRight.legBot.angleMin, ProrokTestUnit2.backRight.legBot.angleMax);
+        SetMotorPosition(prorokTestUnit2.backRight.legBot.MotorJoint, prorokTestUnit2.backRight.legBot.targetPosition,
+            speed, torque,
+            prorokTestUnit2.backRight.legBot.angleMin, prorokTestUnit2.backRight.legBot.angleMax);
 
         /*    Leg Back Right Top    */
-        SetMotorPosition(ProrokTestUnit2.backRight.legTop.MotorJoint, ProrokTestUnit2.backRight.legTop.targetPosition, speed, torque,
-            ProrokTestUnit2.backRight.legTop.angleMin, ProrokTestUnit2.backRight.legTop.angleMax);
+        SetMotorPosition(prorokTestUnit2.backRight.legTop.MotorJoint, prorokTestUnit2.backRight.legTop.targetPosition,
+            speed, torque,
+            prorokTestUnit2.backRight.legTop.angleMin, prorokTestUnit2.backRight.legTop.angleMax);
 
         /*    Shoulder Back Right*/
-        SetMotorPosition(ProrokTestUnit2.backRight.shoulder.MotorJoint, ProrokTestUnit2.backRight.shoulder.targetPosition, speed, torque,
-            ProrokTestUnit2.backRight.shoulder.angleMin, ProrokTestUnit2.backRight.shoulder.angleMax);
+        SetMotorPosition(prorokTestUnit2.backRight.shoulder.MotorJoint,
+            prorokTestUnit2.backRight.shoulder.targetPosition, speed, torque,
+            prorokTestUnit2.backRight.shoulder.angleMin, prorokTestUnit2.backRight.shoulder.angleMax);
 
         /*    Leg Back Left Bot    */
-        SetMotorPosition(ProrokTestUnit2.backLeft.legBot.MotorJoint, ProrokTestUnit2.backLeft.legBot.targetPosition, speed, torque,
-            ProrokTestUnit2.backLeft.legBot.angleMin, ProrokTestUnit2.backLeft.legBot.angleMax);
+        SetMotorPosition(prorokTestUnit2.backLeft.legBot.MotorJoint, prorokTestUnit2.backLeft.legBot.targetPosition,
+            speed, torque,
+            prorokTestUnit2.backLeft.legBot.angleMin, prorokTestUnit2.backLeft.legBot.angleMax);
 
         /*    Leg Front Right Top    */
-        SetMotorPosition(ProrokTestUnit2.backLeft.legTop.MotorJoint, ProrokTestUnit2.backLeft.legTop.targetPosition, speed, torque,
-            ProrokTestUnit2.backLeft.legTop.angleMin, ProrokTestUnit2.backLeft.legTop.angleMax);
+        SetMotorPosition(prorokTestUnit2.backLeft.legTop.MotorJoint, prorokTestUnit2.backLeft.legTop.targetPosition,
+            speed, torque,
+            prorokTestUnit2.backLeft.legTop.angleMin, prorokTestUnit2.backLeft.legTop.angleMax);
 
         /*    Shoulder Front Right    */
-        SetMotorPosition(ProrokTestUnit2.backLeft.shoulder.MotorJoint, ProrokTestUnit2.backLeft.shoulder.targetPosition, speed, torque,
-            ProrokTestUnit2.backLeft.shoulder.angleMin, ProrokTestUnit2.backLeft.shoulder.angleMax);
+        SetMotorPosition(prorokTestUnit2.backLeft.shoulder.MotorJoint, prorokTestUnit2.backLeft.shoulder.targetPosition,
+            speed, torque,
+            prorokTestUnit2.backLeft.shoulder.angleMin, prorokTestUnit2.backLeft.shoulder.angleMax);
 
         /*    Leg Front Right Bot    */
-        SetMotorPosition(ProrokTestUnit2.frontRight.legBot.MotorJoint, ProrokTestUnit2.frontRight.legBot.targetPosition, speed, torque,
-            ProrokTestUnit2.frontRight.legBot.angleMin, ProrokTestUnit2.frontRight.legBot.angleMax);
+        SetMotorPosition(prorokTestUnit2.frontRight.legBot.MotorJoint, prorokTestUnit2.frontRight.legBot.targetPosition,
+            speed, torque,
+            prorokTestUnit2.frontRight.legBot.angleMin, prorokTestUnit2.frontRight.legBot.angleMax);
 
         /*    Leg Front Right Top    */
-        SetMotorPosition(ProrokTestUnit2.frontRight.legTop.MotorJoint, ProrokTestUnit2.frontRight.legTop.targetPosition, speed, torque,
-            ProrokTestUnit2.frontRight.legTop.angleMin, ProrokTestUnit2.frontRight.legTop.angleMax);
+        SetMotorPosition(prorokTestUnit2.frontRight.legTop.MotorJoint, prorokTestUnit2.frontRight.legTop.targetPosition,
+            speed, torque,
+            prorokTestUnit2.frontRight.legTop.angleMin, prorokTestUnit2.frontRight.legTop.angleMax);
 
         /*    Shoulder Front Right    */
-        SetMotorPosition(ProrokTestUnit2.frontRight.shoulder.MotorJoint, -ProrokTestUnit2.frontRight.shoulder.targetPosition, speed, torque,
-            ProrokTestUnit2.frontRight.shoulder.angleMin, ProrokTestUnit2.frontRight.shoulder.angleMax);
+        SetMotorPosition(prorokTestUnit2.frontRight.shoulder.MotorJoint,
+            -prorokTestUnit2.frontRight.shoulder.targetPosition, speed, torque,
+            prorokTestUnit2.frontRight.shoulder.angleMin, prorokTestUnit2.frontRight.shoulder.angleMax);
 
         /*    Leg Front Left Bot    */
-        SetMotorPosition(ProrokTestUnit2.frontLeft.legBot.MotorJoint, ProrokTestUnit2.frontLeft.legBot.targetPosition, speed, torque,
-            ProrokTestUnit2.frontLeft.legBot.angleMin, ProrokTestUnit2.frontLeft.legBot.angleMax);
+        SetMotorPosition(prorokTestUnit2.frontLeft.legBot.MotorJoint, prorokTestUnit2.frontLeft.legBot.targetPosition,
+            speed, torque,
+            prorokTestUnit2.frontLeft.legBot.angleMin, prorokTestUnit2.frontLeft.legBot.angleMax);
 
         /*    Leg Front Left Top    */
-        SetMotorPosition(ProrokTestUnit2.frontLeft.legTop.MotorJoint, ProrokTestUnit2.frontLeft.legTop.targetPosition, speed, torque,
-            ProrokTestUnit2.frontLeft.legTop.angleMin, ProrokTestUnit2.frontLeft.legTop.angleMax);
+        SetMotorPosition(prorokTestUnit2.frontLeft.legTop.MotorJoint, prorokTestUnit2.frontLeft.legTop.targetPosition,
+            speed, torque,
+            prorokTestUnit2.frontLeft.legTop.angleMin, prorokTestUnit2.frontLeft.legTop.angleMax);
 
         /*    Shoulder Front Left    */
-        SetMotorPosition(ProrokTestUnit2.frontLeft.shoulder.MotorJoint, -ProrokTestUnit2.frontLeft.shoulder.targetPosition, speed, torque,
-            ProrokTestUnit2.frontLeft.shoulder.angleMin, ProrokTestUnit2.frontLeft.shoulder.angleMax);
+        SetMotorPosition(prorokTestUnit2.frontLeft.shoulder.MotorJoint,
+            -prorokTestUnit2.frontLeft.shoulder.targetPosition, speed, torque,
+            prorokTestUnit2.frontLeft.shoulder.angleMin, prorokTestUnit2.frontLeft.shoulder.angleMax);
 
-        _motorsDatas = ProrokTestUnit2.GetMotorDatas();
+        _motorsDatas = prorokTestUnit2.GetMotorDatas();
     }
 
     private void InitMotors()
@@ -143,57 +175,64 @@ public class Controller : MonoBehaviour
         /*    Initialize motors    */
 
         /*    Leg Back Right Bot    */
-        ProrokTestUnit2.backRight.legBot.MotorJoint = InitMotor(ProrokTestUnit2.backRight.legBot.motor, ProrokTestUnit2.backRight.legBot.angleMin,
-            ProrokTestUnit2.backRight.legBot.angleMax);
+        prorokTestUnit2.backRight.legBot.MotorJoint = InitMotor(prorokTestUnit2.backRight.legBot.motor,
+            prorokTestUnit2.backRight.legBot.angleMin,
+            prorokTestUnit2.backRight.legBot.angleMax);
 
         /*    Leg Back Right Top    */
-        ProrokTestUnit2.backRight.legTop.MotorJoint = InitMotor(ProrokTestUnit2.backRight.legTop.motor, ProrokTestUnit2.backRight.legTop.angleMin,
-            ProrokTestUnit2.backRight.legTop.angleMax);
+        prorokTestUnit2.backRight.legTop.MotorJoint = InitMotor(prorokTestUnit2.backRight.legTop.motor,
+            prorokTestUnit2.backRight.legTop.angleMin,
+            prorokTestUnit2.backRight.legTop.angleMax);
 
         /*    Shoulder Back Right*/
-        ProrokTestUnit2.backRight.shoulder.MotorJoint =
-            InitMotor(ProrokTestUnit2.backRight.shoulder.motor, ProrokTestUnit2.backRight.shoulder.angleMin,
-                ProrokTestUnit2.backRight.shoulder.angleMax);
+        prorokTestUnit2.backRight.shoulder.MotorJoint =
+            InitMotor(prorokTestUnit2.backRight.shoulder.motor, prorokTestUnit2.backRight.shoulder.angleMin,
+                prorokTestUnit2.backRight.shoulder.angleMax);
 
         /*    Leg Back Left Bot    */
-        ProrokTestUnit2.backLeft.legBot.MotorJoint = InitMotor(ProrokTestUnit2.backLeft.legBot.motor, ProrokTestUnit2.backLeft.legBot.angleMin,
-            ProrokTestUnit2.backLeft.legBot.angleMax);
+        prorokTestUnit2.backLeft.legBot.MotorJoint = InitMotor(prorokTestUnit2.backLeft.legBot.motor,
+            prorokTestUnit2.backLeft.legBot.angleMin,
+            prorokTestUnit2.backLeft.legBot.angleMax);
 
         /*    Leg Back Left Top    */
-        ProrokTestUnit2.backLeft.legTop.MotorJoint = InitMotor(ProrokTestUnit2.backLeft.legTop.motor, ProrokTestUnit2.backLeft.legTop.angleMin,
-            ProrokTestUnit2.backLeft.legTop.angleMax);
+        prorokTestUnit2.backLeft.legTop.MotorJoint = InitMotor(prorokTestUnit2.backLeft.legTop.motor,
+            prorokTestUnit2.backLeft.legTop.angleMin,
+            prorokTestUnit2.backLeft.legTop.angleMax);
 
         /*    Shoulder Back Left*/
-        ProrokTestUnit2.backLeft.shoulder.MotorJoint =
-            InitMotor(ProrokTestUnit2.backLeft.shoulder.motor, ProrokTestUnit2.backLeft.shoulder.angleMin,
-                ProrokTestUnit2.backLeft.shoulder.angleMax);
+        prorokTestUnit2.backLeft.shoulder.MotorJoint =
+            InitMotor(prorokTestUnit2.backLeft.shoulder.motor, prorokTestUnit2.backLeft.shoulder.angleMin,
+                prorokTestUnit2.backLeft.shoulder.angleMax);
 
         /*    Leg Front Right Bot    */
-        ProrokTestUnit2.frontRight.legBot.MotorJoint = InitMotor(ProrokTestUnit2.frontRight.legBot.motor, ProrokTestUnit2.frontRight.legBot.angleMin,
-            ProrokTestUnit2.frontRight.legBot.angleMax);
+        prorokTestUnit2.frontRight.legBot.MotorJoint = InitMotor(prorokTestUnit2.frontRight.legBot.motor,
+            prorokTestUnit2.frontRight.legBot.angleMin,
+            prorokTestUnit2.frontRight.legBot.angleMax);
 
         /*    Leg Front Right Top    */
-        ProrokTestUnit2.frontRight.legTop.MotorJoint = InitMotor(ProrokTestUnit2.frontRight.legTop.motor, ProrokTestUnit2.frontRight.legTop.angleMin,
-            ProrokTestUnit2.frontRight.legTop.angleMax);
+        prorokTestUnit2.frontRight.legTop.MotorJoint = InitMotor(prorokTestUnit2.frontRight.legTop.motor,
+            prorokTestUnit2.frontRight.legTop.angleMin,
+            prorokTestUnit2.frontRight.legTop.angleMax);
 
         /*    Shoulder Front Right    */
-        ProrokTestUnit2.frontRight.shoulder.MotorJoint =
-            InitMotor(ProrokTestUnit2.frontRight.shoulder.motor, ProrokTestUnit2.frontRight.shoulder.angleMin,
-                ProrokTestUnit2.frontRight.shoulder.angleMax);
+        prorokTestUnit2.frontRight.shoulder.MotorJoint =
+            InitMotor(prorokTestUnit2.frontRight.shoulder.motor, prorokTestUnit2.frontRight.shoulder.angleMin,
+                prorokTestUnit2.frontRight.shoulder.angleMax);
 
         /*    Leg Front Left Bot    */
-        ProrokTestUnit2.frontLeft.legBot.MotorJoint = InitMotor(ProrokTestUnit2.frontLeft.legBot.motor, ProrokTestUnit2.frontLeft.legBot.angleMin,
-            ProrokTestUnit2.frontLeft.legBot.angleMax);
+        prorokTestUnit2.frontLeft.legBot.MotorJoint = InitMotor(prorokTestUnit2.frontLeft.legBot.motor,
+            prorokTestUnit2.frontLeft.legBot.angleMin,
+            prorokTestUnit2.frontLeft.legBot.angleMax);
 
         /*    Leg Front Left Top    */
-        ProrokTestUnit2.frontLeft.legTop.MotorJoint = InitMotor(ProrokTestUnit2.frontLeft.legTop.motor, ProrokTestUnit2.frontLeft.legTop.angleMin,
-            ProrokTestUnit2.frontLeft.legTop.angleMax);
+        prorokTestUnit2.frontLeft.legTop.MotorJoint = InitMotor(prorokTestUnit2.frontLeft.legTop.motor,
+            prorokTestUnit2.frontLeft.legTop.angleMin,
+            prorokTestUnit2.frontLeft.legTop.angleMax);
 
         /*    Shoulder Front Left    */
-        ProrokTestUnit2.frontLeft.shoulder.MotorJoint =
-            InitMotor(ProrokTestUnit2.frontLeft.shoulder.motor, ProrokTestUnit2.frontLeft.shoulder.angleMin,
-                ProrokTestUnit2.frontLeft.shoulder.angleMax);
-
+        prorokTestUnit2.frontLeft.shoulder.MotorJoint =
+            InitMotor(prorokTestUnit2.frontLeft.shoulder.motor, prorokTestUnit2.frontLeft.shoulder.angleMin,
+                prorokTestUnit2.frontLeft.shoulder.angleMax);
     }
 
     private void InitRobot()
@@ -204,52 +243,49 @@ public class Controller : MonoBehaviour
 
     private void WalkDemo()
     {
-        if (ProrokTestUnit2.backRight.legBot.MotorJoint.angle > 28 & ProrokTestUnit2.frontLeft.legBot.MotorJoint.angle > 28 &
-            ProrokTestUnit2.backRight.legTop.MotorJoint.angle > 28 &
-            ProrokTestUnit2.frontLeft.legTop.MotorJoint.angle > 28)
+        if (prorokTestUnit2.backRight.legBot.MotorJoint.angle > 28 &
+            prorokTestUnit2.frontLeft.legBot.MotorJoint.angle > 28 &
+            prorokTestUnit2.backRight.legTop.MotorJoint.angle > 28 &
+            prorokTestUnit2.frontLeft.legTop.MotorJoint.angle > 28)
         {
-            ProrokTestUnit2.backRight.legBot.targetPosition = -30;
-            ProrokTestUnit2.backRight.legTop.targetPosition = 23;
-            ProrokTestUnit2.frontLeft.legBot.targetPosition = -30;
-            ProrokTestUnit2.frontLeft.legTop.targetPosition = 23;
+            prorokTestUnit2.backRight.legBot.targetPosition = -30;
+            prorokTestUnit2.backRight.legTop.targetPosition = 23;
+            prorokTestUnit2.frontLeft.legBot.targetPosition = -30;
+            prorokTestUnit2.frontLeft.legTop.targetPosition = 23;
 
-            ProrokTestUnit2.backLeft.legBot.targetPosition = 30;
-            ProrokTestUnit2.backLeft.legTop.targetPosition = 30;
-            ProrokTestUnit2.frontRight.legBot.targetPosition = 30;
-            ProrokTestUnit2.frontRight.legTop.targetPosition = 30;
+            prorokTestUnit2.backLeft.legBot.targetPosition = 30;
+            prorokTestUnit2.backLeft.legTop.targetPosition = 30;
+            prorokTestUnit2.frontRight.legBot.targetPosition = 30;
+            prorokTestUnit2.frontRight.legTop.targetPosition = 30;
         }
 
-        if (ProrokTestUnit2.backLeft.legBot.MotorJoint.angle > 28 & ProrokTestUnit2.frontRight.legBot.MotorJoint.angle > 28 &
-            ProrokTestUnit2.backLeft.legTop.MotorJoint.angle > 28 &
-            ProrokTestUnit2.frontRight.legTop.MotorJoint.angle > 28)
+        if (prorokTestUnit2.backLeft.legBot.MotorJoint.angle > 28 &
+            prorokTestUnit2.frontRight.legBot.MotorJoint.angle > 28 &
+            prorokTestUnit2.backLeft.legTop.MotorJoint.angle > 28 &
+            prorokTestUnit2.frontRight.legTop.MotorJoint.angle > 28)
         {
-            ProrokTestUnit2.backRight.legBot.targetPosition = 30;
-            ProrokTestUnit2.backRight.legTop.targetPosition = 30;
-            ProrokTestUnit2.frontLeft.legBot.targetPosition = 30;
-            ProrokTestUnit2.frontLeft.legTop.targetPosition = 30;
+            prorokTestUnit2.backRight.legBot.targetPosition = 30;
+            prorokTestUnit2.backRight.legTop.targetPosition = 30;
+            prorokTestUnit2.frontLeft.legBot.targetPosition = 30;
+            prorokTestUnit2.frontLeft.legTop.targetPosition = 30;
 
-            ProrokTestUnit2.backLeft.legBot.targetPosition = -30;
-            ProrokTestUnit2.backLeft.legTop.targetPosition = 23;
-            ProrokTestUnit2.frontRight.legBot.targetPosition = -30;
-            ProrokTestUnit2.frontRight.legTop.targetPosition = 23;
+            prorokTestUnit2.backLeft.legBot.targetPosition = -30;
+            prorokTestUnit2.backLeft.legTop.targetPosition = 23;
+            prorokTestUnit2.frontRight.legBot.targetPosition = -30;
+            prorokTestUnit2.frontRight.legTop.targetPosition = 23;
         }
     }
 
     private void InitWalkDemo()
     {
-        ProrokTestUnit2.backRight.legBot.targetPosition = 30;
-        ProrokTestUnit2.backRight.legTop.targetPosition = 30;
-        ProrokTestUnit2.frontLeft.legBot.targetPosition = 30;
-        ProrokTestUnit2.frontLeft.legTop.targetPosition = 30;
+        prorokTestUnit2.backRight.legBot.targetPosition = 30;
+        prorokTestUnit2.backRight.legTop.targetPosition = 30;
+        prorokTestUnit2.frontLeft.legBot.targetPosition = 30;
+        prorokTestUnit2.frontLeft.legTop.targetPosition = 30;
 
-        ProrokTestUnit2.backLeft.legBot.targetPosition = -30;
-        ProrokTestUnit2.backLeft.legTop.targetPosition = 23;
-        ProrokTestUnit2.frontRight.legBot.targetPosition = -30;
-        ProrokTestUnit2.frontRight.legTop.targetPosition = 23;
+        prorokTestUnit2.backLeft.legBot.targetPosition = -30;
+        prorokTestUnit2.backLeft.legTop.targetPosition = 23;
+        prorokTestUnit2.frontRight.legBot.targetPosition = -30;
+        prorokTestUnit2.frontRight.legTop.targetPosition = 23;
     }
 }
-
-
-
-
-

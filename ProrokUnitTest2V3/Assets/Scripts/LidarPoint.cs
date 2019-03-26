@@ -1,6 +1,6 @@
-﻿public class Point
+﻿public class LidarPoint
 {
-    public Point(float hAngle, float vAngle, float distance)
+    public LidarPoint(float hAngle, float vAngle, float distance)
     {
         HorizontalAngle = hAngle;
         VerticalAngle = vAngle;

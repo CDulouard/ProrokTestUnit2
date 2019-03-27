@@ -1,17 +1,17 @@
 {
     "_motorsDatas": {
-        "LegFrontLeftBot": 0.1000043,
-        "LegFrontLeftTop": -0.1174927,
-        "ShoulderFrontLeft": 0.09999627,
-        "LegFrontRightBot": 0.09999588,
-        "LegFrontRightTop": -29.99417,
-        "ShoulderFrontRight": -0.1000061,
-        "LegBackLeftBot": 0.5039391,
-        "LegBackLeftTop": -0.1266785,
-        "ShoulderBackLeft": 0.09999935,
-        "LegBackRightBot": 0.3296433,
-        "LegBackRightTop": 31.46239,
-        "ShoulderBackRight": 0.1000006
+        "LegFrontLeftBot": 10.1,
+        "LegFrontLeftTop": 10.17827,
+        "ShoulderFrontLeft": -10.00882,
+        "LegFrontRightBot": 11.78798,
+        "LegFrontRightTop": 9.58566,
+        "ShoulderFrontRight": -9.900085,
+        "LegBackLeftBot": 10.93375,
+        "LegBackLeftTop": 10.12543,
+        "ShoulderBackLeft": 10.09064,
+        "LegBackRightBot": -23.06049,
+        "LegBackRightTop": -12.53812,
+        "ShoulderBackRight": -20
     },
     "_lidarDatas": [
         [-45, 0 ,0],

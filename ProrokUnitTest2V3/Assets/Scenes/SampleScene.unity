@@ -941,7 +941,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f49997ea141c6e144803a30958ef816c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  writeFilePath: /JsonFiles/status.json
+  robotDatasFilePath: /JsonFiles/status.json
+  targetPositionsFilePath: /JsonFiles/targetPositions.json
 --- !u!114 &972198054
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -954,13 +955,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cad7eed1da5a8542aa77c1360892413, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  debugMode: 0
+  testLeg: 0
   demoWalk: 0
   speed: 70
   torque: 1000
-  testLeg: 1
   generalPurposeSensor: {fileID: 474263191}
   prorokTestUnit2:
     frontLeft:
+      name: 
       legBot:
         name: LegFrontLeftBot
         targetPosition: 0
@@ -983,6 +986,7 @@ MonoBehaviour:
         angleMin: -20
         angleMax: 20
     frontRight:
+      name: 
       legBot:
         name: LegFrontRightBot
         targetPosition: 0
@@ -1005,6 +1009,7 @@ MonoBehaviour:
         angleMin: -20
         angleMax: 20
     backLeft:
+      name: 
       legBot:
         name: LegBackLeftBot
         targetPosition: 0
@@ -1027,6 +1032,7 @@ MonoBehaviour:
         angleMin: -20
         angleMax: 20
     backRight:
+      name: 
       legBot:
         name: LegBackRightBot
         targetPosition: 0
@@ -2971,7 +2977,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1702189097248908637}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 40, z: 0}
+  m_LocalPosition: {x: 0, y: 67.3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1702189097249405291}

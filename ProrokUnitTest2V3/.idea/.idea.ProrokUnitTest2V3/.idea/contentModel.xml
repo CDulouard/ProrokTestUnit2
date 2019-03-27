@@ -15,6 +15,7 @@
           <e p="Motor.cs" t="Include" />
           <e p="ProrokTestUnit2.cs" t="Include" />
           <e p="RobotDatas.cs" t="Include" />
+          <e p="targetPositions.cs" t="Include" />
         </e>
       </e>
       <e p="Library" t="ExcludeRecursive" />

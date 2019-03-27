@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class Controller : MonoBehaviour
 {
+    public bool debugMode;
     public bool testLeg;
     public bool demoWalk;
     public int speed;
@@ -20,19 +21,20 @@ public class Controller : MonoBehaviour
     private static IEnumerable<KeyValuePair<string, float>>
         _sensorValues; /*    Stores roll, pitch, yaw and  altitude of the robot    */
 
-    void Start()
+    private void Start()
     {
         InitRobot();
-        if (demoWalk) InitWalkDemo();
+        if (demoWalk & debugMode) InitWalkDemo();
         RefreshMotors();
         RefreshSensorValues();
     }
 
-    void Update()
+    private void Update()
     {
-        if (!testLeg) _testStep = 0;
-        if (testLeg) BeginTest();
-        if (demoWalk) WalkDemo();
+        if (!testLeg & debugMode) _testStep = 0;
+        if (testLeg & debugMode) BeginTest();
+        if (demoWalk & debugMode) WalkDemo();
+        if (!debugMode) ApplyAskedPositions();
         RefreshMotors();
         RefreshSensorValues();
     }
@@ -249,10 +251,28 @@ public class Controller : MonoBehaviour
     private void InitRobot()
     {
         /*    Initialize the robot    */
-        //InitMotors();
-        prorokTestUnit2.InitTestUnit();
+        InitMotors();
     }
 
+    private void ApplyAskedPositions()
+    {
+        prorokTestUnit2.backRight.legBot.targetPosition = Manager.TargetPositions.legBackRightBot;
+        prorokTestUnit2.backRight.legTop.targetPosition = Manager.TargetPositions.legBackRightTop;
+        prorokTestUnit2.backRight.shoulder.targetPosition = Manager.TargetPositions.shoulderBackRight;
+        
+        prorokTestUnit2.backLeft.legBot.targetPosition = Manager.TargetPositions.legBackLeftBot;
+        prorokTestUnit2.backLeft.legTop.targetPosition = Manager.TargetPositions.legBackLeftTop;
+        prorokTestUnit2.backLeft.shoulder.targetPosition = Manager.TargetPositions.shoulderBackLeft;
+        
+        prorokTestUnit2.frontRight.legBot.targetPosition = Manager.TargetPositions.legFrontRightBot;
+        prorokTestUnit2.frontRight.legTop.targetPosition = Manager.TargetPositions.legFrontRightTop;
+        prorokTestUnit2.frontRight.shoulder.targetPosition = Manager.TargetPositions.shoulderFrontRight;
+        
+        prorokTestUnit2.frontLeft.legBot.targetPosition = Manager.TargetPositions.legFrontLeftBot;
+        prorokTestUnit2.frontLeft.legTop.targetPosition = Manager.TargetPositions.legFrontLeftTop;
+        prorokTestUnit2.frontLeft.shoulder.targetPosition = Manager.TargetPositions.shoulderFrontLeft;
+    }
+    
     private void WalkDemo()
     {
         if (prorokTestUnit2.backRight.legBot.MotorJoint.angle > 28 &

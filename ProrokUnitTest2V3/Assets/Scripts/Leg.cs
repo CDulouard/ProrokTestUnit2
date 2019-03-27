@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 [System.Serializable]
 public struct Leg
@@ -8,15 +7,6 @@ public struct Leg
     public Motor legBot;
     public Motor legTop;
     public Motor shoulder;
-    public Dictionary<string, Motor> motors;
-
-    public void InitLeg()
-    {
-        motors = new Dictionary<string, Motor>
-        {
-            {legBot.name, legBot}, {legTop.name, legTop}, {shoulder.name, shoulder}
-        };
-    }
 
     public Dictionary<string, float> GetDatas()
     {

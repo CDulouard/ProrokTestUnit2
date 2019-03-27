@@ -1,16 +1,14 @@
 {
-    "_targetPosition": {
-        "LegFrontLeftBot": 10.5,
-        "LegFrontLeftTop": 10.5,
-        "ShoulderFrontLeft": 10.5,
-        "LegFrontRightBot": 10.5,
-        "LegFrontRightTop": 10.5,
-        "ShoulderFrontRight": 10.5,
-        "LegBackLeftBot": 10.5,
-        "LegBackLeftTop": 10.5,
-        "ShoulderBackLeft": 10.5,
-        "LegBackRightBot": 10.5,
-        "LegBackRightTop": 10.5,
-        "ShoulderBackRight": 10.5
-    }
+        "legFrontLeftBot": 10.5,
+        "legFrontLeftTop": 10.5,
+        "shoulderFrontLeft": 10.5,
+        "legFrontRightBot": 10.5,
+        "legFrontRightTop": 10.5,
+        "shoulderFrontRight": 10.5,
+        "legBackLeftBot": 10.5,
+        "legBackLeftTop": 10.5,
+        "shoulderBackLeft": 10.5,
+        "legBackRightBot": 10.5,
+        "legBackRightTop": 10.5,
+        "shoulderBackRight": 10.5
 }

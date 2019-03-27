@@ -6,6 +6,8 @@ public class Controller : MonoBehaviour
     public bool demoWalk;
     public int speed;
     public int torque;
+    public bool testLeg;
+    private int _testStep;
 
     public GameObject generalPurposeSensor;
     public ProrokTestUnit2 prorokTestUnit2;
@@ -22,11 +24,12 @@ public class Controller : MonoBehaviour
         if (demoWalk) InitWalkDemo();
         RefreshMotors();
         RefreshSensorValues();
-        
     }
 
     void Update()
     {
+        if (!testLeg) _testStep = 0;
+        if (testLeg) BeginTest();
         if (demoWalk) WalkDemo();
         RefreshMotors();
         RefreshSensorValues();
@@ -36,7 +39,7 @@ public class Controller : MonoBehaviour
     {
         return _motorsDatas;
     }
-    
+
     public static IEnumerable<KeyValuePair<string, float>> GetSensorValues()
     {
         return _sensorValues;
@@ -64,7 +67,7 @@ public class Controller : MonoBehaviour
          *    The target position is modulo 180 so the input can be over 180 or less than -180
          */
         var limits = motor.limits;
-        position = position % 180;
+        position %= 180;
         var newMotor = motor.motor;
         newMotor.force = torque;
         var angle = motor.angle;
@@ -293,5 +296,108 @@ public class Controller : MonoBehaviour
         prorokTestUnit2.backLeft.legTop.targetPosition = 23;
         prorokTestUnit2.frontRight.legBot.targetPosition = -30;
         prorokTestUnit2.frontRight.legTop.targetPosition = 23;
+    }
+
+    private void BeginTest()
+    {
+        if (_testStep == 0)
+        {
+            prorokTestUnit2.backRight.legBot.targetPosition = 0;
+            prorokTestUnit2.backRight.legTop.targetPosition = 0;
+            prorokTestUnit2.backRight.shoulder.targetPosition = 0;
+            _testStep++;
+            Debug.Log("Step : " + _testStep);
+        }
+
+        if (_testStep == 1 & (int) prorokTestUnit2.backRight.legBot.MotorJoint.angle == 0 &
+            (int) prorokTestUnit2.backRight.legTop.MotorJoint.angle == 0 &
+            (int) prorokTestUnit2.backRight.shoulder.MotorJoint.angle == 0)
+        {
+            prorokTestUnit2.backRight.legBot.targetPosition = -30;
+            _testStep++;
+            Debug.Log("Step : " + _testStep);
+        }
+
+        if (_testStep == 2 & prorokTestUnit2.backRight.legBot.MotorJoint.angle <= -27)
+        {
+            prorokTestUnit2.backRight.legBot.targetPosition = 30;
+            _testStep++;
+            Debug.Log("Step : " + _testStep);
+        }
+
+        if (_testStep == 3 & prorokTestUnit2.backRight.legBot.MotorJoint.angle >= 27)
+        {
+            prorokTestUnit2.backRight.legBot.targetPosition = 0;
+            _testStep++;
+            Debug.Log("Step : " + _testStep);
+        }
+
+        if (_testStep == 4 & (int) prorokTestUnit2.backRight.legBot.MotorJoint.angle == 0)
+        {
+            prorokTestUnit2.backRight.legTop.targetPosition = -30;
+            _testStep++;
+            Debug.Log("Step : " + _testStep);
+        }
+
+        if (_testStep == 5 & prorokTestUnit2.backRight.legTop.MotorJoint.angle <= -27)
+        {
+            prorokTestUnit2.backRight.legTop.targetPosition = 30;
+            _testStep++;
+            Debug.Log("Step : " + _testStep);
+        }
+
+        if (_testStep == 6 & prorokTestUnit2.backRight.legTop.MotorJoint.angle >= 27)
+        {
+            prorokTestUnit2.backRight.legTop.targetPosition = 0;
+            _testStep++;
+            Debug.Log("Step : " + _testStep);
+        }
+
+        if (_testStep == 7 & (int) prorokTestUnit2.backRight.legTop.MotorJoint.angle == 0)
+        {
+            prorokTestUnit2.backRight.shoulder.targetPosition = -20;
+            _testStep++;
+            Debug.Log("Step : " + _testStep);
+        }
+
+        if (_testStep == 8 & (int) prorokTestUnit2.backRight.shoulder.MotorJoint.angle <= -17)
+        {
+            prorokTestUnit2.backRight.shoulder.targetPosition = 20;
+            _testStep++;
+            Debug.Log("Step : " + _testStep);
+        }
+
+        if (_testStep == 9 & (int) prorokTestUnit2.backRight.shoulder.MotorJoint.angle >= 17)
+        {
+            prorokTestUnit2.backRight.shoulder.targetPosition = 0;
+            _testStep++;
+            Debug.Log("Step : " + _testStep);
+        }
+
+        if (_testStep == 10 & (int) prorokTestUnit2.backRight.shoulder.MotorJoint.angle == 0)
+        {
+            prorokTestUnit2.backRight.legBot.targetPosition = -30;
+            prorokTestUnit2.backRight.legTop.targetPosition = -30;
+            prorokTestUnit2.backRight.shoulder.targetPosition = -20;
+            _testStep++;
+            Debug.Log("Step : " + _testStep);
+        }
+
+        if (_testStep == 11 & (int) prorokTestUnit2.backRight.shoulder.MotorJoint.angle <= -17 &
+            prorokTestUnit2.backRight.legBot.MotorJoint.angle <= -27 &
+            prorokTestUnit2.backRight.legTop.MotorJoint.angle <= -27)
+        {
+            prorokTestUnit2.backRight.legBot.targetPosition = 30;
+            prorokTestUnit2.backRight.legTop.targetPosition = 30;
+            prorokTestUnit2.backRight.shoulder.targetPosition = 20;
+            _testStep++;
+            Debug.Log("Step : " + _testStep);
+        }
+        if (_testStep == 12 & (int) prorokTestUnit2.backRight.shoulder.MotorJoint.angle >= 17 &
+            prorokTestUnit2.backRight.legBot.MotorJoint.angle >= 27 &
+            prorokTestUnit2.backRight.legTop.MotorJoint.angle >= 27)
+        {
+            _testStep = 0;
+        }
     }
 }

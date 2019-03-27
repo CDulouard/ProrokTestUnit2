@@ -957,6 +957,7 @@ MonoBehaviour:
   demoWalk: 0
   speed: 70
   torque: 1000
+  testLeg: 1
   generalPurposeSensor: {fileID: 474263191}
   prorokTestUnit2:
     frontLeft:

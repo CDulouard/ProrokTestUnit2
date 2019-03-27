@@ -3,14 +3,16 @@ using UnityEngine;
 
 public class Controller : MonoBehaviour
 {
+    public bool testLeg;
     public bool demoWalk;
     public int speed;
     public int torque;
-    public bool testLeg;
-    private int _testStep;
+
 
     public GameObject generalPurposeSensor;
     public ProrokTestUnit2 prorokTestUnit2;
+
+    private int _testStep;
 
     private static IEnumerable<KeyValuePair<string, float>>
         _motorsDatas; /*    Stores the actual angle of each motors    */
@@ -247,7 +249,8 @@ public class Controller : MonoBehaviour
     private void InitRobot()
     {
         /*    Initialize the robot    */
-        InitMotors();
+        //InitMotors();
+        prorokTestUnit2.InitTestUnit();
     }
 
     private void WalkDemo()
@@ -300,6 +303,7 @@ public class Controller : MonoBehaviour
 
     private void BeginTest()
     {
+        /*    Test all the positions of the back right leg.    */
         if (_testStep == 0)
         {
             prorokTestUnit2.backRight.legBot.targetPosition = 0;
@@ -393,6 +397,7 @@ public class Controller : MonoBehaviour
             _testStep++;
             Debug.Log("Step : " + _testStep);
         }
+
         if (_testStep == 12 & (int) prorokTestUnit2.backRight.shoulder.MotorJoint.angle >= 17 &
             prorokTestUnit2.backRight.legBot.MotorJoint.angle >= 27 &
             prorokTestUnit2.backRight.legTop.MotorJoint.angle >= 27)

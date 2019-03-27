@@ -1,0 +1,16 @@
+{
+    "_targetPosition": {
+        "LegFrontLeftBot": 10.5,
+        "LegFrontLeftTop": 10.5,
+        "ShoulderFrontLeft": 10.5,
+        "LegFrontRightBot": 10.5,
+        "LegFrontRightTop": 10.5,
+        "ShoulderFrontRight": 10.5,
+        "LegBackLeftBot": 10.5,
+        "LegBackLeftTop": 10.5,
+        "ShoulderBackLeft": 10.5,
+        "LegBackRightBot": 10.5,
+        "LegBackRightTop": 10.5,
+        "ShoulderBackRight": 10.5
+    }
+}

@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 public class Controller : MonoBehaviour
@@ -37,15 +36,22 @@ public class Controller : MonoBehaviour
     {
         return _motorsDatas;
     }
+    
+    public static IEnumerable<KeyValuePair<string, float>> GetSensorValues()
+    {
+        return _sensorValues;
+    }
 
     private void RefreshSensorValues()
     {
+        /*    Stores the new attitude values in _sensorValues    */
         var newValues = new Dictionary<string, float>();
-        generalPurposeSensor.transform.localRotation.ToAngleAxis(out var angle, out var axis);
+        var sensorTransform = generalPurposeSensor.transform;
+        sensorTransform.localRotation.ToAngleAxis(out var angle, out var axis);
         newValues.Add("roll", angle * axis.z);
         newValues.Add("pitch", angle * axis.x);
         newValues.Add("yaw", angle * axis.y);
-        newValues.Add("altitude", generalPurposeSensor.transform.localPosition.y);
+        newValues.Add("altitude", sensorTransform.localPosition.y);
         _sensorValues = newValues;
     }
 

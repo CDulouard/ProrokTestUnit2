@@ -17,6 +17,7 @@ public class Lidar : MonoBehaviour
 
     public static IEnumerable<LidarPoint> GetMeasures()
     {
+        /*    Return Lidar's datas    */
         return _measures;
     }
 

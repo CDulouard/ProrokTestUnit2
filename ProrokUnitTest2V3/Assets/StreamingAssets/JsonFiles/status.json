@@ -1,16 +1,16 @@
 {
     "_motorsDatas": {
-        "LegFrontLeftBot": 18.34522,
-        "LegFrontLeftTop": 29.93665,
-        "ShoulderFrontLeft": -0.1000061,
-        "LegFrontRightBot": -29.99576,
-        "LegFrontRightTop": 23.09542,
-        "ShoulderFrontRight": -0.05834961,
-        "LegBackLeftBot": -30.11646,
-        "LegBackLeftTop": 23.09062,
-        "ShoulderBackLeft": 0.05369346,
-        "LegBackRightBot": 29.99488,
-        "LegBackRightTop": 29.95875,
+        "LegFrontLeftBot": 0.1000009,
+        "LegFrontLeftTop": -0.1174927,
+        "ShoulderFrontLeft": 0.09999734,
+        "LegFrontRightBot": 0.1000009,
+        "LegFrontRightTop": -0.1205139,
+        "ShoulderFrontRight": -0.1000061,
+        "LegBackLeftBot": 0.8229707,
+        "LegBackLeftTop": -0.1268005,
+        "ShoulderBackLeft": 0.1000019,
+        "LegBackRightBot": 0.09855839,
+        "LegBackRightTop": -0.1251526,
         "ShoulderBackRight": -0.1000061
     },
     "_lidarDatas": [
@@ -105,5 +105,11 @@
         [43, 0 ,0],
         [44, 0 ,0],
         [45, 0 ,0]
-    ]
+    ],
+    "_sensorDatas": {
+        "roll": 0,
+        "pitch": 0,
+        "yaw": 0,
+        "altitude": 50
+    }
 }

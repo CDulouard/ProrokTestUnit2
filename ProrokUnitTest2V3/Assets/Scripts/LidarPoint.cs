@@ -1,5 +1,6 @@
 ﻿public class LidarPoint
 {
+    /*    Stores the 3 values of each measure point of the lidar.    */
     public LidarPoint(float hAngle, float vAngle, float distance)
     {
         HorizontalAngle = hAngle;

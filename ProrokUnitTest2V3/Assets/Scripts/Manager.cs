@@ -16,8 +16,7 @@ public class Manager : MonoBehaviour
 
     private void Update()
     {
-        _datas.RefreshDatas(Controller.GetMotorsDatas(), Lidar.GetMeasures());
-        
+        _datas.RefreshDatas(Controller.GetMotorsDatas(), Lidar.GetMeasures(), Controller.GetSensorValues());
         /*    Write the datas in the Json file    */
         _jsonString = _datas.ToJson();
         File.WriteAllText(_path, _jsonString);

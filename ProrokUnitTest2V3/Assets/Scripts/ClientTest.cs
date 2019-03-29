@@ -44,6 +44,7 @@ public class ClientTest : MonoBehaviour
 
     private void SendRequests()
     {
+        /*    Send the requests to test the server    */
         _client.Send(1000, new StringMessage(MotorControllerToJson()));
 
         _client.Send(2000, new StringMessage("status"));
@@ -52,10 +53,8 @@ public class ClientTest : MonoBehaviour
     private void SetupClient()
     {
         /*    Create a client and connect to the asked ip and port   */
-
-    
         _client = new NetworkClient();
-        
+
         RegisterHandlers();
         _client.Connect(serverIp, serverPort);
     }

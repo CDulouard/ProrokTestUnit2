@@ -55,11 +55,14 @@ public class Controller : MonoBehaviour
         /*    Stores the new attitude values in _sensorValues    */
         var newValues = new Dictionary<string, float>();
         var sensorTransform = generalPurposeSensor.transform;
-        sensorTransform.localRotation.ToAngleAxis(out var angle, out var axis);
+        var sensorTransformPosition = sensorTransform.position;
+        sensorTransform.rotation.ToAngleAxis(out var angle, out var axis);
         newValues.Add("roll", angle * axis.z);
         newValues.Add("pitch", angle * axis.x);
         newValues.Add("yaw", angle * axis.y);
-        newValues.Add("altitude", sensorTransform.localPosition.y);
+        newValues.Add("posX", sensorTransformPosition.x);
+        newValues.Add("posY", sensorTransformPosition.y);
+        newValues.Add("posZ", sensorTransformPosition.z);
         _sensorValues = newValues;
     }
 

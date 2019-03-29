@@ -944,7 +944,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   robotDatasFilePath: /JsonFiles/status.json
-  targetPositionsFilePath: /JsonFiles/targetPositions.json
 --- !u!114 &972198054
 MonoBehaviour:
   m_ObjectHideFlags: 0

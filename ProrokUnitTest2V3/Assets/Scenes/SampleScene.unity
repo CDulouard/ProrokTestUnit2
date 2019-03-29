@@ -957,9 +957,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cad7eed1da5a8542aa77c1360892413, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  debugMode: 1
+  debugMode: 0
+  showDebugMessage: 1
   testLeg: 0
-  demoWalk: 1
+  demoWalk: 0
   speed: 70
   torque: 1000
   generalPurposeSensor: {fileID: 474263191}
@@ -1128,7 +1129,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   serverIp: 127.0.0.1
-  serrverPort: 4444
+  serverPort: 4444
+  showDebugMessage: 1
   motors:
   - name: legBackRightBot
     targetPosition: 0

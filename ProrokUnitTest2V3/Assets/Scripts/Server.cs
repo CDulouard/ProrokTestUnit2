@@ -1,10 +1,10 @@
 ﻿using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.Networking.NetworkSystem;
 
 public class Server : MonoBehaviour
 {
     public static string targetPositions;
-    private short _id = 1000;
 
     void Start()
     {
@@ -26,14 +26,24 @@ public class Server : MonoBehaviour
     {
         /*    All RegisterHandlers    */
 
-        NetworkServer.RegisterHandler(_id, ReadTargetPositions);
+        NetworkServer.RegisterHandler(1000, ReadTargetPositions);
+        NetworkServer.RegisterHandler(2000, SendAskedDatas);
     }
 
 
-    private void ReadTargetPositions(NetworkMessage request)
+    private static void ReadTargetPositions(NetworkMessage netMsg)
     {
         /*    Function use to read and refresh target positions    */
-        targetPositions = request.ReadMessage<Request>().content;
+        targetPositions = netMsg.ReadMessage<StringMessage>().value;
     }
+
+    private void SendAskedDatas(NetworkMessage netMsg)
+    {
+        if (netMsg.ReadMessage<StringMessage>().value.ToLower() == "status")
+        {
+            NetworkServer.SendToAll(1000, new StringMessage(Manager.status));
+        }
+    }
+    
 #pragma warning restore 618
 }

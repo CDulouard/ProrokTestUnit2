@@ -2,18 +2,18 @@
 using System.Globalization;
 using System.Linq;
 using UnityEngine.Networking;
-using UnityEngine.Serialization;
+using System.Threading;
+using UnityEngine.Networking.NetworkSystem;
 
 public class ClientTest : MonoBehaviour
 {
     public string serverIp;
     public int serverPort;
+    public bool showDebugMessage;
     public MotorController[] motors;
-    private static string _messageToSend;
 #pragma warning disable 618
     private NetworkClient _client;
 #pragma warning restore 618
-    private short _requestId;
 
 
     private void Start()
@@ -23,12 +23,9 @@ public class ClientTest : MonoBehaviour
 
     private void Update()
     {
-        _requestId = 1000;
-        _messageToSend = MotorControllerToJson();
-        var request = new Request();
-        request.content = _messageToSend;
-        if (_client.isConnected) _client.Send(_requestId, request);
+        if (_client.isConnected) SendRequests();
     }
+
 
     private string MotorControllerToJson()
     {
@@ -44,22 +41,41 @@ public class ClientTest : MonoBehaviour
     }
 
 #pragma warning disable 618
-    public void SetupClient()
+
+    private void SendRequests()
+    {
+        _client.Send(1000, new StringMessage(MotorControllerToJson()));
+
+        _client.Send(2000, new StringMessage("status"));
+    }
+
+    private void SetupClient()
     {
         /*    Create a client and connect to the asked ip and port   */
 
-
+    
         _client = new NetworkClient();
-        _client.RegisterHandler(MsgType.Connect, OnConnected);
-
+        
+        RegisterHandlers();
         _client.Connect(serverIp, serverPort);
     }
 
+    private void RegisterHandlers()
+    {
+        /*    All RegisterHandlers    */
+        _client.RegisterHandler(MsgType.Connect, OnConnected);
+        _client.RegisterHandler(1000, ReadReceivedDatas);
+    }
 
-    private static void OnConnected(NetworkMessage netMsg)
+    private void ReadReceivedDatas(NetworkMessage netMsg)
+    {
+        if (showDebugMessage) Debug.Log(netMsg.ReadMessage<StringMessage>().value);
+    }
+
+    private void OnConnected(NetworkMessage netMsg)
 
     {
-        Debug.Log("Connected to server");
+        if (showDebugMessage) Debug.Log("Connected to server");
     }
 #pragma warning restore 618
 }

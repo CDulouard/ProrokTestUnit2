@@ -7,6 +7,7 @@
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="Assets" t="Include">
         <e p="Scripts" t="Include">
+          <e p="ClientTest.cs" t="Include" />
           <e p="Controller.cs" t="Include" />
           <e p="Leg.cs" t="Include" />
           <e p="Lidar.cs" t="Include" />
@@ -14,7 +15,9 @@
           <e p="Manager.cs" t="Include" />
           <e p="Motor.cs" t="Include" />
           <e p="ProrokTestUnit2.cs" t="Include" />
+          <e p="Request.cs" t="Include" />
           <e p="RobotDatas.cs" t="Include" />
+          <e p="Server.cs" t="Include" />
           <e p="targetPositions.cs" t="Include" />
         </e>
       </e>

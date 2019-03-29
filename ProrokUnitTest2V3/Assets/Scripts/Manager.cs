@@ -11,7 +11,6 @@ public class Manager : MonoBehaviour
     private static TargetPositions _targetPositions; 
     
     private string _pathRobotDatas; /*    the path to Robot Datas Json file.    */
-    private string _pathTargetPositions;
     private string _jsonString;
     private void Start()
     {
@@ -19,14 +18,13 @@ public class Manager : MonoBehaviour
         _datas = new RobotDatas();
         /*    path initialization    */
         _pathRobotDatas = Application.streamingAssetsPath + robotDatasFilePath;
-        _pathTargetPositions = Application.streamingAssetsPath + targetPositionsFilePath;
     }
 
     private void Update()
     {
         _datas.RefreshDatas(Controller.GetMotorsDatas(), Lidar.GetMeasures(), Controller.GetSensorValues());
-        _targetPositions.ReadValues(_pathTargetPositions);
-        Debug.Log(_targetPositions.legBackLeftBot);
+        /*    Read the datas from the Json file*/
+        _targetPositions.ReadValues(Server.targetPositions);
         /*    Write the datas in the Json file    */
         _jsonString = _datas.ToJson();
         File.WriteAllText(_pathRobotDatas, _jsonString);

@@ -2,7 +2,7 @@
 using System.Globalization;
 using System.Linq;
 
-public struct RobotDatas
+public class RobotDatas
 {
     private IEnumerable<LidarPoint> LidarDatas { get; set; }
 

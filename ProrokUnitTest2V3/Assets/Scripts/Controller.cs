@@ -81,8 +81,8 @@ public class Controller : MonoBehaviour
             if ((int) limits.max != (int) position & (int) limits.min != (int) position)
             {
                 /*    Set new limit to avoid any movements    */
-                limits.max = (int) position + 0.1f;
-                limits.min = (int) position - 0.1f;
+                limits.max = (int) position + 0.2f;
+                limits.min = (int) position - 0.2f;
                 motor.limits = limits;
             }
 
@@ -140,13 +140,13 @@ public class Controller : MonoBehaviour
             speed, torque,
             prorokTestUnit2.backLeft.legBot.angleMin, prorokTestUnit2.backLeft.legBot.angleMax);
 
-        /*    Leg Front Right Top    */
+        /*    Leg Back Left Top    */
         SetMotorPosition(prorokTestUnit2.backLeft.legTop.MotorJoint, prorokTestUnit2.backLeft.legTop.targetPosition,
             speed, torque,
             prorokTestUnit2.backLeft.legTop.angleMin, prorokTestUnit2.backLeft.legTop.angleMax);
 
-        /*    Shoulder Front Right    */
-        SetMotorPosition(prorokTestUnit2.backLeft.shoulder.MotorJoint, prorokTestUnit2.backLeft.shoulder.targetPosition,
+        /*    Shoulder Back Left    */
+        SetMotorPosition(prorokTestUnit2.backLeft.shoulder.MotorJoint, -prorokTestUnit2.backLeft.shoulder.targetPosition,
             speed, torque,
             prorokTestUnit2.backLeft.shoulder.angleMin, prorokTestUnit2.backLeft.shoulder.angleMax);
 
@@ -162,7 +162,7 @@ public class Controller : MonoBehaviour
 
         /*    Shoulder Front Right    */
         SetMotorPosition(prorokTestUnit2.frontRight.shoulder.MotorJoint,
-            -prorokTestUnit2.frontRight.shoulder.targetPosition, speed, torque,
+            prorokTestUnit2.frontRight.shoulder.targetPosition, speed, torque,
             prorokTestUnit2.frontRight.shoulder.angleMin, prorokTestUnit2.frontRight.shoulder.angleMax);
 
         /*    Leg Front Left Bot    */
@@ -256,6 +256,7 @@ public class Controller : MonoBehaviour
 
     private void ApplyAskedPositions()
     {
+        /*    Refresh the position using the asked position in a Json file    */
         prorokTestUnit2.backRight.legBot.targetPosition = Manager.TargetPositions.legBackRightBot;
         prorokTestUnit2.backRight.legTop.targetPosition = Manager.TargetPositions.legBackRightTop;
         prorokTestUnit2.backRight.shoulder.targetPosition = Manager.TargetPositions.shoulderBackRight;
@@ -275,6 +276,7 @@ public class Controller : MonoBehaviour
     
     private void WalkDemo()
     {
+        /*    Show a demo walk    */
         if (prorokTestUnit2.backRight.legBot.MotorJoint.angle > 28 &
             prorokTestUnit2.frontLeft.legBot.MotorJoint.angle > 28 &
             prorokTestUnit2.backRight.legTop.MotorJoint.angle > 28 &
@@ -310,6 +312,7 @@ public class Controller : MonoBehaviour
 
     private void InitWalkDemo()
     {
+        /*    Init the demo walk (should be called in the void start)    */
         prorokTestUnit2.backRight.legBot.targetPosition = 30;
         prorokTestUnit2.backRight.legTop.targetPosition = 30;
         prorokTestUnit2.frontLeft.legBot.targetPosition = 30;

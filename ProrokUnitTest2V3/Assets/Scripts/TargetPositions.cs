@@ -4,6 +4,7 @@ using System.IO;
 
 public struct TargetPositions
 {
+    /*    Can read the target values in the json file and stores the values    */
     public float legFrontLeftBot;
     public float legFrontLeftTop;
     public float shoulderFrontLeft;
@@ -17,9 +18,8 @@ public struct TargetPositions
     public float legBackRightTop;
     public float shoulderBackRight;
 
-    public void ReadValues(string path)
+    public void ReadValues(string jsonDatas)
     {
-        this = JsonUtility.FromJson<TargetPositions>(File.ReadAllText(path));
+        this = JsonUtility.FromJson<TargetPositions>(jsonDatas);
     }
-
 }

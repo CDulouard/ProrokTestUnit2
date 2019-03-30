@@ -16,6 +16,7 @@
           <e p="Manager.cs" t="Include" />
           <e p="Motor.cs" t="Include" />
           <e p="ProrokTestUnit2.cs" t="Include" />
+          <e p="QuitApp.cs" t="Include" />
           <e p="RobotDatas.cs" t="Include" />
           <e p="SceneLoader.cs" t="Include" />
           <e p="Server.cs" t="Include" />

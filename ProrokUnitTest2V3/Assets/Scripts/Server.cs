@@ -5,15 +5,16 @@ using UnityEngine.Networking.NetworkSystem;
 public class Server : MonoBehaviour
 {
     public static string targetPositions;
-
+#pragma warning disable 618
     void Start()
     {
-        SetupServer();
+        
+        if(!NetworkServer.active) SetupServer();
         /*    Initialization of targetPositions (all motors to 0)    */
         targetPositions =
             "{\"legBackRightBot\": 0,    \"legBackRightTop\": 0,    \"shoulderBackRight\": 0,    \"legBackLeftBot\": 0,    \"legBackLeftTop\": 0,    \"shoulderBackLeft\": 0,    \"legFrontRightBot\": 0,    \"legFrontRightTop\": 0,    \"shoulderFrontRight\": 0,    \"legFrontLeftBot\": 0,    \"legFrontLeftTop\": 0,    \"shoulderFrontLeft\": 0}";
     }
-#pragma warning disable 618
+
     private void SetupServer()
     {
         /*    Function used to start the server    */

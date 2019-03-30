@@ -2,28 +2,29 @@
 using UnityEngine.Networking;
 using UnityEngine.Networking.NetworkSystem;
 
+
 public class Server : MonoBehaviour
 {
+    public static bool isActive;
     public static string targetPositions;
 #pragma warning disable 618
-    void Start()
-    {
-        
-        if(!NetworkServer.active) SetupServer();
-        /*    Initialization of targetPositions (all motors to 0)    */
-        targetPositions =
-            "{\"legBackRightBot\": 0,    \"legBackRightTop\": 0,    \"shoulderBackRight\": 0,    \"legBackLeftBot\": 0,    \"legBackLeftTop\": 0,    \"shoulderBackLeft\": 0,    \"legFrontRightBot\": 0,    \"legFrontRightTop\": 0,    \"shoulderFrontRight\": 0,    \"legFrontLeftBot\": 0,    \"legFrontLeftTop\": 0,    \"shoulderFrontLeft\": 0}";
-    }
-
-    private void SetupServer()
+    public static void SetupServer(int portNumber)
     {
         /*    Function used to start the server    */
-        NetworkServer.Listen(4444);
-
+        NetworkServer.Listen(portNumber);
         RegisterHandlers();
+        isActive = NetworkServer.active;
+    }
+    
+    public static void StopServer()
+    {
+        /*    Function used to start the server    */
+        NetworkServer.Shutdown();
+        isActive = NetworkServer.active;
+
     }
 
-    private void RegisterHandlers()
+    private static void RegisterHandlers()
     {
         /*    All RegisterHandlers    */
 
@@ -38,7 +39,7 @@ public class Server : MonoBehaviour
         targetPositions = netMsg.ReadMessage<StringMessage>().value;
     }
 
-    private void SendAskedDatas(NetworkMessage netMsg)
+    private static void SendAskedDatas(NetworkMessage netMsg)
     {
         if (netMsg.ReadMessage<StringMessage>().value.ToLower() == "status")
         {

@@ -16,11 +16,16 @@
           <e p="Manager.cs" t="Include" />
           <e p="Motor.cs" t="Include" />
           <e p="ProrokTestUnit2.cs" t="Include" />
-          <e p="QuitApp.cs" t="Include" />
           <e p="RobotDatas.cs" t="Include" />
-          <e p="SceneLoader.cs" t="Include" />
           <e p="Server.cs" t="Include" />
           <e p="targetPositions.cs" t="Include" />
+          <e p="UIScripts" t="Include">
+            <e p="QuitApp.cs" t="Include" />
+            <e p="SceneLoader.cs" t="Include" />
+            <e p="ServerDisplayManager.cs" t="Include" />
+            <e p="StartServer.cs" t="Include" />
+            <e p="StopServer.cs" t="Include" />
+          </e>
         </e>
       </e>
       <e p="Library" t="ExcludeRecursive" />

@@ -1,6 +1,4 @@
 ﻿using UnityEngine;
-using System.IO;
-using UnityEngine.Serialization;
 
 public class Manager : MonoBehaviour
 {
@@ -18,10 +16,9 @@ public class Manager : MonoBehaviour
 
     private void Update()
     {
+        /*    Refresh the datas of the robot    */
         _datas.RefreshDatas(Controller.GetMotorsDatas(), Lidar.GetMeasures(), Controller.GetSensorValues());
-        /*    Read the datas from the Json file*/
-        _targetPositions.ReadValues(Server.targetPositions);
-        /*    Write the datas in the Json file    */
+        if(Server.isActive)_targetPositions.ReadValues(Server.targetPositions);
         status = _datas.ToJson();
     }
 

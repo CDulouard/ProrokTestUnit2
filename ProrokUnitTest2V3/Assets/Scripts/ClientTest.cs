@@ -2,7 +2,6 @@
 using System.Globalization;
 using System.Linq;
 using UnityEngine.Networking;
-using System.Threading;
 using UnityEngine.Networking.NetworkSystem;
 
 public class ClientTest : MonoBehaviour

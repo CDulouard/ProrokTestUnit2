@@ -958,7 +958,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   debugMode: 0
-  showDebugMessage: 1
+  showDebugMessage: 0
   testLeg: 0
   demoWalk: 0
   speed: 70

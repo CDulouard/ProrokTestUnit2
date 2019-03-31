@@ -20,7 +20,9 @@
           <e p="Server.cs" t="Include" />
           <e p="targetPositions.cs" t="Include" />
           <e p="UIScripts" t="Include">
+            <e p="ExpandBox.cs" t="Include" />
             <e p="QuitApp.cs" t="Include" />
+            <e p="ReduceBox.cs" t="Include" />
             <e p="SceneLoader.cs" t="Include" />
             <e p="ServerDisplayManager.cs" t="Include" />
             <e p="StartServer.cs" t="Include" />

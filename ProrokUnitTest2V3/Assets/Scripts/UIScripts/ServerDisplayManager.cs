@@ -10,10 +10,19 @@ namespace UIScripts
         public Text statusDisplayer;
         public GameObject inputPortNumber;
         public static int portNumber;
+        public static bool isReduced;
+        public Image ReducedRunning;
+        public Image ReducedStopped;
+        
         private Text _text;
-    
-        void Start()
+        private Image _reducedRunningImage;
+        private Image _reducedStoppedImage;
+
+        private void Start()
         {
+            _reducedRunningImage = ReducedRunning.GetComponent<Image>();
+            _reducedStoppedImage = ReducedStopped.GetComponent<Image>();
+            isReduced = false;
             portNumber = -1;
             _text = inputPortNumber.GetComponent<Text>();
         }
@@ -34,6 +43,29 @@ namespace UIScripts
             {
                 statusDisplayer.text = "Stoped";
                 statusDisplayer.color = Color.red;
+            }
+
+            if (isReduced)
+            {
+                if (Server.isActive & !_reducedRunningImage.enabled)
+                {
+                    _reducedRunningImage.enabled = true;
+                    _reducedStoppedImage.enabled = false;
+                }
+
+                if (!Server.isActive & !_reducedStoppedImage.enabled)
+                {
+                    _reducedRunningImage.enabled = false;
+                    _reducedStoppedImage.enabled = true;
+                }
+            }
+            else
+            {
+                if (_reducedRunningImage.enabled || _reducedStoppedImage.enabled)
+                {
+                    _reducedRunningImage.enabled = false;
+                    _reducedStoppedImage.enabled = false;
+                }
             }
 
         }

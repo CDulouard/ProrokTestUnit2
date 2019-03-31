@@ -1,23 +1,32 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class SceneLoader : MonoBehaviour
+namespace UIScripts
 {
-    private static int _sceneToLoad;
-
-    private void Start()
+    public class SceneLoader : MonoBehaviour
     {
-        _sceneToLoad = 0;
-    }
+        private static int _sceneToLoad;
+        private static string _mode;
 
-    public void SceneSwitcher()
-    {
-        SceneManager.LoadScene(_sceneToLoad);
-    }
+        private void Start()
+        {
+            _sceneToLoad = 0;
+        }
 
-    public void SelectScene(int nb)
-    {
-        _sceneToLoad = nb;
-    }
+        public void SceneSwitcher()
+        {
+            SceneManager.LoadScene(_sceneToLoad);
+        }
+
+        public void SelectScene(int nb)
+        {
+            _sceneToLoad = nb;
+        }
+
+        public void SelectMode(string mode)
+        {
+            _mode = mode;
+        }
     
+    }
 }

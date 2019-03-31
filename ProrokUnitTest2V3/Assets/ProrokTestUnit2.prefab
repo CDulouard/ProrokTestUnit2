@@ -1615,8 +1615,9 @@ GameObject:
   - component: {fileID: 3184332873443337118}
   - component: {fileID: 454010190728864587}
   - component: {fileID: 5365798675162370868}
+  - component: {fileID: 1864571346996971307}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: HUD
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1704,6 +1705,19 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
+--- !u!114 &1864571346996971307
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2732151799423448638}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e936201064512a546b2add14b8e249fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  camera: {fileID: 3297802213334255776}
 --- !u!1 &2803850355375471504
 GameObject:
   m_ObjectHideFlags: 0
@@ -2111,7 +2125,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.3
-  far clip plane: 1000
+  far clip plane: 15000
   field of view: 60
   orthographic: 0
   orthographic size: 5

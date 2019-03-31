@@ -1,45 +1,47 @@
-﻿using UIScripts;
-using UnityEngine;
-using UnityEngine.Networking;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class StartServer : MonoBehaviour
+namespace UIScripts
 {
-    public void Launch(Text error)
+    public class StartServer : MonoBehaviour
     {
-#pragma warning disable 618
-        if (ServerDisplayManager.portNumber >= 49152 & ServerDisplayManager.portNumber <= 65535)
+        public void Launch(Text error)
         {
-            Server.targetPositions =
-                "{\"legBackRightBot\": 0,    \"legBackRightTop\": 0,    \"shoulderBackRight\": 0,    \"legBackLeftBot\": 0,    \"legBackLeftTop\": 0,    \"shoulderBackLeft\": 0,    \"legFrontRightBot\": 0,    \"legFrontRightTop\": 0,    \"shoulderFrontRight\": 0,    \"legFrontLeftBot\": 0,    \"legFrontLeftTop\": 0,    \"shoulderFrontLeft\": 0}";
-
-            if (!NetworkServer.active)
+#pragma warning disable 618
+            if (ServerDisplayManager.portNumber >= 49152 & ServerDisplayManager.portNumber <= 65535)
             {
-                Server.SetupServer(ServerDisplayManager.portNumber);
-                error.text = "";
-                
+                Server.targetPositions =
+                    "{\"legBackRightBot\": 0,    \"legBackRightTop\": 0,    \"shoulderBackRight\": 0,    \"legBackLeftBot\": 0,    \"legBackLeftTop\": 0,    \"shoulderBackLeft\": 0,    \"legFrontRightBot\": 0,    \"legFrontRightTop\": 0,    \"shoulderFrontRight\": 0,    \"legFrontLeftBot\": 0,    \"legFrontLeftTop\": 0,    \"shoulderFrontLeft\": 0}";
+
+                if (!Server.isActive)
+                {
+                    Server.SetupServer(ServerDisplayManager.portNumber);
+                    error.text = "";
+
+
+                }
+                else
+                {
+                    error.text = "Can't creat the server. Maybe it's already running.";
+                }
             }
             else
             {
-                error.text = "Can't creat the server. Maybe it's already running.";
+                error.text = "Enter a correct port number.";
             }
-        }
-        else
-        {
-            error.text = "Enter a correct port number.";
-        }
 #pragma warning restore 618
-    }
-
-    public void EnableButtonStop(Button stopButton)
-    {
-        if (Server.isActive)
-        {
-            GetComponent<Button>().interactable = false;
-            stopButton.interactable = true;
         }
+
+        public void EnableButtonStop(Button stopButton)
+        {
+            if (Server.isActive)
+            {
+                GetComponent<Button>().interactable = false;
+                stopButton.interactable = true;
+            }
         
+        }
+
+
     }
-
-
 }

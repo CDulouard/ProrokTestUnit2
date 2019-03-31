@@ -18,8 +18,11 @@ public class Manager : MonoBehaviour
     {
         /*    Refresh the datas of the robot    */
         _datas.RefreshDatas(Controller.GetMotorsDatas(), Lidar.GetMeasures(), Controller.GetSensorValues());
-        if(Server.isActive)_targetPositions.ReadValues(Server.targetPositions);
+        
+        if(Server.isActive)_targetPositions = TargetPositions.ReadValues(Server.targetPositions);
+        
         status = _datas.ToJson();
+
     }
 
     public static TargetPositions TargetPositions

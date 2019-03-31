@@ -14,6 +14,7 @@ public class Server : MonoBehaviour
         NetworkServer.Listen(portNumber);
         RegisterHandlers();
         isActive = NetworkServer.active;
+        
     }
     
     public static void StopServer()

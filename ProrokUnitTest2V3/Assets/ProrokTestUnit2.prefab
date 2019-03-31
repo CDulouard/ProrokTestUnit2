@@ -985,7 +985,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Port [49152, 65535]
+  m_Text: ' Port [49152, 65535]'
 --- !u!1 &2253055994694022190
 GameObject:
   m_ObjectHideFlags: 0
@@ -3099,7 +3099,6 @@ GameObject:
   - component: {fileID: 4172309300893583702}
   - component: {fileID: 1731771072756813142}
   - component: {fileID: 484407687211964161}
-  - component: {fileID: 4723075752485786629}
   - component: {fileID: 4315904504707801317}
   - component: {fileID: 6622777507239657289}
   m_Layer: 9
@@ -3344,46 +3343,6 @@ MonoBehaviour:
   horizontalOffset: 0
   verticalOffset: 0
   lidar: {fileID: 4335639323937303705}
---- !u!114 &4723075752485786629
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5664980132785214600}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 565de48678f90194b80bfea6828a83ef, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  serverIp: 127.0.0.1
-  serverPort: 4444
-  showDebugMessage: 0
-  motors:
-  - name: legBackRightBot
-    targetPosition: 0
-  - name: legBackRightTop
-    targetPosition: 0
-  - name: shoulderBackRight
-    targetPosition: 0
-  - name: legBackLeftBot
-    targetPosition: 0
-  - name: legBackLeftTop
-    targetPosition: 0
-  - name: shoulderBackLeft
-    targetPosition: 0
-  - name: legFrontRightBot
-    targetPosition: 0
-  - name: legFrontRightTop
-    targetPosition: 0
-  - name: shoulderFrontRight
-    targetPosition: 0
-  - name: legFrontLeftBot
-    targetPosition: 0
-  - name: legFrontLeftTop
-    targetPosition: 0
-  - name: shoulderFrontLeft
-    targetPosition: 0
 --- !u!114 &4315904504707801317
 MonoBehaviour:
   m_ObjectHideFlags: 0

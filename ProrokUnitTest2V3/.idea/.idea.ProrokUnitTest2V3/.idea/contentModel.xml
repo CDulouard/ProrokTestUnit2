@@ -8,7 +8,6 @@
       <e p="Assets" t="Include">
         <e p="Scripts" t="Include">
           <e p="CameraController.cs" t="Include" />
-          <e p="ClientTest.cs" t="Include" />
           <e p="Controller.cs" t="Include" />
           <e p="Leg.cs" t="Include" />
           <e p="Lidar.cs" t="Include" />

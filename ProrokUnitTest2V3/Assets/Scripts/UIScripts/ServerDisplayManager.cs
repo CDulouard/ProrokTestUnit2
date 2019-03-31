@@ -14,7 +14,7 @@ namespace UIScripts
     
         void Start()
         {
-            portNumber = 4444;
+            portNumber = -1;
             _text = inputPortNumber.GetComponent<Text>();
         }
 

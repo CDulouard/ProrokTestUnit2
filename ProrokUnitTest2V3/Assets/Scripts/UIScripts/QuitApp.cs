@@ -6,6 +6,7 @@ public class QuitApp : MonoBehaviour
 {
     public void Quit()
     {
+        /*    Quit application    */
         Application.Quit();
     }
 }

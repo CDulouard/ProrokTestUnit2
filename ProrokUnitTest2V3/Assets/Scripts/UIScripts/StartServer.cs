@@ -5,8 +5,10 @@ namespace UIScripts
 {
     public class StartServer : MonoBehaviour
     {
+        /*    Functions used for the start server button    */
         public void Launch(Text error)
         {
+            /*    Launch the server and display an error message if it can't    */
 #pragma warning disable 618
             if (ServerDisplayManager.portNumber >= 49152 & ServerDisplayManager.portNumber <= 65535)
             {
@@ -34,12 +36,11 @@ namespace UIScripts
 
         public void EnableButtonStop(Button stopButton)
         {
-            if (Server.isActive)
-            {
-                GetComponent<Button>().interactable = false;
-                stopButton.interactable = true;
-            }
-        
+            /*    If the server is launched, enable the stop button and disable the start button    */
+            if (!Server.isActive) return;
+            GetComponent<Button>().interactable = false;
+            stopButton.interactable = true;
+
         }
 
 

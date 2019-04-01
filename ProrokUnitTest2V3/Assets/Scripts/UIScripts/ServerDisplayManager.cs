@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System;
+using UnityEngine.Serialization;
 
 
 namespace UIScripts
@@ -11,8 +12,8 @@ namespace UIScripts
         public GameObject inputPortNumber;
         public static int portNumber;
         public static bool isReduced;
-        public Image ReducedRunning;
-        public Image ReducedStopped;
+        public Image reducedRunning;
+        public Image reducedStopped;
         
         private Text _text;
         private Image _reducedRunningImage;
@@ -20,8 +21,8 @@ namespace UIScripts
 
         private void Start()
         {
-            _reducedRunningImage = ReducedRunning.GetComponent<Image>();
-            _reducedStoppedImage = ReducedStopped.GetComponent<Image>();
+            _reducedRunningImage = reducedRunning.GetComponent<Image>();
+            _reducedStoppedImage = reducedStopped.GetComponent<Image>();
             isReduced = false;
             portNumber = -1;
             _text = inputPortNumber.GetComponent<Text>();

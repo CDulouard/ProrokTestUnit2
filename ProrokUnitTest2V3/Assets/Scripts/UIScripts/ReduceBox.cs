@@ -5,9 +5,9 @@ namespace UIScripts
 {
     public class ReduceBox : MonoBehaviour
     {
-        // Start is called before the first frame update
         public void Reduce(GameObject box)
         {
+            /*    Disable all the components of the expanded box    */
             box.GetComponent<Image>().enabled = false;
             var images = box.GetComponentsInChildren<Image>();
             foreach (var child in images)
@@ -26,6 +26,7 @@ namespace UIScripts
 
         public void ShowReduce(GameObject boxReduced)
         {
+            /*    Enable all the components of the reduced box    */
             var images = boxReduced.GetComponentsInChildren<Image>();
             foreach (var child in images)
             {

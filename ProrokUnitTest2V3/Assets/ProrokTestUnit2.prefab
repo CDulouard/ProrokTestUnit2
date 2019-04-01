@@ -557,7 +557,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 105.62012, y: -50.18994}
+  m_AnchoredPosition: {x: 105.62012, y: -50}
   m_SizeDelta: {x: 211, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8664776487872084250
@@ -611,8 +611,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   statusDisplayer: {fileID: 3029404809512282702}
   inputPortNumber: {fileID: 2803850355375471504}
-  ReducedRunning: {fileID: 1128756518891964889}
-  ReducedStopped: {fileID: 3374336878894396862}
+  reducedRunning: {fileID: 0}
+  reducedStopped: {fileID: 0}
 --- !u!1 &1384035318060576802
 GameObject:
   m_ObjectHideFlags: 0
@@ -2262,7 +2262,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 221.3, y: -14.900002}
+  m_AnchoredPosition: {x: 220.99, y: -14.96}
   m_SizeDelta: {x: 20, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5717994296770541387

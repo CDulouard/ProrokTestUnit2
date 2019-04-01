@@ -5,7 +5,7 @@ namespace UIScripts
     public class UIManager : MonoBehaviour
     {
 
-        public GameObject camera;
+        //public GameObject camera;
         // Start is called before the first frame update
         void Start()
         {

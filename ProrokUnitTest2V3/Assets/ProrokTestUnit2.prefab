@@ -611,8 +611,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   statusDisplayer: {fileID: 3029404809512282702}
   inputPortNumber: {fileID: 2803850355375471504}
-  reducedRunning: {fileID: 0}
-  reducedStopped: {fileID: 0}
+  reducedRunning: {fileID: 1128756518891964889}
+  reducedStopped: {fileID: 3374336878894396862}
 --- !u!1 &1384035318060576802
 GameObject:
   m_ObjectHideFlags: 0

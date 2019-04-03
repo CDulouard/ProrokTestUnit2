@@ -11,7 +11,7 @@ namespace UIScripts
         public Text statusDisplay;
         public GameObject inputPortNumber;
         public static int portNumber = 49152;
-        public static bool isReduced;
+        public Image expandButton;
         public InputField portInput;
         public Button startButton;
         public Button stopButton;
@@ -29,7 +29,7 @@ namespace UIScripts
             stopButton.interactable = Server.isActive;
             _reducedRunningImage = reducedRunning.GetComponent<Image>();
             _reducedStoppedImage = reducedStopped.GetComponent<Image>();
-            isReduced = false;
+            expandButton.enabled = false;
             portNumber = -1;
             _text = inputPortNumber.GetComponent<Text>();
         }
@@ -52,7 +52,7 @@ namespace UIScripts
                 statusDisplay.color = Color.red;
             }
 
-            if (isReduced)
+            if (expandButton.enabled)
             {
                 if (Server.isActive & !_reducedRunningImage.enabled)
                 {

@@ -20,8 +20,6 @@ namespace UIScripts
             {
                 child.enabled = true;
             }
-
-            ServerDisplayManager.isReduced = false;
         }
 
         public void HideReduce(GameObject boxReduced)

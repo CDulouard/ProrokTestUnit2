@@ -2,26 +2,25 @@
 
 public class Manager : MonoBehaviour
 {
-    public string robotDatasFilePath;
     public static string status;
 
-    private RobotDatas _datas; /*    Contain all the datas to put in the Json file.    */
+    public static RobotDatas datas; /*    Contain all the datas to put in the Json file.    */
     private static TargetPositions _targetPositions;
 
     private void Start()
     {
         _targetPositions = new TargetPositions();
-        _datas = new RobotDatas();
+        datas = new RobotDatas();
     }
 
     private void Update()
     {
         /*    Refresh the datas of the robot    */
-        _datas.RefreshDatas(Controller.GetMotorsDatas(), Lidar.GetMeasures(), Controller.GetSensorValues());
+        datas.RefreshDatas(Controller.GetMotorsDatas(), Lidar.GetMeasures(), Controller.GetSensorValues());
         
         if(Server.isActive)_targetPositions = TargetPositions.ReadValues(Server.targetPositions);
         
-        status = _datas.ToJson();
+        status = datas.ToJson();
 
     }
 

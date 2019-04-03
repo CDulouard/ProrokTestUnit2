@@ -26,6 +26,18 @@ Preset:
     value: 
     objectReference: {fileID: 0}
   - target: {fileID: 0}
+    propertyPath: debugMode
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: showDebugMessage
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: testLeg
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
     propertyPath: demoWalk
     value: 0
     objectReference: {fileID: 0}
@@ -38,12 +50,12 @@ Preset:
     value: 1000
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: testLeg
-    value: 0
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
     propertyPath: generalPurposeSensor
     value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: prorokTestUnit2.frontLeft.name
+    value: FrontLeft
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: prorokTestUnit2.frontLeft.legBot.name
@@ -118,6 +130,10 @@ Preset:
     value: 20
     objectReference: {fileID: 0}
   - target: {fileID: 0}
+    propertyPath: prorokTestUnit2.frontRight.name
+    value: FrontRight
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
     propertyPath: prorokTestUnit2.frontRight.legBot.name
     value: LegFrontRightBot
     objectReference: {fileID: 0}
@@ -190,6 +206,10 @@ Preset:
     value: 20
     objectReference: {fileID: 0}
   - target: {fileID: 0}
+    propertyPath: prorokTestUnit2.backLeft.name
+    value: BackLeft
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
     propertyPath: prorokTestUnit2.backLeft.legBot.name
     value: LegBackLeftBot
     objectReference: {fileID: 0}
@@ -260,6 +280,10 @@ Preset:
   - target: {fileID: 0}
     propertyPath: prorokTestUnit2.backLeft.shoulder.angleMax
     value: 20
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: prorokTestUnit2.backRight.name
+    value: BackRight
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: prorokTestUnit2.backRight.legBot.name

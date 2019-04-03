@@ -13,6 +13,7 @@ public class Controller : MonoBehaviour
 
     public GameObject generalPurposeSensor;
     public ProrokTestUnit2 prorokTestUnit2;
+    private static ProrokTestUnit2 _prorokTestUnit2Copy;
 
     private int _testStep;
 
@@ -28,6 +29,7 @@ public class Controller : MonoBehaviour
         if (demoWalk & debugMode) InitWalkDemo();
         RefreshMotors();
         RefreshSensorValues();
+        _prorokTestUnit2Copy = prorokTestUnit2;
     }
 
     private void Update()
@@ -38,6 +40,7 @@ public class Controller : MonoBehaviour
         if (!debugMode) ApplyAskedPositions();
         RefreshMotors();
         RefreshSensorValues();
+        _prorokTestUnit2Copy = prorokTestUnit2;
     }
 
     public static IEnumerable<KeyValuePair<string, float>> GetMotorsDatas()
@@ -315,6 +318,11 @@ public class Controller : MonoBehaviour
         }
     }
 
+    public static ProrokTestUnit2 GetProrokUnitTest2()
+    {
+        return _prorokTestUnit2Copy;
+    }
+    
     private void InitWalkDemo()
     {
         /*    Init the demo walk (should be called in the void start)    */

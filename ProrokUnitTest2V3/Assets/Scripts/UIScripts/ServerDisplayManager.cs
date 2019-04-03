@@ -8,10 +8,13 @@ namespace UIScripts
 {
     public class ServerDisplayManager : MonoBehaviour
     {
-        public Text statusDisplayer;
+        public Text statusDisplay;
         public GameObject inputPortNumber;
-        public static int portNumber;
+        public static int portNumber = 49152;
         public static bool isReduced;
+        public InputField portInput;
+        public Button startButton;
+        public Button stopButton;
         public Image reducedRunning;
         public Image reducedStopped;
         
@@ -21,6 +24,9 @@ namespace UIScripts
 
         private void Start()
         {
+            portInput.text = portNumber.ToString();
+            startButton.interactable = !Server.isActive;
+            stopButton.interactable = Server.isActive;
             _reducedRunningImage = reducedRunning.GetComponent<Image>();
             _reducedStoppedImage = reducedStopped.GetComponent<Image>();
             isReduced = false;
@@ -30,20 +36,20 @@ namespace UIScripts
 
         private void Update()
         {
-            if (Int32.TryParse(_text.text, out var x))
+            if (int.TryParse(_text.text, out var x))
             {
                 portNumber = x;
             }
             
             if (Server.isActive)
             {
-                statusDisplayer.text = "Running";
-                statusDisplayer.color = Color.green;
+                statusDisplay.text = "Running";
+                statusDisplay.color = Color.green;
             }
             else
             {
-                statusDisplayer.text = "Stoped";
-                statusDisplayer.color = Color.red;
+                statusDisplay.text = "Stoped";
+                statusDisplay.color = Color.red;
             }
 
             if (isReduced)

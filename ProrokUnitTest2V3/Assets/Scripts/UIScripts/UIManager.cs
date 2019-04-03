@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 namespace UIScripts
 {
@@ -13,6 +14,17 @@ namespace UIScripts
             {
                 var cam = mainCamera.GetComponent<Camera>();
                 cam.farClipPlane = 1;
+                var images = trainingPanel.GetComponentsInChildren<Image>();
+                foreach (var child in images)
+                {
+                    child.enabled = true;
+                }
+
+                var texts = trainingPanel.GetComponentsInChildren<Text>();
+                foreach (var child in texts)
+                {
+                    child.enabled = true;
+                }
             }
         }
 

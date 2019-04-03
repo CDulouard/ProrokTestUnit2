@@ -88,8 +88,8 @@ public class Controller : MonoBehaviour
             if ((int) limits.max != (int) position & (int) limits.min != (int) position)
             {
                 /*    Set new limit to avoid any movements    */
-                limits.max = (int) position + 0.2f;
-                limits.min = (int) position - 0.2f;
+                limits.max = (int) position + 0.15f;
+                limits.min = (int) position - 0.15f;
                 motor.limits = limits;
             }
 

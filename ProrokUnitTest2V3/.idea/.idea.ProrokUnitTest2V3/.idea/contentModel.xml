@@ -20,6 +20,7 @@
           <e p="Server.cs" t="Include" />
           <e p="targetPositions.cs" t="Include" />
           <e p="UIScripts" t="Include">
+            <e p="AttitudeDisplayManager.cs" t="Include" />
             <e p="ExpandBox.cs" t="Include" />
             <e p="LegsStatusManager.cs" t="Include" />
             <e p="QuitApp.cs" t="Include" />

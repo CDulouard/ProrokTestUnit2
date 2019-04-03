@@ -6,7 +6,7 @@ namespace UIScripts
     public class SceneLoader : MonoBehaviour
     {
         private static int _sceneToLoad;
-        private static string _mode;
+        private static string _mode = "Simulation";
 
         private void Start()
         {
@@ -29,6 +29,11 @@ namespace UIScripts
         {
             /*    Change _mode    */
             _mode = mode;
+        }
+
+        public static string GetMode()
+        {
+            return _mode;
         }
     
     }

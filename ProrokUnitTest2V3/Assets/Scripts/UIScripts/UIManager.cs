@@ -4,12 +4,16 @@ namespace UIScripts
 {
     public class UIManager : MonoBehaviour
     {
+        public GameObject mainCamera;
+        public GameObject trainingPanel;
 
-        //public GameObject camera;
-        // Start is called before the first frame update
-        void Start()
+        private void Start()
         {
-        
+            if (SceneLoader.GetMode().ToLower() == "training")
+            {
+                var cam = mainCamera.GetComponent<Camera>();
+                cam.farClipPlane = 1;
+            }
         }
 
         // Update is called once per frame

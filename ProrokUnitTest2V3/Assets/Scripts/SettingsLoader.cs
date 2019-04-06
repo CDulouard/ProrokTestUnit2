@@ -36,6 +36,21 @@ public class SettingsLoader : MonoBehaviour
         Lidar.verticalStep = settings.verticalStep;
         Lidar.horizontalOffset = settings.horizontalOffset;
         Lidar.verticalOffset = settings.verticalOffset;
+    
+        /*    Apply robot settings    */
+        Controller.legBotSpeed = settings.legBotSpeed;
+        Controller.legTopSpeed = settings.legTopSpeed;
+        Controller.shoulderSpeed = settings.shoulderSpeed;
+        Controller.legBotTorque = settings.legBotTorque;
+        Controller.legTopTorque = settings.legTopTorque;
+        Controller.shoulderTorque = settings.shoulderTorque;
+        Controller.legBotAngleMin = settings.legBotAngleMin;
+        Controller.legTopAngleMin = settings.legTopAngleMin;
+        Controller.shoulderAngleMin = settings.shoulderAngleMin;
+        Controller.legBotAngleMax = settings.legBotAngleMax;
+        Controller.legTopAngleMax = settings.legTopAngleMax;
+        Controller.shoulderAngleMax = settings.shoulderAngleMax;
+    
 
 
     }

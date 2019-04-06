@@ -11,6 +11,18 @@ public class Controller : MonoBehaviour
     public int speed;
     public int torque;
 
+    public static float legBotSpeed;
+    public static float legTopSpeed;
+    public static float shoulderSpeed;
+    public static float legBotTorque;
+    public static float legTopTorque;
+    public static float shoulderTorque;
+    public static float legBotAngleMin;
+    public static float legTopAngleMin;
+    public static float shoulderAngleMin;
+    public static float legBotAngleMax;
+    public static float legTopAngleMax;
+    public static float shoulderAngleMax;
 
     public GameObject generalPurposeSensor;
     public ProrokTestUnit2 prorokTestUnit2;
@@ -192,6 +204,69 @@ public class Controller : MonoBehaviour
         _motorsDatas = prorokTestUnit2.GetMotorDatas();
     }
 
+    private void ImportMotorsSettings()
+    {
+        /*    Import motors Settings    */
+
+        /*    Leg Back Right Bot    */
+        prorokTestUnit2.backRight.legBot = ImportMotorSetting(prorokTestUnit2.backRight.legBot, legBotAngleMin,
+            legBotAngleMax, legBotSpeed, legBotTorque);
+
+        /*    Leg Back Right Top    */
+        prorokTestUnit2.backRight.legTop = ImportMotorSetting(prorokTestUnit2.backRight.legTop, legTopAngleMin,
+            legTopAngleMax, legTopSpeed, legTopTorque);
+        
+        /*    Shoulder Back Right*/
+        prorokTestUnit2.backRight.shoulder = ImportMotorSetting(prorokTestUnit2.backRight.shoulder, shoulderAngleMin,
+            shoulderAngleMax, shoulderSpeed, shoulderTorque);
+
+        /*    Leg Back Left Bot    */
+        prorokTestUnit2.backLeft.legBot = ImportMotorSetting(prorokTestUnit2.backLeft.legBot, legBotAngleMin,
+            legBotAngleMax, legBotSpeed, legBotTorque);
+
+        /*    Leg Back Left Top    */
+        prorokTestUnit2.backLeft.legTop = ImportMotorSetting(prorokTestUnit2.backLeft.legTop, legTopAngleMin,
+            legTopAngleMax, legTopSpeed, legTopTorque);
+        
+        /*    Shoulder Back Left*/
+        prorokTestUnit2.backLeft.shoulder = ImportMotorSetting(prorokTestUnit2.backLeft.shoulder, shoulderAngleMin,
+            shoulderAngleMax, shoulderSpeed, shoulderTorque);
+        
+        /*    Leg Front Right Bot    */
+        prorokTestUnit2.frontRight.legBot = ImportMotorSetting(prorokTestUnit2.frontRight.legBot, legBotAngleMin,
+            legBotAngleMax, legBotSpeed, legBotTorque);
+        
+        /*    Leg Front Right Top    */
+        prorokTestUnit2.frontRight.legTop = ImportMotorSetting(prorokTestUnit2.frontRight.legTop, legTopAngleMin,
+            legTopAngleMax, legTopSpeed, legTopTorque);
+
+        /*    Shoulder Front Right    */
+        prorokTestUnit2.frontRight.shoulder = ImportMotorSetting(prorokTestUnit2.frontRight.shoulder, shoulderAngleMin,
+            shoulderAngleMax, shoulderSpeed, shoulderTorque);
+
+        /*    Leg Front Left Bot    */
+        prorokTestUnit2.frontLeft.legBot = ImportMotorSetting(prorokTestUnit2.frontLeft.legBot, legBotAngleMin,
+            legBotAngleMax, legBotSpeed, legBotTorque);
+
+        /*    Leg Front Left Top    */
+        prorokTestUnit2.frontLeft.legTop = ImportMotorSetting(prorokTestUnit2.frontLeft.legTop, legTopAngleMin,
+            legTopAngleMax, legTopSpeed, legTopTorque);
+
+        /*    Shoulder Front Left    */
+        prorokTestUnit2.frontLeft.shoulder = ImportMotorSetting(prorokTestUnit2.frontLeft.shoulder, shoulderAngleMin,
+            shoulderAngleMax, shoulderSpeed, shoulderTorque);
+        
+    }
+
+    private static Motor ImportMotorSetting(Motor motor, float xMin, float xMax, float speed, float torque)
+    {
+        motor.angleMin = xMin;
+        motor.angleMax = xMax;
+        motor.speed = speed;
+        motor.torque = torque;
+        return motor;
+    }
+
     private void InitMotors()
     {
         /*    Initialize motors    */
@@ -260,6 +335,7 @@ public class Controller : MonoBehaviour
     private void InitRobot()
     {
         /*    Initialize the robot    */
+        ImportMotorsSettings();
         InitMotors();
     }
 
@@ -323,7 +399,7 @@ public class Controller : MonoBehaviour
     {
         return _prorokTestUnit2Copy;
     }
-    
+
     private void InitWalkDemo()
     {
         /*    Init the demo walk (should be called in the void start)    */

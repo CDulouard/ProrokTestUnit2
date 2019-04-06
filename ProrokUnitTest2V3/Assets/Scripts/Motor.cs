@@ -9,7 +9,9 @@ public struct Motor
     public GameObject sensor;
     [Range(-180, 180)] public float angleMin;
     [Range(-180, 180)] public float angleMax;
-
+    public float speed;
+    public float torque;
+    
     private HingeJoint _motorJoint; /*    The HingeJoint of the GameObject    */
 
     public HingeJoint MotorJoint

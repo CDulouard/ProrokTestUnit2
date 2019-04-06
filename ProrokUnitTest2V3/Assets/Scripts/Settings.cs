@@ -1,0 +1,57 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using System.IO;
+using UnityEngine;
+
+public class Settings
+{
+    /*    Visual Settings    */
+    public float cameraViewDistance;
+    public float xSensivity;
+    public float ySensivity;
+    public float scrollSensivity;
+    public float cameraDefaultDistance;
+    
+    /*    Robot Settings    */
+    public float legBotSpeed;
+    public float legTopSpeed;
+    public float shoulderSpeed;
+    public float legBotTorque;
+    public float legTopTorque;
+    public float shoulderTorque;
+    public float legBotAngleMin;
+    public float legTopAngleMin;
+    public float shoulderAngleMin;
+    public float legBotAngleMax;
+    public float legTopAngleMax;
+    public float shoulderAngleMax;
+    
+    /*    Lidar Settings    */
+
+    public float rayRange;
+    public float horizontalRange;
+    public float verticalRange;
+    public float horizontalStep;
+    public float verticalStep;
+    public float horizontalOffset;
+    public float verticalOffset;
+    
+    /*    Server Settings    */
+    public int portDefault;
+
+    public void SaveSettings(string path)
+    {
+        /*    Save current settings to the specified Json file    */
+        File.WriteAllText(path, ToJson());
+    }
+
+    public string ToJson()
+    {
+        return JsonUtility.ToJson(this);
+    }
+    
+    public static Settings FromJson(string jsonString)
+    {
+        return JsonUtility.FromJson<Settings>(jsonString);
+    }
+}

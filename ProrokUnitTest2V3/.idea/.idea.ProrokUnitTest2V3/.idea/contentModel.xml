@@ -18,7 +18,13 @@
           <e p="ProrokTestUnit2.cs" t="Include" />
           <e p="RobotDatas.cs" t="Include" />
           <e p="Server.cs" t="Include" />
+          <e p="Settings.cs" t="Include" />
+          <e p="SettingsLoader.cs" t="Include" />
           <e p="targetPositions.cs" t="Include" />
+          <e p="TestScripts" t="Include">
+            <e p="ApplyForceToObject.cs" t="Include" />
+            <e p="moveObject.cs" t="Include" />
+          </e>
           <e p="UIScripts" t="Include">
             <e p="AttitudeDisplayManager.cs" t="Include" />
             <e p="ExpandBox.cs" t="Include" />

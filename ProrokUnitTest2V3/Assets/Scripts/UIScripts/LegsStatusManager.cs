@@ -76,77 +76,78 @@ namespace UIScripts
                 (int) robotDatas.frontLeft.legBot.GetAngle() == (int) Manager.TargetPositions.legFrontLeftBot
                     ? Color.green
                     : Color.red;
-                
+
             frontLeftTopPosition.text =
                 ((int) robotDatas.frontLeft.legTop.GetAngle()).ToString(CultureInfo.InvariantCulture);
             frontLeftTopPosition.color =
                 (int) robotDatas.frontLeft.legTop.GetAngle() == (int) Manager.TargetPositions.legFrontLeftTop
                     ? Color.green
                     : Color.red;
-                
+
+
             frontLeftShoulderPosition.text =
-                ((int) robotDatas.frontLeft.shoulder.GetAngle()).ToString(CultureInfo.InvariantCulture);
+                (-(int) robotDatas.frontLeft.shoulder.GetAngle()).ToString(CultureInfo.InvariantCulture);
             frontLeftShoulderPosition.color =
-                (int) robotDatas.frontLeft.shoulder.GetAngle() == (int) Manager.TargetPositions.shoulderFrontLeft
+                (int) robotDatas.frontLeft.shoulder.GetAngle() == -(int) Manager.TargetPositions.shoulderFrontLeft
                     ? Color.green
                     : Color.red;
-                
+
             frontRightBotPosition.text =
                 ((int) robotDatas.frontRight.legBot.GetAngle()).ToString(CultureInfo.InvariantCulture);
             frontRightBotPosition.color =
                 (int) robotDatas.frontRight.legBot.GetAngle() == (int) Manager.TargetPositions.legFrontRightBot
                     ? Color.green
                     : Color.red;
-                
+
             frontRightTopPosition.text =
                 ((int) robotDatas.frontRight.legTop.GetAngle()).ToString(CultureInfo.InvariantCulture);
             frontRightTopPosition.color =
                 (int) robotDatas.frontRight.legTop.GetAngle() == (int) Manager.TargetPositions.legFrontRightTop
                     ? Color.green
                     : Color.red;
-                
+
             frontRightShoulderPosition.text =
                 ((int) robotDatas.frontRight.shoulder.GetAngle()).ToString(CultureInfo.InvariantCulture);
             frontRightShoulderPosition.color =
                 (int) robotDatas.frontRight.shoulder.GetAngle() == (int) Manager.TargetPositions.shoulderFrontRight
                     ? Color.green
                     : Color.red;
-                
+
             backLeftBotPosition.text =
                 ((int) robotDatas.backLeft.legBot.GetAngle()).ToString(CultureInfo.InvariantCulture);
             backLeftBotPosition.color =
                 (int) robotDatas.backLeft.legBot.GetAngle() == (int) Manager.TargetPositions.legBackLeftBot
                     ? Color.green
                     : Color.red;
-                
+
             backLeftTopPosition.text =
                 ((int) robotDatas.backLeft.legTop.GetAngle()).ToString(CultureInfo.InvariantCulture);
             backLeftTopPosition.color =
                 (int) robotDatas.backLeft.legTop.GetAngle() == (int) Manager.TargetPositions.legBackLeftTop
                     ? Color.green
                     : Color.red;
-                
+
             backLeftShoulderPosition.text =
-                ((int) robotDatas.backLeft.shoulder.GetAngle()).ToString(CultureInfo.InvariantCulture);
+                (-(int) robotDatas.backLeft.shoulder.GetAngle()).ToString(CultureInfo.InvariantCulture);
             backLeftShoulderPosition.color =
-                (int) robotDatas.backLeft.shoulder.GetAngle() == (int) Manager.TargetPositions.shoulderBackLeft
+                (int) robotDatas.backLeft.shoulder.GetAngle() == -(int) Manager.TargetPositions.shoulderBackLeft
                     ? Color.green
                     : Color.red;
-                
+
             backRightBotPosition.text =
                 ((int) robotDatas.backRight.legBot.GetAngle()).ToString(CultureInfo.InvariantCulture);
             backRightBotPosition.color =
                 (int) robotDatas.backRight.legBot.GetAngle() == (int) Manager.TargetPositions.legBackRightBot
                     ? Color.green
                     : Color.red;
-                
+
             backRightTopPosition.text =
                 ((int) robotDatas.backRight.legTop.GetAngle()).ToString(CultureInfo.InvariantCulture);
             backRightTopPosition.color =
                 (int) robotDatas.backRight.legTop.GetAngle() == (int) Manager.TargetPositions.legBackRightTop
                     ? Color.green
                     : Color.red;
-                
+
             backRightShoulderPosition.text =
                 ((int) robotDatas.backRight.shoulder.GetAngle()).ToString(CultureInfo.InvariantCulture);
             backRightShoulderPosition.color =

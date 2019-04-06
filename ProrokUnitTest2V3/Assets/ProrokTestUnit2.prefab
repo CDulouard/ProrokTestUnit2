@@ -6047,6 +6047,7 @@ GameObject:
   - component: {fileID: 484407687211964161}
   - component: {fileID: 4315904504707801317}
   - component: {fileID: 6622777507239657289}
+  - component: {fileID: 4361479244380743248}
   m_Layer: 9
   m_Name: Body
   m_TagString: Untagged
@@ -6145,7 +6146,7 @@ MonoBehaviour:
   testLeg: 0
   demoWalk: 0
   speed: 70
-  torque: 1000
+  torque: 20000
   generalPurposeSensor: {fileID: 6585095210799246453}
   prorokTestUnit2:
     frontLeft:
@@ -6214,7 +6215,7 @@ MonoBehaviour:
         name: ShoulderBackLeft
         targetPosition: 0
         motor: {fileID: 5507741372979792502}
-        sensor: {fileID: 5507741372979792502}
+        sensor: {fileID: 2265798004738795467}
         angleMin: -20
         angleMax: 20
     backRight:
@@ -6316,8 +6317,20 @@ MonoBehaviour:
   sensivityY: 2
   scrollSensivity: 5
   distance: 150
-  target: {fileID: 4388355645060410485}
+  target: {fileID: 909972776470248022}
   cameraObject: {fileID: 3297802213334255776}
+--- !u!114 &4361479244380743248
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5664980132785214600}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87cc035378f3d9443b2ef343b3ca7873, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5753286825093709268
 GameObject:
   m_ObjectHideFlags: 0

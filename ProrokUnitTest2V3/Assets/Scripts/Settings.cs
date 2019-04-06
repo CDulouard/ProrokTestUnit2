@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Settings
 {
-    /*    Visual Settings    */
+    /*    Video Settings    */
     public float cameraViewDistance;
     public float xSensivity;
     public float ySensivity;

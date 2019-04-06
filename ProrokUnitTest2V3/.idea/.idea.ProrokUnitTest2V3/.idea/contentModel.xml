@@ -26,7 +26,9 @@
             <e p="moveObject.cs" t="Include" />
           </e>
           <e p="UIScripts" t="Include">
+            <e p="ApplySettings.cs" t="Include" />
             <e p="AttitudeDisplayManager.cs" t="Include" />
+            <e p="BoxManager.cs" t="Include" />
             <e p="ExpandBox.cs" t="Include" />
             <e p="LegsStatusManager.cs" t="Include" />
             <e p="QuitApp.cs" t="Include" />
@@ -34,6 +36,7 @@
             <e p="RobotStatusManager.cs" t="Include" />
             <e p="SceneLoader.cs" t="Include" />
             <e p="ServerDisplayManager.cs" t="Include" />
+            <e p="SettingsManager.cs" t="Include" />
             <e p="StartServer.cs" t="Include" />
             <e p="StopServer.cs" t="Include" />
             <e p="UIManager.cs" t="Include" />

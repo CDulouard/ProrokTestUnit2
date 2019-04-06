@@ -6158,6 +6158,8 @@ MonoBehaviour:
         sensor: {fileID: 7148624048127913953}
         angleMin: -30
         angleMax: 30
+        speed: 0
+        torque: 0
       legTop:
         name: LegFrontLeftTop
         targetPosition: 0
@@ -6165,6 +6167,8 @@ MonoBehaviour:
         sensor: {fileID: 2535159379492661198}
         angleMin: -30
         angleMax: 30
+        speed: 0
+        torque: 0
       shoulder:
         name: ShoulderFrontLeft
         targetPosition: 0
@@ -6172,6 +6176,8 @@ MonoBehaviour:
         sensor: {fileID: 4531936487058043394}
         angleMin: -20
         angleMax: 20
+        speed: 0
+        torque: 0
     frontRight:
       name: FrontRight
       legBot:
@@ -6181,6 +6187,8 @@ MonoBehaviour:
         sensor: {fileID: 4582707120435087553}
         angleMin: -30
         angleMax: 30
+        speed: 0
+        torque: 0
       legTop:
         name: LegFrontRightTop
         targetPosition: 0
@@ -6188,6 +6196,8 @@ MonoBehaviour:
         sensor: {fileID: 5130998773079558115}
         angleMin: -30
         angleMax: 30
+        speed: 0
+        torque: 0
       shoulder:
         name: ShoulderFrontRight
         targetPosition: 0
@@ -6195,6 +6205,8 @@ MonoBehaviour:
         sensor: {fileID: 2635671112218983462}
         angleMin: -20
         angleMax: 20
+        speed: 0
+        torque: 0
     backLeft:
       name: BackLeft
       legBot:
@@ -6204,6 +6216,8 @@ MonoBehaviour:
         sensor: {fileID: 8844521280886912657}
         angleMin: -30
         angleMax: 30
+        speed: 0
+        torque: 0
       legTop:
         name: LegBackLeftTop
         targetPosition: 0
@@ -6211,6 +6225,8 @@ MonoBehaviour:
         sensor: {fileID: 1560166812336104803}
         angleMin: -30
         angleMax: 30
+        speed: 0
+        torque: 0
       shoulder:
         name: ShoulderBackLeft
         targetPosition: 0
@@ -6218,6 +6234,8 @@ MonoBehaviour:
         sensor: {fileID: 2265798004738795467}
         angleMin: -20
         angleMax: 20
+        speed: 0
+        torque: 0
     backRight:
       name: BackRight
       legBot:
@@ -6227,6 +6245,8 @@ MonoBehaviour:
         sensor: {fileID: 5797669834027227264}
         angleMin: -30
         angleMax: 30
+        speed: 0
+        torque: 0
       legTop:
         name: LegBackRightTop
         targetPosition: 0
@@ -6234,6 +6254,8 @@ MonoBehaviour:
         sensor: {fileID: 5020801865849339041}
         angleMin: -30
         angleMax: 30
+        speed: 0
+        torque: 0
       shoulder:
         name: ShoulderBackRight
         targetPosition: 0
@@ -6241,6 +6263,8 @@ MonoBehaviour:
         sensor: {fileID: 2253055994694022190}
         angleMin: -20
         angleMax: 20
+        speed: 0
+        torque: 0
 --- !u!54 &4172309300893583702
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -6253,7 +6277,7 @@ Rigidbody:
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
-  m_IsKinematic: 1
+  m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
@@ -6281,13 +6305,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99dd8d53174b9494e87a71147bd85474, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rayRange: 1000
-  horizontalRange: 45
-  verticalRange: 0
-  horizontalStep: 20
-  verticalStep: 1
-  horizontalOffset: 0
-  verticalOffset: 0
   lidar: {fileID: 4335639323937303705}
 --- !u!114 &4315904504707801317
 MonoBehaviour:
@@ -6313,10 +6330,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a97c134623aef824087e6816ee6bcf1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sensivityX: 5
-  sensivityY: 2
-  scrollSensivity: 5
-  distance: 150
   target: {fileID: 909972776470248022}
   cameraObject: {fileID: 3297802213334255776}
 --- !u!114 &4361479244380743248

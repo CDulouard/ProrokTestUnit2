@@ -5,10 +5,10 @@ using UnityEngine.Serialization;
 
 public class CameraController : MonoBehaviour
 {
-    public float sensivityX;
-    public float sensivityY;
-    public float scrollSensivity;
-    public float distance;
+    public static float sensivityX;
+    public static float sensivityY;
+    public static float scrollSensivity;
+    public static float distance;
     public Transform target;
     public GameObject cameraObject;
 

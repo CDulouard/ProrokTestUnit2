@@ -3,13 +3,13 @@ using UnityEngine;
 
 public class Lidar : MonoBehaviour
 {
-    public int rayRange; /*    lidar's range   */
-    public int horizontalRange; /*    half of lidar's horizontal angular range    */
-    public int verticalRange; /*    half of lidar's vertical angular range    */
-    public float horizontalStep; /*    angular step between to horizontal ray    */
-    public float verticalStep; /*    angular step between to vertical ray    */
-    public float horizontalOffset;    /*    horizontal offset the lidar (in degrees)     */
-    public float verticalOffset;    /*    vertical offset the lidar (in degrees)     */
+    public static int rayRange; /*    lidar's range   */
+    public static int horizontalRange; /*    half of lidar's horizontal angular range    */
+    public static int verticalRange; /*    half of lidar's vertical angular range    */
+    public static float horizontalStep; /*    angular step between to horizontal ray    */
+    public static float verticalStep; /*    angular step between to vertical ray    */
+    public static float horizontalOffset;    /*    horizontal offset the lidar (in degrees)     */
+    public static float verticalOffset;    /*    vertical offset the lidar (in degrees)     */
 
     public GameObject lidar;
 

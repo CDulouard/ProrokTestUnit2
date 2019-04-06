@@ -10,7 +10,7 @@ namespace UIScripts
     {
         public Text statusDisplay;
         public GameObject inputPortNumber;
-        public static int portNumber = 49152;
+        public static int portNumber;
         public Image expandButton;
         public InputField portInput;
         public Button startButton;
@@ -24,6 +24,7 @@ namespace UIScripts
 
         private void Start()
         {
+            portNumber = SettingsLoader.settings.portDefault;
             portInput.text = portNumber.ToString();
             startButton.interactable = !Server.isActive;
             stopButton.interactable = Server.isActive;

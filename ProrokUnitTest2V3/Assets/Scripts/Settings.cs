@@ -28,9 +28,9 @@ public class Settings
     
     /*    Lidar Settings    */
 
-    public float rayRange;
-    public float horizontalRange;
-    public float verticalRange;
+    public int rayRange;
+    public int horizontalRange;
+    public int verticalRange;
     public float horizontalStep;
     public float verticalStep;
     public float horizontalOffset;
@@ -50,8 +50,8 @@ public class Settings
         return JsonUtility.ToJson(this);
     }
     
-    public static Settings FromJson(string jsonString)
+    public static Settings FromJson(string path)
     {
-        return JsonUtility.FromJson<Settings>(jsonString);
+        return JsonUtility.FromJson<Settings>(File.ReadAllText(path));
     }
 }

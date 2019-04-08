@@ -6,7 +6,7 @@ namespace UIScripts
 {
     public class SettingsManager : MonoBehaviour
     {
-        public GameObject content;
+
         
         public Text camViewDistanceText;
         public Text xSensivityText;
@@ -26,13 +26,13 @@ namespace UIScripts
         private const float CamViewDistanceMax = 50000f;
 
         private const float XSensivityMin = 1f;
-        private const float XSensivityMax = 20f;
+        private const float XSensivityMax = 30f;
 
         private const float YSensivityMin = 1f;
-        private const float YSensivityMax = 20f;
+        private const float YSensivityMax = 30f;
 
         private const float ScrollSensivityMin = 1f;
-        private const float ScrollSensivityMax = 20f;
+        private const float ScrollSensivityMax = 100f;
 
         private const float CamDistanceMin = 100f;
         private const float CamDistanceMax = 1000f;
@@ -40,7 +40,6 @@ namespace UIScripts
         private void Start()
         {
             settings = Settings.FromJson(Application.streamingAssetsPath + "/JsonFiles/settings.json");
-            BoxManager.HideContentGeneric(content);
             
             camViewDistanceText.text = ((int) settings.cameraViewDistance).ToString(CultureInfo.InvariantCulture);
             xSensivityText.text = ((int) settings.xSensivity).ToString(CultureInfo.InvariantCulture);

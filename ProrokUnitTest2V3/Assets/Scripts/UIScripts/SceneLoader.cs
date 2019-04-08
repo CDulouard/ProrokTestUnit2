@@ -15,6 +15,7 @@ namespace UIScripts
 
         public void SceneSwitcher()
         {
+            if(Server.isActive) Server.StopServer();
             /*    Switch to the scene stores in _sceneToLoad    */
             SceneManager.LoadScene(_sceneToLoad);
         }

@@ -18,6 +18,7 @@
           <e p="ProrokTestUnit2.cs" t="Include" />
           <e p="RobotDatas.cs" t="Include" />
           <e p="Server.cs" t="Include" />
+          <e p="ServerTest.cs" t="Include" />
           <e p="Settings.cs" t="Include" />
           <e p="SettingsLoader.cs" t="Include" />
           <e p="targetPositions.cs" t="Include" />

@@ -18,20 +18,12 @@ public class Server : MonoBehaviour
 #pragma warning disable 618
     public static void SetupServer(int portNumber)
     {
-        var test = new TargetPositions();
-        test.shoulderBackLeft = 10;
-        test.shoulderBackRight = 10;
-        test.shoulderFrontLeft = 10;
-        test.shoulderFrontRight = 10;
-        Debug.Log(JsonUtility.ToJson(test));
         /*    Function used to start the server    */
         /*=========================*/
         _listener = new Thread(() => Listen(portNumber));
         _listener.Start();
         /*=========================*/
 
-
-        
 
         isActive = _listener.IsAlive;
     }
@@ -43,7 +35,7 @@ public class Server : MonoBehaviour
         _listener.Abort();
         Debug.Log("Server stopped");
         /*=========================*/
-        
+
         isActive = _listener.IsAlive;
     }
 
@@ -53,13 +45,16 @@ public class Server : MonoBehaviour
         switch (id)
         {
             case 1000:
+                /*    received new target position    */
                 ReadTargetPositions(content);
+                break;
+            case 2000:
+                /*    received a request to send status    */
                 break;
             default:
                 Debug.Log("Unknown id");
                 break;
         }
-
     }
 
 
@@ -82,29 +77,23 @@ public class Server : MonoBehaviour
     [SuppressMessage("ReSharper", "FunctionNeverReturns")]
     private static void Listen(int portNumber)
     {
-        Debug.Log("Server is starting...");
-
-        //On crée le serveur en lui spécifiant le port sur lequel il devra écouter.
+        /*    Creat a new UDP server    */
         var server = new UdpClient(portNumber);
 
-        //Création d'une boucle infinie qui aura pour tâche d'écouter.
+        /*    Infinite loop to listen the client requests    */
         while (true)
         {
-            //Création d'un objet IPEndPoint qui recevra les données du Socket distant.
+            /*    Creat an IPEndPoint to contain datas from the distant socket    */
             IPEndPoint client = null;
-            Debug.Log("Listening...");
 
-            //On écoute jusqu'à recevoir un message.
+            /*    wait for a message    */
             var data = server.Receive(ref client);
-            Debug.Log("Received datas from :" + client.Address + " " + client.Port);
 
-            //Décryptage et affichage du message.
+            /*    Read the message    */
             var message = Encoding.Default.GetString(data);
-            
+
             ReadMessage(message, out var id, out var content);
             RegisterHandlers(id, content);
-            
-            Debug.Log("id : " + id + "  message : " + content + "\n");
         }
     }
 
@@ -119,6 +108,7 @@ public class Server : MonoBehaviour
             content = message.Substring(idLength, message.Length - idLength);
             return;
         }
+
         content = message;
         id = -1;
     }

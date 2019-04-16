@@ -1,8 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-using System;
-using UnityEngine.Serialization;
-
+using System.Collections;
 
 namespace UIScripts
 {
@@ -37,6 +35,8 @@ namespace UIScripts
 
         private void Update()
         {
+            
+            portNumber = SettingsLoader.settings.portDefault;
             if (int.TryParse(_text.text, out var x))
             {
                 portNumber = x;

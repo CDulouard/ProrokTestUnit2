@@ -4,7 +4,7 @@ public class SettingsLoader : MonoBehaviour
 {
     public GameObject mainCamera;
     public static Settings settings;
-    private void Start()
+    private void Awake()
     {
        ApplySettings(Application.streamingAssetsPath + "/JsonFiles/settings.json");
     }
@@ -12,8 +12,6 @@ public class SettingsLoader : MonoBehaviour
     private void ApplySettings(string path)
     {
         settings = Settings.FromJson(path);
-        //test.SaveSettings(Application.streamingAssetsPath + "/JsonFiles/settings.json");
-        
         
         /*    Apply camera settings    */
         if (UIScripts.SceneLoader.GetMode().ToLower() != "training")
@@ -50,8 +48,6 @@ public class SettingsLoader : MonoBehaviour
         Controller.legBotAngleMax = settings.legBotAngleMax;
         Controller.legTopAngleMax = settings.legTopAngleMax;
         Controller.shoulderAngleMax = settings.shoulderAngleMax;
-    
-
 
     }
 

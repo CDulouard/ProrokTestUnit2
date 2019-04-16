@@ -19,10 +19,8 @@ public class Server : MonoBehaviour
     public static void SetupServer(int portNumber)
     {
         /*    Function used to start the server    */
-        /*=========================*/
         _listener = new Thread(() => Listen(portNumber));
         _listener.Start();
-        /*=========================*/
 
 
         isActive = _listener.IsAlive;
@@ -31,11 +29,7 @@ public class Server : MonoBehaviour
     public static void StopServer()
     {
         /*    Function used to start the server    */
-        /*=========================*/
         _listener.Abort();
-        Debug.Log("Server stopped");
-        /*=========================*/
-
         isActive = _listener.IsAlive;
     }
 

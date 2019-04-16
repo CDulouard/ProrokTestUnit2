@@ -6041,13 +6041,13 @@ GameObject:
   - component: {fileID: 9080200747601439652}
   - component: {fileID: 1753277980148868638}
   - component: {fileID: 8934577702508082117}
+  - component: {fileID: 4361479244380743248}
   - component: {fileID: 9177599830270558920}
   - component: {fileID: 4172309300893583702}
   - component: {fileID: 1731771072756813142}
   - component: {fileID: 484407687211964161}
   - component: {fileID: 4315904504707801317}
   - component: {fileID: 6622777507239657289}
-  - component: {fileID: 4361479244380743248}
   m_Layer: 9
   m_Name: Body
   m_TagString: Untagged
@@ -6129,6 +6129,19 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 14
   m_Mesh: {fileID: 4300004, guid: 1158fd4c1132701449c1f57e02ad1024, type: 3}
+--- !u!114 &4361479244380743248
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5664980132785214600}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87cc035378f3d9443b2ef343b3ca7873, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainCamera: {fileID: 3297802213334255776}
 --- !u!114 &9177599830270558920
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6332,19 +6345,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 909972776470248022}
   cameraObject: {fileID: 3297802213334255776}
---- !u!114 &4361479244380743248
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5664980132785214600}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 87cc035378f3d9443b2ef343b3ca7873, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mainCamera: {fileID: 3297802213334255776}
 --- !u!1 &5753286825093709268
 GameObject:
   m_ObjectHideFlags: 0

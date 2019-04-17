@@ -7499,6 +7499,16 @@ MonoBehaviour:
   shoulderSpeedScroll: {fileID: 2014636831}
   legBotTorqueField: {fileID: 775982848}
   legBotTorqueScroll: {fileID: 1879256710}
+  legTopTorqueField: {fileID: 553550260}
+  legTopTorqueScroll: {fileID: 2040240867}
+  shoulderTorqueField: {fileID: 423352670}
+  shoulderTorqueScroll: {fileID: 500115762}
+  legBotAngleMinField: {fileID: 456552250}
+  legBotAngleMinScroll: {fileID: 53593865}
+  legTopAngleMinField: {fileID: 1010660763}
+  legTopAngleMinScroll: {fileID: 1442508041}
+  shoulderAngleMinField: {fileID: 814872065}
+  shoulderAngleMinScroll: {fileID: 955826441}
 --- !u!1 &902647427
 GameObject:
   m_ObjectHideFlags: 0

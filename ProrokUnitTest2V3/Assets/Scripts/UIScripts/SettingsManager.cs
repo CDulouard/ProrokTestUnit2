@@ -50,8 +50,23 @@ namespace UIScripts
         
         public InputField shoulderSpeedField;
         public Scrollbar shoulderSpeedScroll;
-        private const float shoulderSpeedMin = 10f;
-        private const float shoulderSpeedMax = 200f;
+        private const float ShoulderSpeedMin = 10f;
+        private const float ShoulderSpeedMax = 200f;
+        
+        public InputField legBotTorqueField;
+        public Scrollbar legBotTorqueScroll;
+        private const float LegBotTorqueMin = 1000f;
+        private const float LegBotTorqueMax = 50000f;
+        
+        public InputField legTopTorqueField;
+        public Scrollbar legTopTorqueScroll;
+        private const float LegTopTorqueMin = 1000f;
+        private const float LegTopTorqueMax = 50000f;
+        
+        public InputField shoulderTorqueField;
+        public Scrollbar shoulderTorqueScroll;
+        private const float ShoulderTorqueMin = 1000f;
+        private const float ShoulderTorqueMax = 50000f;
 
 
         private void Start()
@@ -75,6 +90,10 @@ namespace UIScripts
             legBotSpeedField.text = ((int) settings.legBotSpeed).ToString(CultureInfo.InvariantCulture);
             legTopSpeedField.text = ((int) settings.legTopSpeed).ToString(CultureInfo.InvariantCulture);
             shoulderSpeedField.text = ((int) settings.shoulderSpeed).ToString(CultureInfo.InvariantCulture);
+            
+            legBotTorqueField.text = ((int) settings.legBotTorque).ToString(CultureInfo.InvariantCulture);
+            legTopTorqueField.text = ((int) settings.legTopTorque).ToString(CultureInfo.InvariantCulture);
+            shoulderTorqueField.text = ((int) settings.shoulderTorque).ToString(CultureInfo.InvariantCulture);
             
             /*    Convert the value of the settings to a value for scroll bars    */
 
@@ -103,8 +122,18 @@ namespace UIScripts
             legTopSpeedScroll.value = (settings.legTopSpeed - LegTopSpeedMin) /
                                       (LegTopSpeedMax - LegTopSpeedMin);
             
-            shoulderSpeedScroll.value = (settings.shoulderSpeed - shoulderSpeedMin) /
-                                      (shoulderSpeedMax - shoulderSpeedMin);
+            shoulderSpeedScroll.value = (settings.shoulderSpeed - ShoulderSpeedMin) /
+                                      (ShoulderSpeedMax - ShoulderSpeedMin);
+            
+            
+            legBotTorqueScroll.value = (settings.legBotTorque - LegBotTorqueMin) /
+                                      (LegBotTorqueMax - LegBotTorqueMin);
+            
+            legTopTorqueScroll.value = (settings.legTopTorque - LegTopTorqueMin) /
+                                       (LegTopTorqueMax - LegTopTorqueMin);
+            
+            shoulderTorqueScroll.value = (settings.shoulderTorque - ShoulderTorqueMin) /
+                                       (ShoulderTorqueMax - ShoulderTorqueMin);
         }
 
 
@@ -388,28 +417,28 @@ namespace UIScripts
             if (float.TryParse(shoulderSpeedField.text == "" ? "0" : shoulderSpeedField.text,
                     out var shoulderSpeedFieldValue) && shoulderSpeedField.isFocused)
             {
-                if (shoulderSpeedFieldValue > shoulderSpeedMax)
+                if (shoulderSpeedFieldValue > ShoulderSpeedMax)
                 {
                     if (!shoulderSpeedField.isFocused)
                     {
-                        shoulderSpeedField.text = ((int) shoulderSpeedMax).ToString(CultureInfo.InvariantCulture);
+                        shoulderSpeedField.text = ((int) ShoulderSpeedMax).ToString(CultureInfo.InvariantCulture);
                     }
 
                     shoulderSpeedScroll.value = 1;
                 }
-                else if (shoulderSpeedFieldValue < shoulderSpeedMin)
+                else if (shoulderSpeedFieldValue < ShoulderSpeedMin)
                 {
                     if (!shoulderSpeedField.isFocused)
                     {
-                        shoulderSpeedField.text = ((int) shoulderSpeedMin).ToString(CultureInfo.InvariantCulture);
+                        shoulderSpeedField.text = ((int) ShoulderSpeedMin).ToString(CultureInfo.InvariantCulture);
                     }
 
                     shoulderSpeedScroll.value = 0;
                 }
                 else
                 {
-                    shoulderSpeedScroll.value = (shoulderSpeedFieldValue - shoulderSpeedMin) /
-                                              (shoulderSpeedMax - shoulderSpeedMin);
+                    shoulderSpeedScroll.value = (shoulderSpeedFieldValue - ShoulderSpeedMin) /
+                                              (ShoulderSpeedMax - ShoulderSpeedMin);
                 }
             }
             else if (shoulderSpeedField.text != "")
@@ -418,9 +447,123 @@ namespace UIScripts
             }
             else if (!shoulderSpeedField.isFocused)
             {
-                shoulderSpeedField.text = 0 > shoulderSpeedMin
-                    ? 0 < shoulderSpeedMax ? "0" : ((int) shoulderSpeedMax).ToString(CultureInfo.InvariantCulture)
-                    : ((int) shoulderSpeedMin).ToString(CultureInfo.InvariantCulture);
+                shoulderSpeedField.text = 0 > ShoulderSpeedMin
+                    ? 0 < ShoulderSpeedMax ? "0" : ((int) ShoulderSpeedMax).ToString(CultureInfo.InvariantCulture)
+                    : ((int) ShoulderSpeedMin).ToString(CultureInfo.InvariantCulture);
+            }
+            
+            if (float.TryParse(legBotTorqueField.text == "" ? "0" : legBotTorqueField.text,
+                    out var legBotTorqueFieldValue) && legBotTorqueField.isFocused)
+            {
+                if (legBotTorqueFieldValue > LegBotTorqueMax)
+                {
+                    if (!legBotTorqueField.isFocused)
+                    {
+                        legBotTorqueField.text = ((int) LegBotTorqueMax).ToString(CultureInfo.InvariantCulture);
+                    }
+
+                    legBotTorqueScroll.value = 1;
+                }
+                else if (legBotTorqueFieldValue < LegBotTorqueMin)
+                {
+                    if (!legBotTorqueField.isFocused)
+                    {
+                        legBotTorqueField.text = ((int) LegBotTorqueMin).ToString(CultureInfo.InvariantCulture);
+                    }
+
+                    legBotTorqueScroll.value = 0;
+                }
+                else
+                {
+                    legBotTorqueScroll.value = (legBotTorqueFieldValue - LegBotTorqueMin) /
+                                               (LegBotTorqueMax - LegBotTorqueMin);
+                }
+            }
+            else if (legBotTorqueField.text != "")
+            {
+                legBotTorqueField.text = ((int) settings.legBotTorque).ToString(CultureInfo.InvariantCulture);
+            }
+            else if (!legBotTorqueField.isFocused)
+            {
+                legBotTorqueField.text = 0 > LegBotTorqueMin
+                    ? 0 < LegBotTorqueMax ? "0" : ((int) LegBotTorqueMax).ToString(CultureInfo.InvariantCulture)
+                    : ((int) LegBotTorqueMin).ToString(CultureInfo.InvariantCulture);
+            }
+            
+            if (float.TryParse(legTopTorqueField.text == "" ? "0" : legTopTorqueField.text,
+                    out var legTopTorqueFieldValue) && legTopTorqueField.isFocused)
+            {
+                if (legTopTorqueFieldValue > LegTopTorqueMax)
+                {
+                    if (!legTopTorqueField.isFocused)
+                    {
+                        legTopTorqueField.text = ((int) LegTopTorqueMax).ToString(CultureInfo.InvariantCulture);
+                    }
+
+                    legTopTorqueScroll.value = 1;
+                }
+                else if (legTopTorqueFieldValue < LegTopTorqueMin)
+                {
+                    if (!legTopTorqueField.isFocused)
+                    {
+                        legTopTorqueField.text = ((int) LegTopTorqueMin).ToString(CultureInfo.InvariantCulture);
+                    }
+
+                    legTopTorqueScroll.value = 0;
+                }
+                else
+                {
+                    legTopTorqueScroll.value = (legTopTorqueFieldValue - LegTopTorqueMin) /
+                                               (LegTopTorqueMax - LegTopTorqueMin);
+                }
+            }
+            else if (legTopTorqueField.text != "")
+            {
+                legTopTorqueField.text = ((int) settings.legTopTorque).ToString(CultureInfo.InvariantCulture);
+            }
+            else if (!legTopTorqueField.isFocused)
+            {
+                legTopTorqueField.text = 0 > LegTopTorqueMin
+                    ? 0 < LegTopTorqueMax ? "0" : ((int) LegTopTorqueMax).ToString(CultureInfo.InvariantCulture)
+                    : ((int) LegTopTorqueMin).ToString(CultureInfo.InvariantCulture);
+            }
+            
+            if (float.TryParse(shoulderTorqueField.text == "" ? "0" : shoulderTorqueField.text,
+                    out var shoulderTorqueFieldValue) && shoulderTorqueField.isFocused)
+            {
+                if (shoulderTorqueFieldValue > ShoulderTorqueMax)
+                {
+                    if (!shoulderTorqueField.isFocused)
+                    {
+                        shoulderTorqueField.text = ((int) ShoulderTorqueMax).ToString(CultureInfo.InvariantCulture);
+                    }
+
+                    shoulderTorqueScroll.value = 1;
+                }
+                else if (shoulderTorqueFieldValue < ShoulderTorqueMin)
+                {
+                    if (!shoulderTorqueField.isFocused)
+                    {
+                        shoulderTorqueField.text = ((int) ShoulderTorqueMin).ToString(CultureInfo.InvariantCulture);
+                    }
+
+                    shoulderTorqueScroll.value = 0;
+                }
+                else
+                {
+                    shoulderTorqueScroll.value = (shoulderTorqueFieldValue - ShoulderTorqueMin) /
+                                                 (ShoulderTorqueMax - ShoulderTorqueMin);
+                }
+            }
+            else if (shoulderTorqueField.text != "")
+            {
+                shoulderTorqueField.text = ((int) settings.shoulderTorque).ToString(CultureInfo.InvariantCulture);
+            }
+            else if (!shoulderTorqueField.isFocused)
+            {
+                shoulderTorqueField.text = 0 > ShoulderTorqueMin
+                    ? 0 < ShoulderTorqueMax ? "0" : ((int) ShoulderTorqueMax).ToString(CultureInfo.InvariantCulture)
+                    : ((int) ShoulderTorqueMin).ToString(CultureInfo.InvariantCulture);
             }
 
             /*    Convert the value of scroll bars to setting values    */
@@ -447,8 +590,18 @@ namespace UIScripts
             settings.legTopSpeed = legTopSpeedScroll.value * (LegTopSpeedMax - LegTopSpeedMin) +
                                    LegTopSpeedMin;
             
-            settings.shoulderSpeed = shoulderSpeedScroll.value * (shoulderSpeedMax - shoulderSpeedMin) +
-                                     shoulderSpeedMin;
+            settings.shoulderSpeed = shoulderSpeedScroll.value * (ShoulderSpeedMax - ShoulderSpeedMin) +
+                                     ShoulderSpeedMin;
+            
+            
+            settings.legBotTorque = legBotTorqueScroll.value * (LegBotTorqueMax - LegBotTorqueMin) +
+                                    LegBotTorqueMin;
+            
+            settings.legTopTorque = legTopTorqueScroll.value * (LegTopTorqueMax - LegTopTorqueMin) +
+                                    LegTopTorqueMin;
+            
+            settings.shoulderTorque = shoulderTorqueScroll.value * (ShoulderTorqueMax - ShoulderTorqueMin) +
+                                      ShoulderTorqueMin;
         }
     }
 }

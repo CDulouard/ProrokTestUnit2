@@ -7497,6 +7497,8 @@ MonoBehaviour:
   legTopSpeedScroll: {fileID: 1874174949}
   shoulderSpeedField: {fileID: 737208581}
   shoulderSpeedScroll: {fileID: 2014636831}
+  legBotTorqueField: {fileID: 775982848}
+  legBotTorqueScroll: {fileID: 1879256710}
 --- !u!1 &902647427
 GameObject:
   m_ObjectHideFlags: 0

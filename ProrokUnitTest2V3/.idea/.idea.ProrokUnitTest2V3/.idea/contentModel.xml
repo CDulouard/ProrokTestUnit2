@@ -41,6 +41,7 @@
             <e p="StartServer.cs" t="Include" />
             <e p="StopServer.cs" t="Include" />
             <e p="UIManager.cs" t="Include" />
+            <e p="work.cs" t="Include" />
           </e>
         </e>
       </e>

@@ -42,11 +42,22 @@ namespace UIScripts
         public Scrollbar legBotSpeedScroll;
         private const float LegBotSpeedMin = 10f;
         private const float LegBotSpeedMax = 200f;
+        
+        public InputField legTopSpeedField;
+        public Scrollbar legTopSpeedScroll;
+        private const float LegTopSpeedMin = 10f;
+        private const float LegTopSpeedMax = 200f;
+        
+        public InputField shoulderSpeedField;
+        public Scrollbar shoulderSpeedScroll;
+        private const float shoulderSpeedMin = 10f;
+        private const float shoulderSpeedMax = 200f;
 
 
         private void Start()
         {
             /*    Load actual settings    */
+            
             settings = Settings.FromJson(Application.streamingAssetsPath + "/JsonFiles/settings.json");
 
             /*    Write settings values to the UI    */
@@ -62,7 +73,9 @@ namespace UIScripts
             /*    Robot settings    */
 
             legBotSpeedField.text = ((int) settings.legBotSpeed).ToString(CultureInfo.InvariantCulture);
-
+            legTopSpeedField.text = ((int) settings.legTopSpeed).ToString(CultureInfo.InvariantCulture);
+            shoulderSpeedField.text = ((int) settings.shoulderSpeed).ToString(CultureInfo.InvariantCulture);
+            
             /*    Convert the value of the settings to a value for scroll bars    */
 
             /*    Video settings    */
@@ -86,6 +99,12 @@ namespace UIScripts
 
             legBotSpeedScroll.value = (settings.legBotSpeed - LegBotSpeedMin) /
                                       (LegBotSpeedMax - LegBotSpeedMin);
+            
+            legTopSpeedScroll.value = (settings.legTopSpeed - LegTopSpeedMin) /
+                                      (LegTopSpeedMax - LegTopSpeedMin);
+            
+            shoulderSpeedScroll.value = (settings.shoulderSpeed - shoulderSpeedMin) /
+                                      (shoulderSpeedMax - shoulderSpeedMin);
         }
 
 
@@ -328,6 +347,81 @@ namespace UIScripts
                     : ((int) LegBotSpeedMin).ToString(CultureInfo.InvariantCulture);
             }
 
+            if (float.TryParse(legTopSpeedField.text == "" ? "0" : legTopSpeedField.text,
+                    out var legTopSpeedFieldValue) && legTopSpeedField.isFocused)
+            {
+                if (legTopSpeedFieldValue > LegTopSpeedMax)
+                {
+                    if (!legTopSpeedField.isFocused)
+                    {
+                        legTopSpeedField.text = ((int) LegTopSpeedMax).ToString(CultureInfo.InvariantCulture);
+                    }
+
+                    legTopSpeedScroll.value = 1;
+                }
+                else if (legTopSpeedFieldValue < LegTopSpeedMin)
+                {
+                    if (!legTopSpeedField.isFocused)
+                    {
+                        legTopSpeedField.text = ((int) LegTopSpeedMin).ToString(CultureInfo.InvariantCulture);
+                    }
+
+                    legTopSpeedScroll.value = 0;
+                }
+                else
+                {
+                    legTopSpeedScroll.value = (legTopSpeedFieldValue - LegTopSpeedMin) /
+                                              (LegTopSpeedMax - LegTopSpeedMin);
+                }
+            }
+            else if (legTopSpeedField.text != "")
+            {
+                legTopSpeedField.text = ((int) settings.legTopSpeed).ToString(CultureInfo.InvariantCulture);
+            }
+            else if (!legTopSpeedField.isFocused)
+            {
+                legTopSpeedField.text = 0 > LegTopSpeedMin
+                    ? 0 < LegTopSpeedMax ? "0" : ((int) LegTopSpeedMax).ToString(CultureInfo.InvariantCulture)
+                    : ((int) LegTopSpeedMin).ToString(CultureInfo.InvariantCulture);
+            }
+            
+            if (float.TryParse(shoulderSpeedField.text == "" ? "0" : shoulderSpeedField.text,
+                    out var shoulderSpeedFieldValue) && shoulderSpeedField.isFocused)
+            {
+                if (shoulderSpeedFieldValue > shoulderSpeedMax)
+                {
+                    if (!shoulderSpeedField.isFocused)
+                    {
+                        shoulderSpeedField.text = ((int) shoulderSpeedMax).ToString(CultureInfo.InvariantCulture);
+                    }
+
+                    shoulderSpeedScroll.value = 1;
+                }
+                else if (shoulderSpeedFieldValue < shoulderSpeedMin)
+                {
+                    if (!shoulderSpeedField.isFocused)
+                    {
+                        shoulderSpeedField.text = ((int) shoulderSpeedMin).ToString(CultureInfo.InvariantCulture);
+                    }
+
+                    shoulderSpeedScroll.value = 0;
+                }
+                else
+                {
+                    shoulderSpeedScroll.value = (shoulderSpeedFieldValue - shoulderSpeedMin) /
+                                              (shoulderSpeedMax - shoulderSpeedMin);
+                }
+            }
+            else if (shoulderSpeedField.text != "")
+            {
+                shoulderSpeedField.text = ((int) settings.shoulderSpeed).ToString(CultureInfo.InvariantCulture);
+            }
+            else if (!shoulderSpeedField.isFocused)
+            {
+                shoulderSpeedField.text = 0 > shoulderSpeedMin
+                    ? 0 < shoulderSpeedMax ? "0" : ((int) shoulderSpeedMax).ToString(CultureInfo.InvariantCulture)
+                    : ((int) shoulderSpeedMin).ToString(CultureInfo.InvariantCulture);
+            }
 
             /*    Convert the value of scroll bars to setting values    */
 
@@ -349,6 +443,12 @@ namespace UIScripts
 
             settings.legBotSpeed = legBotSpeedScroll.value * (LegBotSpeedMax - LegBotSpeedMin) +
                                    LegBotSpeedMin;
+            
+            settings.legTopSpeed = legTopSpeedScroll.value * (LegTopSpeedMax - LegTopSpeedMin) +
+                                   LegTopSpeedMin;
+            
+            settings.shoulderSpeed = shoulderSpeedScroll.value * (shoulderSpeedMax - shoulderSpeedMin) +
+                                     shoulderSpeedMin;
         }
     }
 }

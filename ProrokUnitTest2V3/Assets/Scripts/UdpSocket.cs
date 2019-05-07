@@ -5,24 +5,32 @@ using System.Text;
 using System.Text.RegularExpressions;
 using UnityEngine;
 
-public class UdpSocket : MonoBehaviour
-{
-    private Socket _socket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
-        private const int bufSize = 8 * 1024;
+
+public class UdpSocket{
+        private Socket _socket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
+        private const int BufSize = 8 * 1024;
         private State state = new State();
-        private EndPoint epFrom = new IPEndPoint(IPAddress.Any, 0);
-        private AsyncCallback recv = null;
+        private EndPoint _epFrom = new IPEndPoint(IPAddress.Any, 0);
+        private AsyncCallback _recv;
+        private UdpSocket _client;
+        private string _clientIp;
+        private int _clientPort;
 
         public class State
         {
-            public byte[] buffer = new byte[bufSize];
+            public byte[] buffer = new byte[BufSize];
         }
 
-        public void Server(string address, int port)
+        public void Stop()
+        {
+            //_socket.Shutdown(SocketShutdown.Both);
+            _socket.Close();
+        }
+        
+        public void StartServer(string address, int port)
         {
             _socket.SetSocketOption(SocketOptionLevel.IP, SocketOptionName.ReuseAddress, true);
             _socket.Bind(new IPEndPoint(IPAddress.Parse(address), port));
-            
             Receive();
         }
 
@@ -37,7 +45,7 @@ public class UdpSocket : MonoBehaviour
             byte[] data = Encoding.ASCII.GetBytes(text);
             _socket.BeginSend(data, 0, data.Length, SocketFlags.None, (ar) =>
             {
-                State so = (State) ar.AsyncState;
+                var so = (State) ar.AsyncState;
                 int bytes = _socket.EndSend(ar);
                 Console.WriteLine("SEND: {0}, {1}", bytes, text);
             }, state);
@@ -45,20 +53,95 @@ public class UdpSocket : MonoBehaviour
 
         private void Receive()
         {
-            _socket.BeginReceiveFrom(state.buffer, 0, bufSize, SocketFlags.None, ref epFrom, recv = (ar) =>
+            _socket.BeginReceiveFrom(state.buffer, 0, BufSize, SocketFlags.None, ref _epFrom, _recv = ar =>
             {
-                State so = (State) ar.AsyncState;
-                int bytes = _socket.EndReceiveFrom(ar, ref epFrom);
-                _socket.BeginReceiveFrom(so.buffer, 0, bufSize, SocketFlags.None, ref epFrom, recv, so);
+                var so = (State) ar.AsyncState;
+                int bytes = _socket.EndReceiveFrom(ar, ref _epFrom);
+                _socket.BeginReceiveFrom(so.buffer, 0, BufSize, SocketFlags.None, ref _epFrom, _recv, so);
 
                 var msg = Encoding.ASCII.GetString(so.buffer, 0, bytes);
-                var from = epFrom.ToString();
+                var from = _epFrom.ToString();
                 
                 Console.WriteLine("RECV: {0}: {1}, {2}", from, bytes,
                     msg);
                 Console.WriteLine();
                 ReadMessage(msg, out var id, out var content);
-                Console.WriteLine(ReadIp(from));
+
+
+                switch (id)
+                {
+                    case 100:
+                        var rx = new Regex(@"[0-9]*",
+                            RegexOptions.Compiled | RegexOptions.IgnoreCase);
+
+                        var port = content.Substring(1, content.Length - 1);
+                    
+                        if (int.TryParse(rx.Match(port).ToString(), out var x))
+                        {
+                            if (_client != null)
+                            {
+                                _client.Stop();
+                            }
+                        
+                            _clientPort = x;
+                            _clientIp = ReadIp(from);
+                        
+                            Console.WriteLine(_clientIp+ ":" + _clientPort);
+                        
+                            _client = new UdpSocket();
+                            _client.Client(_clientIp, _clientPort);
+                            _client.Send("Connected");
+                            Console.WriteLine(_clientIp+ ":" + _clientPort);
+                      
+                        }
+                        else
+                        {
+                            _clientPort = 0;
+                        }
+                        break;
+                    case 1000:
+                        /*    received new target position    */
+                        ReadTargetPositions(content);
+                        break;
+                    default:
+                        Debug.Log("Unknown id");
+                        break;
+                }
+                
+
+                if (id == 100)    /*    Client ask for connection    */
+                {
+                    var rx = new Regex(@"[0-9]*",
+                        RegexOptions.Compiled | RegexOptions.IgnoreCase);
+
+                    var port = content.Substring(1, content.Length - 1);
+                    
+                    if (int.TryParse(rx.Match(port).ToString(), out var x))
+                    {
+                        if (_client != null)
+                        {
+                            _client.Stop();
+                        }
+                        
+                        _clientPort = x;
+                        _clientIp = ReadIp(from);
+                        
+                        Console.WriteLine(_clientIp+ ":" + _clientPort);
+                        
+                        _client = new UdpSocket();
+                        _client.Client(_clientIp, _clientPort);
+                        _client.Send("Connected");
+                        Console.WriteLine(_clientIp+ ":" + _clientPort);
+                      
+                    }
+                    else
+                    {
+                        _clientPort = 0;
+                    }
+                    
+                }
+                
+                
                 Console.WriteLine();
             }, state);
         }
@@ -83,5 +166,12 @@ public class UdpSocket : MonoBehaviour
 
             content = message;
             id = -1;
+        }
+
+        private static void ReadTargetPositions(string message)
+        {
+            /*    Function use to read and refresh target positions    */
+            Server.targetPositions = message;           
+        }
+       
     }
-}

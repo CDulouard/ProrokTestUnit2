@@ -13,25 +13,25 @@ public class Server : MonoBehaviour
     public static bool isActive;
     public static string targetPositions;
 
-    private static Thread _listener;
+    private static UdpSocket _server;
 
 #pragma warning disable 618
     public static void SetupServer(int portNumber)
     {
         /*    Function used to start the server    */
-        _listener = new Thread(() => Listen(portNumber));
-        _listener.Start();
+        _server = new UdpSocket();
+        _server.StartServer("127.0.0.1", portNumber);
         
         
 
-        isActive = _listener.IsAlive;
+        isActive = _server != null;
     }
 
     public static void StopServer()
     {
         /*    Function used to stop the server    */
-        _listener.Abort();
-        isActive = _listener.IsAlive;
+        _server.Stop();
+        isActive = false;
     }
 
     private static void RegisterHandlers(int id, string content, ref UdpClient server)

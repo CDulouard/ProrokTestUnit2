@@ -100,6 +100,8 @@ namespace UIScripts
         public Scrollbar shoulderAngleMaxScroll;
         private const float ShoulderAngleMaxMin = 1f;
         private const float ShoulderAngleMaxMax = 170f;
+        
+        /*    Lidar settings    */
 
         
         
@@ -137,6 +139,8 @@ namespace UIScripts
             legBotAngleMaxField.text = ((int) settings.legBotAngleMax).ToString(CultureInfo.InvariantCulture);
             legTopAngleMaxField.text = ((int) settings.legTopAngleMax).ToString(CultureInfo.InvariantCulture);
             shoulderAngleMaxField.text = ((int) settings.shoulderAngleMax).ToString(CultureInfo.InvariantCulture);
+            
+            /*    Lidar settings    */
             
             /*    Convert the value of the settings to a value for scroll bars    */
 
@@ -197,6 +201,9 @@ namespace UIScripts
             
             shoulderAngleMaxScroll.value = (settings.shoulderAngleMax - ShoulderAngleMaxMin) /
                                          (ShoulderAngleMaxMax - ShoulderAngleMaxMin);
+            
+            
+            /*    Lidar settings    */
         }
 
 
@@ -856,6 +863,12 @@ namespace UIScripts
                     ? 0 < ShoulderAngleMaxMax ? "0" : ((int) ShoulderAngleMaxMax).ToString(CultureInfo.InvariantCulture)
                     : ((int) ShoulderAngleMaxMin).ToString(CultureInfo.InvariantCulture);
             }
+            
+            
+            /*    Lidar settings    */
+            
+            
+            
             /*    Convert the value of scroll bars to setting values    */
 
             /*    Video settings    */
@@ -912,6 +925,12 @@ namespace UIScripts
             
             settings.shoulderAngleMax = shoulderAngleMaxScroll.value * (ShoulderAngleMaxMax - ShoulderAngleMaxMin) +
                                         ShoulderAngleMaxMin;
+            
+            
+            /*    Lidar settings    */
+            
+            
+            
         }
     }
 }

@@ -14,6 +14,8 @@ public class Server : MonoBehaviour
     public static string targetPositions;
 
     private static Thread _listener;
+    private static string _clientIp = "";
+    private static int _clientPort = 0;
 
 #pragma warning disable 618
     public static void SetupServer(int portNumber)
@@ -21,19 +23,20 @@ public class Server : MonoBehaviour
         /*    Function used to start the server    */
         _listener = new Thread(() => Listen(portNumber));
         _listener.Start();
-
+        
+        
 
         isActive = _listener.IsAlive;
     }
 
     public static void StopServer()
     {
-        /*    Function used to start the server    */
+        /*    Function used to stop the server    */
         _listener.Abort();
         isActive = _listener.IsAlive;
     }
 
-    private static void RegisterHandlers(int id, string content)
+    private static void RegisterHandlers(int id, string content, ref UdpClient server)
     {
         /*    All RegisterHandlers    */
         switch (id)
@@ -41,6 +44,12 @@ public class Server : MonoBehaviour
             case 1000:
                 /*    received new target position    */
                 ReadTargetPositions(content);
+                
+                
+                var bytes = Encoding.UTF8.GetBytes("test");
+                server.Send(bytes, bytes.Length);
+                
+                
                 break;
             case 2000:
                 /*    received a request to send status    */
@@ -80,14 +89,18 @@ public class Server : MonoBehaviour
             /*    Creat an IPEndPoint to contain datas from the distant socket    */
             IPEndPoint client = null;
 
+            
+            
             /*    wait for a message    */
             var data = server.Receive(ref client);
-
+            
             /*    Read the message    */
             var message = Encoding.Default.GetString(data);
 
             ReadMessage(message, out var id, out var content);
-            RegisterHandlers(id, content);
+            
+            /*    Execute a register handler if the message asked for it    */
+            RegisterHandlers(id, content, ref server);
         }
     }
 
@@ -105,5 +118,12 @@ public class Server : MonoBehaviour
 
         content = message;
         id = -1;
+    }
+    
+    private static string ReadIp(string from)
+    {
+        var rx = new Regex(@"[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}",
+            RegexOptions.Compiled | RegexOptions.IgnoreCase);
+        return rx.Match(from).ToString();
     }
 }

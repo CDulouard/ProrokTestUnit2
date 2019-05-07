@@ -14,8 +14,6 @@ public class Server : MonoBehaviour
     public static string targetPositions;
 
     private static Thread _listener;
-    private static string _clientIp = "";
-    private static int _clientPort = 0;
 
 #pragma warning disable 618
     public static void SetupServer(int portNumber)

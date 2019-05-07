@@ -101,47 +101,25 @@ public class UdpSocket{
                         break;
                     case 1000:
                         /*    received new target position    */
-                        ReadTargetPositions(content);
+                        if (ReadIp(from) == _clientIp && _clientPort != 0)
+                        {
+                            ReadTargetPositions(content);
+                            _client.Send(Manager.status);
+                        }
                         break;
+                    
+                    case 1001:
+                        /*    received new target position    */
+                        if (ReadIp(from) == _clientIp && _clientPort != 0)
+                        {
+                            _client.Send(Manager.status);
+                        }
+                        break;
+                        
                     default:
                         Debug.Log("Unknown id");
                         break;
                 }
-                
-
-                if (id == 100)    /*    Client ask for connection    */
-                {
-                    var rx = new Regex(@"[0-9]*",
-                        RegexOptions.Compiled | RegexOptions.IgnoreCase);
-
-                    var port = content.Substring(1, content.Length - 1);
-                    
-                    if (int.TryParse(rx.Match(port).ToString(), out var x))
-                    {
-                        if (_client != null)
-                        {
-                            _client.Stop();
-                        }
-                        
-                        _clientPort = x;
-                        _clientIp = ReadIp(from);
-                        
-                        Console.WriteLine(_clientIp+ ":" + _clientPort);
-                        
-                        _client = new UdpSocket();
-                        _client.Client(_clientIp, _clientPort);
-                        _client.Send("Connected");
-                        Console.WriteLine(_clientIp+ ":" + _clientPort);
-                      
-                    }
-                    else
-                    {
-                        _clientPort = 0;
-                    }
-                    
-                }
-                
-                
                 Console.WriteLine();
             }, state);
         }

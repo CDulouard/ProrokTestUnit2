@@ -33,6 +33,7 @@ public class Controller : MonoBehaviour
     private static int _score;
 
     private static bool _respawnFlag;
+    private static int _finished;
     private static MapDatas _currentMap;
 
     private static IEnumerable<KeyValuePair<string, float>>
@@ -46,18 +47,25 @@ public class Controller : MonoBehaviour
 
     IEnumerator CheckForProgress()
     {
+        /*    increase score if the robot progress and dicrease it if it's not moving or moving the wrong way    */
         var finish = _currentMap.GetFinishPoint();
         var prevDistance = Vector3.Distance(generalPurposeSensor.transform.position, finish);
         while (true)
         {
             var dFromFinish = Vector3.Distance(generalPurposeSensor.transform.position,finish);
             _score += (int)(prevDistance - dFromFinish - 1);
+            if (dFromFinish <= 30)
+            {
+                _score += 1000;
+                _finished = 1;
+            }
             prevDistance = dFromFinish;
             yield return new WaitForSeconds(1f);
         }   
     }
     private void Start()
     {
+        _finished = 0;
         _score = 0;
         _currentMap = new MapDatas(SceneManager.GetActiveScene().buildIndex);
         InitRobot();
@@ -92,6 +100,11 @@ public class Controller : MonoBehaviour
             Debug.Log(_score);
         }
 
+    }
+
+    public static int GetFinished()
+    {
+        return _finished;
     }
 
     public static int GetScore()

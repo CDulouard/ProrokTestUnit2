@@ -34,7 +34,6 @@ namespace UIScripts
         private const float CamDistanceMin = 100f;
         private const float CamDistanceMax = 1000f;
 
-        
 
         /*    Robot settings    */
 
@@ -42,74 +41,109 @@ namespace UIScripts
         public Scrollbar legBotSpeedScroll;
         private const float LegBotSpeedMin = 10f;
         private const float LegBotSpeedMax = 200f;
-        
+
         public InputField legTopSpeedField;
         public Scrollbar legTopSpeedScroll;
         private const float LegTopSpeedMin = 10f;
         private const float LegTopSpeedMax = 200f;
-        
+
         public InputField shoulderSpeedField;
         public Scrollbar shoulderSpeedScroll;
         private const float ShoulderSpeedMin = 10f;
         private const float ShoulderSpeedMax = 200f;
-        
-        
+
+
         public InputField legBotTorqueField;
         public Scrollbar legBotTorqueScroll;
         private const float LegBotTorqueMin = 1000f;
         private const float LegBotTorqueMax = 50000f;
-        
+
         public InputField legTopTorqueField;
         public Scrollbar legTopTorqueScroll;
         private const float LegTopTorqueMin = 1000f;
         private const float LegTopTorqueMax = 50000f;
-        
+
         public InputField shoulderTorqueField;
         public Scrollbar shoulderTorqueScroll;
         private const float ShoulderTorqueMin = 1000f;
         private const float ShoulderTorqueMax = 50000f;
-        
-        
+
+
         public InputField legBotAngleMinField;
         public Scrollbar legBotAngleMinScroll;
         private const float LegBotAngleMinMin = -170f;
         private const float LegBotAngleMinMax = -1f;
-        
+
         public InputField legTopAngleMinField;
         public Scrollbar legTopAngleMinScroll;
         private const float LegTopAngleMinMin = -170f;
         private const float LegTopAngleMinMax = -1f;
-        
+
         public InputField shoulderAngleMinField;
         public Scrollbar shoulderAngleMinScroll;
         private const float ShoulderAngleMinMin = -170f;
         private const float ShoulderAngleMinMax = -1f;
-        
-        
+
+
         public InputField legBotAngleMaxField;
         public Scrollbar legBotAngleMaxScroll;
         private const float LegBotAngleMaxMin = 1f;
         private const float LegBotAngleMaxMax = 170f;
-        
+
         public InputField legTopAngleMaxField;
         public Scrollbar legTopAngleMaxScroll;
         private const float LegTopAngleMaxMin = 1f;
         private const float LegTopAngleMaxMax = 170f;
-        
+
         public InputField shoulderAngleMaxField;
         public Scrollbar shoulderAngleMaxScroll;
         private const float ShoulderAngleMaxMin = 1f;
         private const float ShoulderAngleMaxMax = 170f;
-        
+
         /*    Lidar settings    */
 
-        
-        
+        public InputField rayRangeField;
+        public Scrollbar rayRangeScroll;
+        private const int RayRangeMin = 10;
+        private const int RayRangeMax = 10000;
+
+        public InputField horizontalRangeField;
+        public Scrollbar horizontalRangeScroll;
+        private const int HorizontalRangeMin = 0;
+        private const int HorizontalRangeMax = 90;
+
+        public InputField verticalRangeField;
+        public Scrollbar verticalRangeScroll;
+        private const int VerticalRangeMin = 0;
+        private const int VerticalRangeMax = 90;
+
+        public InputField horizontalStepField;
+        public Scrollbar horizontalStepScroll;
+        private const float HorizontalStepRangeMin = 0.1f;
+        private const float HorizontalStepRangeMax = 90f;
+
+        public InputField verticalStepField;
+        public Scrollbar verticalStepScroll;
+        private const float VerticalStepRangeMin = 0.1f;
+        private const float VerticalStepRangeMax = 90f;
+
+        public InputField horizontalOffsetField;
+        public Scrollbar horizontalOffsetScroll;
+        private const float HorizontalOffsetRangeMin = 0f;
+        private const float HorizontalOffsetRangeMax = 90f;
+
+        public InputField verticalOffsetField;
+        public Scrollbar verticalOffsetScroll;
+        private const float VerticalOffsetRangeMin = 0f;
+        private const float VerticalOffsetRangeMax = 90f;
+
+
         public static Settings settings;
+
         private void Start()
         {
             /*    Load actual settings    */
-            
+
             settings = Settings.FromJson(Application.streamingAssetsPath + "/JsonFiles/settings.json");
 
             /*    Write settings values to the UI    */
@@ -127,21 +161,26 @@ namespace UIScripts
             legBotSpeedField.text = ((int) settings.legBotSpeed).ToString(CultureInfo.InvariantCulture);
             legTopSpeedField.text = ((int) settings.legTopSpeed).ToString(CultureInfo.InvariantCulture);
             shoulderSpeedField.text = ((int) settings.shoulderSpeed).ToString(CultureInfo.InvariantCulture);
-            
+
             legBotTorqueField.text = ((int) settings.legBotTorque).ToString(CultureInfo.InvariantCulture);
             legTopTorqueField.text = ((int) settings.legTopTorque).ToString(CultureInfo.InvariantCulture);
             shoulderTorqueField.text = ((int) settings.shoulderTorque).ToString(CultureInfo.InvariantCulture);
-            
+
             legBotAngleMinField.text = ((int) settings.legBotAngleMin).ToString(CultureInfo.InvariantCulture);
             legTopAngleMinField.text = ((int) settings.legTopAngleMin).ToString(CultureInfo.InvariantCulture);
             shoulderAngleMinField.text = ((int) settings.shoulderAngleMin).ToString(CultureInfo.InvariantCulture);
-            
+
             legBotAngleMaxField.text = ((int) settings.legBotAngleMax).ToString(CultureInfo.InvariantCulture);
             legTopAngleMaxField.text = ((int) settings.legTopAngleMax).ToString(CultureInfo.InvariantCulture);
             shoulderAngleMaxField.text = ((int) settings.shoulderAngleMax).ToString(CultureInfo.InvariantCulture);
-            
+
             /*    Lidar settings    */
-            
+
+            rayRangeField.text = settings.rayRange.ToString(CultureInfo.InvariantCulture);
+            horizontalRangeField.text = settings.horizontalRange.ToString(CultureInfo.InvariantCulture);
+            verticalRangeField.text = settings.verticalRange.ToString(CultureInfo.InvariantCulture);
+
+
             /*    Convert the value of the settings to a value for scroll bars    */
 
             /*    Video settings    */
@@ -165,45 +204,54 @@ namespace UIScripts
 
             legBotSpeedScroll.value = (settings.legBotSpeed - LegBotSpeedMin) /
                                       (LegBotSpeedMax - LegBotSpeedMin);
-            
+
             legTopSpeedScroll.value = (settings.legTopSpeed - LegTopSpeedMin) /
                                       (LegTopSpeedMax - LegTopSpeedMin);
-            
+
             shoulderSpeedScroll.value = (settings.shoulderSpeed - ShoulderSpeedMin) /
-                                      (ShoulderSpeedMax - ShoulderSpeedMin);
-            
-            
+                                        (ShoulderSpeedMax - ShoulderSpeedMin);
+
+
             legBotTorqueScroll.value = (settings.legBotTorque - LegBotTorqueMin) /
-                                      (LegBotTorqueMax - LegBotTorqueMin);
-            
+                                       (LegBotTorqueMax - LegBotTorqueMin);
+
             legTopTorqueScroll.value = (settings.legTopTorque - LegTopTorqueMin) /
                                        (LegTopTorqueMax - LegTopTorqueMin);
-            
+
             shoulderTorqueScroll.value = (settings.shoulderTorque - ShoulderTorqueMin) /
-                                       (ShoulderTorqueMax - ShoulderTorqueMin);
-            
-            
+                                         (ShoulderTorqueMax - ShoulderTorqueMin);
+
+
             legBotAngleMinScroll.value = (settings.legBotAngleMin - LegBotAngleMinMin) /
-                                       (LegBotAngleMinMax - LegBotAngleMinMin);
-            
+                                         (LegBotAngleMinMax - LegBotAngleMinMin);
+
             legTopAngleMinScroll.value = (settings.legTopAngleMin - LegTopAngleMinMin) /
                                          (LegTopAngleMinMax - LegTopAngleMinMin);
-            
+
             shoulderAngleMinScroll.value = (settings.shoulderAngleMin - ShoulderAngleMinMin) /
-                                         (ShoulderAngleMinMax - ShoulderAngleMinMin);
-            
-            
+                                           (ShoulderAngleMinMax - ShoulderAngleMinMin);
+
+
             legBotAngleMaxScroll.value = (settings.legBotAngleMax - LegBotAngleMaxMin) /
                                          (LegBotAngleMaxMax - LegBotAngleMaxMin);
-            
+
             legTopAngleMaxScroll.value = (settings.legTopAngleMax - LegTopAngleMaxMin) /
                                          (LegTopAngleMaxMax - LegTopAngleMaxMin);
-            
+
             shoulderAngleMaxScroll.value = (settings.shoulderAngleMax - ShoulderAngleMaxMin) /
-                                         (ShoulderAngleMaxMax - ShoulderAngleMaxMin);
-            
-            
+                                           (ShoulderAngleMaxMax - ShoulderAngleMaxMin);
+
+
             /*    Lidar settings    */
+
+            rayRangeScroll.value = (float) (settings.rayRange - RayRangeMin) /
+                                   (RayRangeMax - RayRangeMin);
+
+            horizontalRangeScroll.value = (float) (settings.horizontalRange - HorizontalRangeMin) /
+                                          (HorizontalRangeMax - HorizontalRangeMin);
+            
+            verticalRangeScroll.value = (float) (settings.verticalRange - VerticalRangeMin) /
+                                          (VerticalRangeMax - VerticalRangeMin);
         }
 
 
@@ -483,7 +531,7 @@ namespace UIScripts
                     ? 0 < LegTopSpeedMax ? "0" : ((int) LegTopSpeedMax).ToString(CultureInfo.InvariantCulture)
                     : ((int) LegTopSpeedMin).ToString(CultureInfo.InvariantCulture);
             }
-            
+
             if (float.TryParse(shoulderSpeedField.text == "" ? "0" : shoulderSpeedField.text,
                     out var shoulderSpeedFieldValue) && shoulderSpeedField.isFocused)
             {
@@ -508,7 +556,7 @@ namespace UIScripts
                 else
                 {
                     shoulderSpeedScroll.value = (shoulderSpeedFieldValue - ShoulderSpeedMin) /
-                                              (ShoulderSpeedMax - ShoulderSpeedMin);
+                                                (ShoulderSpeedMax - ShoulderSpeedMin);
                 }
             }
             else if (shoulderSpeedField.text != "")
@@ -521,7 +569,7 @@ namespace UIScripts
                     ? 0 < ShoulderSpeedMax ? "0" : ((int) ShoulderSpeedMax).ToString(CultureInfo.InvariantCulture)
                     : ((int) ShoulderSpeedMin).ToString(CultureInfo.InvariantCulture);
             }
-            
+
             if (float.TryParse(legBotTorqueField.text == "" ? "0" : legBotTorqueField.text,
                     out var legBotTorqueFieldValue) && legBotTorqueField.isFocused)
             {
@@ -559,7 +607,7 @@ namespace UIScripts
                     ? 0 < LegBotTorqueMax ? "0" : ((int) LegBotTorqueMax).ToString(CultureInfo.InvariantCulture)
                     : ((int) LegBotTorqueMin).ToString(CultureInfo.InvariantCulture);
             }
-            
+
             if (float.TryParse(legTopTorqueField.text == "" ? "0" : legTopTorqueField.text,
                     out var legTopTorqueFieldValue) && legTopTorqueField.isFocused)
             {
@@ -597,7 +645,7 @@ namespace UIScripts
                     ? 0 < LegTopTorqueMax ? "0" : ((int) LegTopTorqueMax).ToString(CultureInfo.InvariantCulture)
                     : ((int) LegTopTorqueMin).ToString(CultureInfo.InvariantCulture);
             }
-            
+
             if (float.TryParse(shoulderTorqueField.text == "" ? "0" : shoulderTorqueField.text,
                     out var shoulderTorqueFieldValue) && shoulderTorqueField.isFocused)
             {
@@ -636,7 +684,9 @@ namespace UIScripts
                     : ((int) ShoulderTorqueMin).ToString(CultureInfo.InvariantCulture);
             }
 
-            if (float.TryParse(legBotAngleMinField.text == "" ? "0" : legBotAngleMinField.text == "-" ? "0" : legBotAngleMinField.text,
+            if (float.TryParse(
+                    legBotAngleMinField.text == "" ? "0" :
+                    legBotAngleMinField.text == "-" ? "0" : legBotAngleMinField.text,
                     out var legBotAngleMinFieldValue) && legBotAngleMinField.isFocused)
             {
                 if (legBotAngleMinFieldValue > LegBotAngleMinMax)
@@ -673,8 +723,10 @@ namespace UIScripts
                     ? 0 < LegBotAngleMinMax ? "0" : ((int) LegBotAngleMinMax).ToString(CultureInfo.InvariantCulture)
                     : ((int) LegBotAngleMinMin).ToString(CultureInfo.InvariantCulture);
             }
-            
-            if (float.TryParse(legTopAngleMinField.text == "" ? "0" : legTopAngleMinField.text == "-" ? "0" : legTopAngleMinField.text,
+
+            if (float.TryParse(
+                    legTopAngleMinField.text == "" ? "0" :
+                    legTopAngleMinField.text == "-" ? "0" : legTopAngleMinField.text,
                     out var legTopAngleMinFieldValue) && legTopAngleMinField.isFocused)
             {
                 if (legTopAngleMinFieldValue > LegTopAngleMinMax)
@@ -711,8 +763,10 @@ namespace UIScripts
                     ? 0 < LegTopAngleMinMax ? "0" : ((int) LegTopAngleMinMax).ToString(CultureInfo.InvariantCulture)
                     : ((int) LegTopAngleMinMin).ToString(CultureInfo.InvariantCulture);
             }
-            
-            if (float.TryParse(shoulderAngleMinField.text == "" ? "0" : shoulderAngleMinField.text == "-" ? "0" : shoulderAngleMinField.text,
+
+            if (float.TryParse(
+                    shoulderAngleMinField.text == "" ? "0" :
+                    shoulderAngleMinField.text == "-" ? "0" : shoulderAngleMinField.text,
                     out var shoulderAngleMinFieldValue) && shoulderAngleMinField.isFocused)
             {
                 if (shoulderAngleMinFieldValue > ShoulderAngleMinMax)
@@ -749,8 +803,10 @@ namespace UIScripts
                     ? 0 < ShoulderAngleMinMax ? "0" : ((int) ShoulderAngleMinMax).ToString(CultureInfo.InvariantCulture)
                     : ((int) ShoulderAngleMinMin).ToString(CultureInfo.InvariantCulture);
             }
-            
-            if (float.TryParse(legBotAngleMaxField.text == "" ? "0" : legBotAngleMaxField.text == "-" ? "0" : legBotAngleMaxField.text,
+
+            if (float.TryParse(
+                    legBotAngleMaxField.text == "" ? "0" :
+                    legBotAngleMaxField.text == "-" ? "0" : legBotAngleMaxField.text,
                     out var legBotAngleMaxFieldValue) && legBotAngleMaxField.isFocused)
             {
                 if (legBotAngleMaxFieldValue > LegBotAngleMaxMax)
@@ -787,8 +843,10 @@ namespace UIScripts
                     ? 0 < LegBotAngleMaxMax ? "0" : ((int) LegBotAngleMaxMax).ToString(CultureInfo.InvariantCulture)
                     : ((int) LegBotAngleMaxMin).ToString(CultureInfo.InvariantCulture);
             }
-            
-            if (float.TryParse(legTopAngleMaxField.text == "" ? "0" : legTopAngleMaxField.text == "-" ? "0" : legTopAngleMaxField.text,
+
+            if (float.TryParse(
+                    legTopAngleMaxField.text == "" ? "0" :
+                    legTopAngleMaxField.text == "-" ? "0" : legTopAngleMaxField.text,
                     out var legTopAngleMaxFieldValue) && legTopAngleMaxField.isFocused)
             {
                 if (legTopAngleMaxFieldValue > LegTopAngleMaxMax)
@@ -825,8 +883,10 @@ namespace UIScripts
                     ? 0 < LegTopAngleMaxMax ? "0" : ((int) LegTopAngleMaxMax).ToString(CultureInfo.InvariantCulture)
                     : ((int) LegTopAngleMaxMin).ToString(CultureInfo.InvariantCulture);
             }
-            
-            if (float.TryParse(shoulderAngleMaxField.text == "" ? "0" : shoulderAngleMaxField.text == "-" ? "0" : shoulderAngleMaxField.text,
+
+            if (float.TryParse(
+                    shoulderAngleMaxField.text == "" ? "0" :
+                    shoulderAngleMaxField.text == "-" ? "0" : shoulderAngleMaxField.text,
                     out var shoulderAngleMaxFieldValue) && shoulderAngleMaxField.isFocused)
             {
                 if (shoulderAngleMaxFieldValue > ShoulderAngleMaxMax)
@@ -863,12 +923,128 @@ namespace UIScripts
                     ? 0 < ShoulderAngleMaxMax ? "0" : ((int) ShoulderAngleMaxMax).ToString(CultureInfo.InvariantCulture)
                     : ((int) ShoulderAngleMaxMin).ToString(CultureInfo.InvariantCulture);
             }
-            
-            
+
+
             /*    Lidar settings    */
+
+            if (float.TryParse(rayRangeField.text == "" ? "0" : rayRangeField.text == "-" ? "0" : rayRangeField.text,
+                    out var rayRangeFieldValue) && rayRangeField.isFocused)
+            {
+                if (rayRangeFieldValue > RayRangeMax)
+                {
+                    if (!rayRangeField.isFocused)
+                    {
+                        rayRangeField.text = RayRangeMax.ToString(CultureInfo.InvariantCulture);
+                    }
+
+                    rayRangeScroll.value = 1;
+                }
+                else if (rayRangeFieldValue < RayRangeMin)
+                {
+                    if (!rayRangeField.isFocused)
+                    {
+                        rayRangeField.text = (RayRangeMin).ToString(CultureInfo.InvariantCulture);
+                    }
+
+                    rayRangeScroll.value = 0;
+                }
+                else
+                {
+                    rayRangeScroll.value = (rayRangeFieldValue - RayRangeMin) /
+                                           (RayRangeMax - RayRangeMin);
+                }
+            }
+            else if (rayRangeField.text != "" || rayRangeField.text != "-")
+            {
+                rayRangeField.text = settings.rayRange.ToString(CultureInfo.InvariantCulture);
+            }
+            else if (!rayRangeField.isFocused)
+            {
+                rayRangeField.text = 0 > RayRangeMin
+                    ? 0 < RayRangeMax ? "0" : ((int) RayRangeMax).ToString(CultureInfo.InvariantCulture)
+                    : ((int) RayRangeMin).ToString(CultureInfo.InvariantCulture);
+            }
+
+            if (float.TryParse(
+                    horizontalRangeField.text == "" ? "0" :
+                    horizontalRangeField.text == "-" ? "0" : horizontalRangeField.text,
+                    out var horizontalRangeFieldValue) && horizontalRangeField.isFocused)
+            {
+                if (horizontalRangeFieldValue > HorizontalRangeMax)
+                {
+                    if (!horizontalRangeField.isFocused)
+                    {
+                        horizontalRangeField.text = (HorizontalRangeMax).ToString(CultureInfo.InvariantCulture);
+                    }
+
+                    horizontalRangeScroll.value = 1;
+                }
+                else if (horizontalRangeFieldValue < HorizontalRangeMin)
+                {
+                    if (!horizontalRangeField.isFocused)
+                    {
+                        horizontalRangeField.text = HorizontalRangeMin.ToString(CultureInfo.InvariantCulture);
+                    }
+
+                    horizontalRangeScroll.value = 0;
+                }
+                else
+                {
+                    horizontalRangeScroll.value = (horizontalRangeFieldValue - HorizontalRangeMin) /
+                                                  (HorizontalRangeMax - HorizontalRangeMin);
+                }
+            }
+            else if (horizontalRangeField.text != "" || horizontalRangeField.text != "-")
+            {
+                horizontalRangeField.text = settings.horizontalRange.ToString(CultureInfo.InvariantCulture);
+            }
+            else if (!horizontalRangeField.isFocused)
+            {
+                horizontalRangeField.text = 0 > HorizontalRangeMin
+                    ? 0 < HorizontalRangeMax ? "0" : ((int) HorizontalRangeMax).ToString(CultureInfo.InvariantCulture)
+                    : ((int) HorizontalRangeMin).ToString(CultureInfo.InvariantCulture);
+            }
             
-            
-            
+            if (float.TryParse(
+                    verticalRangeField.text == "" ? "0" :
+                    verticalRangeField.text == "-" ? "0" : verticalRangeField.text,
+                    out var verticalRangeFieldValue) && verticalRangeField.isFocused)
+            {
+                if (verticalRangeFieldValue > VerticalRangeMax)
+                {
+                    if (!verticalRangeField.isFocused)
+                    {
+                        verticalRangeField.text = (VerticalRangeMax).ToString(CultureInfo.InvariantCulture);
+                    }
+
+                    verticalRangeScroll.value = 1;
+                }
+                else if (verticalRangeFieldValue < VerticalRangeMin)
+                {
+                    if (!verticalRangeField.isFocused)
+                    {
+                        verticalRangeField.text = VerticalRangeMin.ToString(CultureInfo.InvariantCulture);
+                    }
+
+                    verticalRangeScroll.value = 0;
+                }
+                else
+                {
+                    verticalRangeScroll.value = (verticalRangeFieldValue - VerticalRangeMin) /
+                                                (VerticalRangeMax - VerticalRangeMin);
+                }
+            }
+            else if (verticalRangeField.text != "" || verticalRangeField.text != "-")
+            {
+                verticalRangeField.text = settings.verticalRange.ToString(CultureInfo.InvariantCulture);
+            }
+            else if (!verticalRangeField.isFocused)
+            {
+                verticalRangeField.text = 0 > VerticalRangeMin
+                    ? 0 < VerticalRangeMax ? "0" : ((int) VerticalRangeMax).ToString(CultureInfo.InvariantCulture)
+                    : ((int) VerticalRangeMin).ToString(CultureInfo.InvariantCulture);
+            }
+
             /*    Convert the value of scroll bars to setting values    */
 
             /*    Video settings    */
@@ -889,48 +1065,54 @@ namespace UIScripts
 
             settings.legBotSpeed = legBotSpeedScroll.value * (LegBotSpeedMax - LegBotSpeedMin) +
                                    LegBotSpeedMin;
-            
+
             settings.legTopSpeed = legTopSpeedScroll.value * (LegTopSpeedMax - LegTopSpeedMin) +
                                    LegTopSpeedMin;
-            
+
             settings.shoulderSpeed = shoulderSpeedScroll.value * (ShoulderSpeedMax - ShoulderSpeedMin) +
                                      ShoulderSpeedMin;
-            
-            
+
+
             settings.legBotTorque = legBotTorqueScroll.value * (LegBotTorqueMax - LegBotTorqueMin) +
                                     LegBotTorqueMin;
-            
+
             settings.legTopTorque = legTopTorqueScroll.value * (LegTopTorqueMax - LegTopTorqueMin) +
                                     LegTopTorqueMin;
-            
+
             settings.shoulderTorque = shoulderTorqueScroll.value * (ShoulderTorqueMax - ShoulderTorqueMin) +
                                       ShoulderTorqueMin;
-            
-            
+
+
             settings.legBotAngleMin = legBotAngleMinScroll.value * (LegBotAngleMinMax - LegBotAngleMinMin) +
                                       LegBotAngleMinMin;
-            
+
             settings.legTopAngleMin = legTopAngleMinScroll.value * (LegTopAngleMinMax - LegTopAngleMinMin) +
                                       LegTopAngleMinMin;
-            
+
             settings.shoulderAngleMin = shoulderAngleMinScroll.value * (ShoulderAngleMinMax - ShoulderAngleMinMin) +
                                         ShoulderAngleMinMin;
-            
-            
+
+
             settings.legBotAngleMax = legBotAngleMaxScroll.value * (LegBotAngleMaxMax - LegBotAngleMaxMin) +
                                       LegBotAngleMaxMin;
-            
+
             settings.legTopAngleMax = legTopAngleMaxScroll.value * (LegTopAngleMaxMax - LegTopAngleMaxMin) +
                                       LegTopAngleMaxMin;
-            
+
             settings.shoulderAngleMax = shoulderAngleMaxScroll.value * (ShoulderAngleMaxMax - ShoulderAngleMaxMin) +
                                         ShoulderAngleMaxMin;
-            
-            
+
+
             /*    Lidar settings    */
+
+            settings.rayRange = (int) (rayRangeScroll.value * (RayRangeMax - RayRangeMin) +
+                                       RayRangeMin);
+
+            settings.horizontalRange = (int) (horizontalRangeScroll.value * (HorizontalRangeMax - HorizontalRangeMin) +
+                                              HorizontalRangeMin);
             
-            
-            
+            settings.verticalRange = (int) (verticalRangeScroll.value * (VerticalRangeMax - VerticalRangeMin) +
+                                            VerticalRangeMin);
         }
     }
 }

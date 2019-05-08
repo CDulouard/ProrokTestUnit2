@@ -88,6 +88,9 @@ public class RobotDatas
         json += LidarDatasToJson();
         json += ",\n";
         json += SensorDatasToJson();
+        json += ",\n";
+        json += "\"score\": " + Controller.GetScore() + ",\n";
+        json += "\"finished\": " + Controller.GetFinished();
         json += "\n}";
         return json;
     }

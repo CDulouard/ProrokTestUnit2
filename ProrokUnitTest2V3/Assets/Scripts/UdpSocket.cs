@@ -128,6 +128,14 @@ public class UdpSocket{
                             _client.Send(Manager.status);
                         }
                         break;
+                    case 1003:
+                        /*    received new target position    */
+                        
+                        if (ReadIp(from) == _clientIp && _clientPort != 0)
+                        {
+                            _client.Send(Controller.GetScore().ToString());
+                        }
+                        break;
                         
                     default:
                         Debug.Log("Unknown id");

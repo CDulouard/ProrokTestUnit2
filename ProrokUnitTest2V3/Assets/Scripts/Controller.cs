@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using UIScripts;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using UnityEngine;
 
@@ -30,6 +30,7 @@ public class Controller : MonoBehaviour
     private static ProrokTestUnit2 _prorokTestUnit2Copy;
 
     private int _testStep;
+    private static int _score;
 
     private static bool _respawnFlag;
     private static MapDatas _currentMap;
@@ -39,15 +40,37 @@ public class Controller : MonoBehaviour
 
     private static IEnumerable<KeyValuePair<string, float>>
         _sensorValues; /*    Stores roll, pitch, yaw and  altitude of the robot    */
+    
+    /*    DEBUG    */
+    private int _frameCount;
 
+    IEnumerator CheckForProgress()
+    {
+        var finish = _currentMap.GetFinishPoint();
+        var prevDistance = Vector3.Distance(generalPurposeSensor.transform.position, finish);
+        while (true)
+        {
+            var dFromFinish = Vector3.Distance(generalPurposeSensor.transform.position,finish);
+            _score += (int)(prevDistance - dFromFinish - 1);
+            prevDistance = dFromFinish;
+            yield return new WaitForSeconds(1f);
+        }   
+    }
     private void Start()
     {
-        
+        _score = 0;
+        _currentMap = new MapDatas(SceneManager.GetActiveScene().buildIndex);
         InitRobot();
         if (demoWalk & debugMode) InitWalkDemo();
         RefreshMotors();
         RefreshSensorValues();
         _prorokTestUnit2Copy = prorokTestUnit2;
+        StartCoroutine(CheckForProgress());
+
+        /*    DEBUG    */
+
+        _frameCount = 0;
+
     }
 
     private void Update()
@@ -60,25 +83,31 @@ public class Controller : MonoBehaviour
         RefreshSensorValues();
         _prorokTestUnit2Copy = prorokTestUnit2;
         CheckRespawn();
+        
+        /*    DEBUG    */
+        _frameCount += 1;
+        if (_frameCount == 100)
+        {
+            _frameCount = 0;
+            Debug.Log(_score);
+        }
+
+    }
+
+    public static int GetScore()
+    {
+        return _score;
     }
 
     public static void Respawn()
     {
-        /*
-        Debug.Log("Respawn");
-        _currentMap = new MapDatas(SceneLoader.activeScene);
-        Debug.Log(0);
-        _robotRigidBody.isKinematic = true;
-        Debug.Log(1);
-        _robotTransform.position = _currentMap.GetSpawnPoint();
-        Debug.Log(2);
-        Debug.Log(_currentMap.GetSpawnPoint());
-        */
+        /*    Set _respawnFlag    */
         _respawnFlag = true;
     }
 
     private void CheckRespawn()
     {
+        /*    Reload the scene if _respawnFlag is set    */
         if (!_respawnFlag) return;
         _respawnFlag = false;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);

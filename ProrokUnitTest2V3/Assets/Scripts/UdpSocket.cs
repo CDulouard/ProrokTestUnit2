@@ -3,9 +3,10 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Text.RegularExpressions;
+using UIScripts;
 using UnityEngine;
 
-
+using UnityEngine.SceneManagement;
 public class UdpSocket{
         private Socket _socket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
         private const int BufSize = 8 * 1024;
@@ -15,6 +16,8 @@ public class UdpSocket{
         private UdpSocket _client;
         private string _clientIp;
         private int _clientPort;
+        
+
 
         public class State
         {
@@ -29,6 +32,7 @@ public class UdpSocket{
         
         public void StartServer(string address, int port)
         {
+            
             _socket.SetSocketOption(SocketOptionLevel.IP, SocketOptionName.ReuseAddress, true);
             _socket.Bind(new IPEndPoint(IPAddress.Parse(address), port));
             Receive();
@@ -109,9 +113,18 @@ public class UdpSocket{
                         break;
                     
                     case 1001:
-                        /*    received new target position    */
+                        /*    Reset    */
                         if (ReadIp(from) == _clientIp && _clientPort != 0)
                         {
+                            _client.Send(Manager.status);
+                        }
+                        break;
+                    case 1002:
+                        /*    received new target position    */
+                        
+                        if (ReadIp(from) == _clientIp && _clientPort != 0)
+                        {
+                            Controller.Respawn();
                             _client.Send(Manager.status);
                         }
                         break;

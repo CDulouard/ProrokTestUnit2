@@ -7,6 +7,7 @@ namespace UIScripts
     {
         private static int _sceneToLoad;
         private static string _mode = "Simulation";
+        public static int activeScene;
 
         private void Start()
         {
@@ -18,6 +19,7 @@ namespace UIScripts
             if(Server.isActive) Server.StopServer();
             /*    Switch to the scene stores in _sceneToLoad    */
             SceneManager.LoadScene(_sceneToLoad);
+            activeScene = _sceneToLoad;
         }
 
         public void SelectScene(int nb)

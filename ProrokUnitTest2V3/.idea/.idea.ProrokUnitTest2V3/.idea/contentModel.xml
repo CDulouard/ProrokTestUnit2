@@ -14,6 +14,7 @@
           <e p="LidarPoint.cs" t="Include" />
           <e p="MainMenuCamera.cs" t="Include" />
           <e p="Manager.cs" t="Include" />
+          <e p="MapDatas.cs" t="Include" />
           <e p="Motor.cs" t="Include" />
           <e p="ProrokTestUnit2.cs" t="Include" />
           <e p="RobotDatas.cs" t="Include" />

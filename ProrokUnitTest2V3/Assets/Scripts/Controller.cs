@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
+using UIScripts;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 
 public class Controller : MonoBehaviour
@@ -30,6 +31,9 @@ public class Controller : MonoBehaviour
 
     private int _testStep;
 
+    private static bool _respawnFlag;
+    private static MapDatas _currentMap;
+
     private static IEnumerable<KeyValuePair<string, float>>
         _motorsDatas; /*    Stores the actual angle of each motors    */
 
@@ -38,6 +42,7 @@ public class Controller : MonoBehaviour
 
     private void Start()
     {
+        
         InitRobot();
         if (demoWalk & debugMode) InitWalkDemo();
         RefreshMotors();
@@ -54,6 +59,29 @@ public class Controller : MonoBehaviour
         RefreshMotors();
         RefreshSensorValues();
         _prorokTestUnit2Copy = prorokTestUnit2;
+        CheckRespawn();
+    }
+
+    public static void Respawn()
+    {
+        /*
+        Debug.Log("Respawn");
+        _currentMap = new MapDatas(SceneLoader.activeScene);
+        Debug.Log(0);
+        _robotRigidBody.isKinematic = true;
+        Debug.Log(1);
+        _robotTransform.position = _currentMap.GetSpawnPoint();
+        Debug.Log(2);
+        Debug.Log(_currentMap.GetSpawnPoint());
+        */
+        _respawnFlag = true;
+    }
+
+    private void CheckRespawn()
+    {
+        if (!_respawnFlag) return;
+        _respawnFlag = false;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     public static IEnumerable<KeyValuePair<string, float>> GetMotorsDatas()

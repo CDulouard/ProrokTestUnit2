@@ -119,23 +119,23 @@ namespace UIScripts
 
         public InputField horizontalStepField;
         public Scrollbar horizontalStepScroll;
-        private const float HorizontalStepRangeMin = 0.1f;
-        private const float HorizontalStepRangeMax = 90f;
+        private const float HorizontalStepMin = 0.1f;
+        private const float HorizontalStepMax = 90f;
 
         public InputField verticalStepField;
         public Scrollbar verticalStepScroll;
-        private const float VerticalStepRangeMin = 0.1f;
-        private const float VerticalStepRangeMax = 90f;
+        private const float VerticalStepMin = 0.1f;
+        private const float VerticalStepMax = 90f;
 
         public InputField horizontalOffsetField;
         public Scrollbar horizontalOffsetScroll;
-        private const float HorizontalOffsetRangeMin = 0f;
-        private const float HorizontalOffsetRangeMax = 90f;
+        private const float HorizontalOffsetMin = 0f;
+        private const float HorizontalOffsetMax = 90f;
 
         public InputField verticalOffsetField;
         public Scrollbar verticalOffsetScroll;
-        private const float VerticalOffsetRangeMin = 0f;
-        private const float VerticalOffsetRangeMax = 90f;
+        private const float VerticalOffsetMin = 0f;
+        private const float VerticalOffsetMax = 90f;
 
 
         public static Settings settings;
@@ -179,6 +179,12 @@ namespace UIScripts
             rayRangeField.text = settings.rayRange.ToString(CultureInfo.InvariantCulture);
             horizontalRangeField.text = settings.horizontalRange.ToString(CultureInfo.InvariantCulture);
             verticalRangeField.text = settings.verticalRange.ToString(CultureInfo.InvariantCulture);
+            
+            horizontalStepField.text = settings.horizontalStep.ToString(CultureInfo.InvariantCulture);
+            verticalStepField.text = settings.horizontalStep.ToString(CultureInfo.InvariantCulture);
+            
+            horizontalOffsetField.text = settings.horizontalOffset.ToString(CultureInfo.InvariantCulture);
+            verticalOffsetField.text = settings.verticalOffset.ToString(CultureInfo.InvariantCulture);
 
 
             /*    Convert the value of the settings to a value for scroll bars    */
@@ -249,9 +255,21 @@ namespace UIScripts
 
             horizontalRangeScroll.value = (float) (settings.horizontalRange - HorizontalRangeMin) /
                                           (HorizontalRangeMax - HorizontalRangeMin);
-            
+
             verticalRangeScroll.value = (float) (settings.verticalRange - VerticalRangeMin) /
-                                          (VerticalRangeMax - VerticalRangeMin);
+                                        (VerticalRangeMax - VerticalRangeMin);
+
+            horizontalStepScroll.value = (settings.horizontalStep - HorizontalStepMin) /
+                                         (HorizontalStepMax - HorizontalStepMin);
+            
+            verticalStepScroll.value = (settings.verticalStep - VerticalStepMin) /
+                                         (VerticalStepMax - VerticalStepMin);
+            
+            horizontalOffsetScroll.value = (settings.horizontalOffset - HorizontalOffsetMin) /
+                                         (HorizontalOffsetMax - HorizontalOffsetMin);
+            
+            verticalOffsetScroll.value = (settings.verticalOffset - VerticalOffsetMin) /
+                                       (VerticalOffsetMax - VerticalOffsetMin);
         }
 
 
@@ -1004,7 +1022,7 @@ namespace UIScripts
                     ? 0 < HorizontalRangeMax ? "0" : ((int) HorizontalRangeMax).ToString(CultureInfo.InvariantCulture)
                     : ((int) HorizontalRangeMin).ToString(CultureInfo.InvariantCulture);
             }
-            
+
             if (float.TryParse(
                     verticalRangeField.text == "" ? "0" :
                     verticalRangeField.text == "-" ? "0" : verticalRangeField.text,
@@ -1043,6 +1061,170 @@ namespace UIScripts
                 verticalRangeField.text = 0 > VerticalRangeMin
                     ? 0 < VerticalRangeMax ? "0" : ((int) VerticalRangeMax).ToString(CultureInfo.InvariantCulture)
                     : ((int) VerticalRangeMin).ToString(CultureInfo.InvariantCulture);
+            }
+
+            if (float.TryParse(
+                    horizontalStepField.text == "" ? "0" :
+                    horizontalStepField.text == "-" ? "0" : horizontalStepField.text, NumberStyles.Any,
+                    CultureInfo.InvariantCulture,
+                    out var horizontalStepFieldValue) && horizontalStepField.isFocused)
+            {
+                if (horizontalStepFieldValue > HorizontalStepMax)
+                {
+                    if (!horizontalStepField.isFocused)
+                    {
+                        horizontalStepField.text = HorizontalStepMax.ToString(CultureInfo.InvariantCulture);
+                    }
+
+                    horizontalStepScroll.value = 1;
+                }
+                else if (horizontalStepFieldValue < HorizontalStepMin)
+                {
+                    if (!horizontalStepField.isFocused)
+                    {
+                        horizontalStepField.text = HorizontalStepMin.ToString(CultureInfo.InvariantCulture);
+                    }
+
+                    horizontalStepScroll.value = 0;
+                }
+                else
+                {
+                    horizontalStepScroll.value = (horizontalStepFieldValue - HorizontalStepMin) /
+                                                 (HorizontalStepMax - HorizontalStepMin);
+                }
+            }
+            else if (horizontalStepField.text != "" || horizontalStepField.text != "-")
+            {
+                horizontalStepField.text = settings.horizontalStep.ToString(CultureInfo.InvariantCulture);
+            }
+            else if (!horizontalStepField.isFocused)
+            {
+                horizontalStepField.text = 0 > HorizontalStepMin
+                    ? 0 < HorizontalStepMax ? "0" : ((int) HorizontalStepMax).ToString(CultureInfo.InvariantCulture)
+                    : ((int) HorizontalStepMin).ToString(CultureInfo.InvariantCulture);
+            }
+            
+            if (float.TryParse(
+                    verticalStepField.text == "" ? "0" :
+                    verticalStepField.text == "-" ? "0" : verticalStepField.text, NumberStyles.Any,
+                    CultureInfo.InvariantCulture,
+                    out var verticalStepFieldValue) && verticalStepField.isFocused)
+            {
+                if (verticalStepFieldValue > VerticalStepMax)
+                {
+                    if (!verticalStepField.isFocused)
+                    {
+                        verticalStepField.text = VerticalStepMax.ToString(CultureInfo.InvariantCulture);
+                    }
+
+                    verticalStepScroll.value = 1;
+                }
+                else if (verticalStepFieldValue < VerticalStepMin)
+                {
+                    if (!verticalStepField.isFocused)
+                    {
+                        verticalStepField.text = VerticalStepMin.ToString(CultureInfo.InvariantCulture);
+                    }
+
+                    verticalStepScroll.value = 0;
+                }
+                else
+                {
+                    verticalStepScroll.value = (verticalStepFieldValue - VerticalStepMin) /
+                                               (VerticalStepMax - VerticalStepMin);
+                }
+            }
+            else if (verticalStepField.text != "" || verticalStepField.text != "-")
+            {
+                verticalStepField.text = settings.verticalStep.ToString(CultureInfo.InvariantCulture);
+            }
+            else if (!verticalStepField.isFocused)
+            {
+                verticalStepField.text = 0 > VerticalStepMin
+                    ? 0 < VerticalStepMax ? "0" : ((int) VerticalStepMax).ToString(CultureInfo.InvariantCulture)
+                    : ((int) VerticalStepMin).ToString(CultureInfo.InvariantCulture);
+            }
+            
+            if (float.TryParse(
+                    horizontalOffsetField.text == "" ? "0" :
+                    horizontalOffsetField.text == "-" ? "0" : horizontalOffsetField.text, NumberStyles.Any,
+                    CultureInfo.InvariantCulture,
+                    out var horizontalOffsetFieldValue) && horizontalOffsetField.isFocused)
+            {
+                if (horizontalOffsetFieldValue > HorizontalOffsetMax)
+                {
+                    if (!horizontalOffsetField.isFocused)
+                    {
+                        horizontalOffsetField.text = HorizontalOffsetMax.ToString(CultureInfo.InvariantCulture);
+                    }
+
+                    horizontalOffsetScroll.value = 1;
+                }
+                else if (horizontalOffsetFieldValue < HorizontalOffsetMin)
+                {
+                    if (!horizontalOffsetField.isFocused)
+                    {
+                        horizontalOffsetField.text = HorizontalOffsetMin.ToString(CultureInfo.InvariantCulture);
+                    }
+
+                    horizontalOffsetScroll.value = 0;
+                }
+                else
+                {
+                    horizontalOffsetScroll.value = (horizontalOffsetFieldValue - HorizontalOffsetMin) /
+                                                   (HorizontalOffsetMax - HorizontalOffsetMin);
+                }
+            }
+            else if (horizontalOffsetField.text != "" || horizontalOffsetField.text != "-")
+            {
+                horizontalOffsetField.text = settings.horizontalOffset.ToString(CultureInfo.InvariantCulture);
+            }
+            else if (!horizontalOffsetField.isFocused)
+            {
+                horizontalOffsetField.text = 0 > HorizontalOffsetMin
+                    ? 0 < HorizontalOffsetMax ? "0" : ((int) HorizontalOffsetMax).ToString(CultureInfo.InvariantCulture)
+                    : ((int) HorizontalOffsetMin).ToString(CultureInfo.InvariantCulture);
+            }
+            
+            if (float.TryParse(
+                    verticalOffsetField.text == "" ? "0" :
+                    verticalOffsetField.text == "-" ? "0" : verticalOffsetField.text, NumberStyles.Any,
+                    CultureInfo.InvariantCulture,
+                    out var verticalOffsetFieldValue) && verticalOffsetField.isFocused)
+            {
+                if (verticalOffsetFieldValue > VerticalOffsetMax)
+                {
+                    if (!verticalOffsetField.isFocused)
+                    {
+                        verticalOffsetField.text = VerticalOffsetMax.ToString(CultureInfo.InvariantCulture);
+                    }
+
+                    verticalOffsetScroll.value = 1;
+                }
+                else if (verticalOffsetFieldValue < VerticalOffsetMin)
+                {
+                    if (!verticalOffsetField.isFocused)
+                    {
+                        verticalOffsetField.text = VerticalOffsetMin.ToString(CultureInfo.InvariantCulture);
+                    }
+
+                    verticalOffsetScroll.value = 0;
+                }
+                else
+                {
+                    verticalOffsetScroll.value = (verticalOffsetFieldValue - VerticalOffsetMin) /
+                                                 (VerticalOffsetMax - VerticalOffsetMin);
+                }
+            }
+            else if (verticalOffsetField.text != "" || verticalOffsetField.text != "-")
+            {
+                verticalOffsetField.text = settings.verticalOffset.ToString(CultureInfo.InvariantCulture);
+            }
+            else if (!verticalOffsetField.isFocused)
+            {
+                verticalOffsetField.text = 0 > VerticalOffsetMin
+                    ? 0 < VerticalOffsetMax ? "0" : ((int) VerticalOffsetMax).ToString(CultureInfo.InvariantCulture)
+                    : ((int) VerticalOffsetMin).ToString(CultureInfo.InvariantCulture);
             }
 
             /*    Convert the value of scroll bars to setting values    */
@@ -1110,9 +1292,21 @@ namespace UIScripts
 
             settings.horizontalRange = (int) (horizontalRangeScroll.value * (HorizontalRangeMax - HorizontalRangeMin) +
                                               HorizontalRangeMin);
-            
+
             settings.verticalRange = (int) (verticalRangeScroll.value * (VerticalRangeMax - VerticalRangeMin) +
                                             VerticalRangeMin);
+
+            settings.horizontalStep = horizontalStepScroll.value * (HorizontalStepMax - HorizontalStepMin) +
+                                      HorizontalStepMin;
+            
+            settings.verticalStep = verticalStepScroll.value * (VerticalStepMax - VerticalStepMin) +
+                                    VerticalStepMin;
+            
+            settings.horizontalOffset = horizontalOffsetScroll.value * (HorizontalOffsetMax - HorizontalOffsetMin) +
+                                        HorizontalOffsetMin;
+            
+            settings.verticalOffset = verticalOffsetScroll.value * (VerticalOffsetMax - VerticalOffsetMin) +
+                                      VerticalOffsetMin;
         }
     }
 }

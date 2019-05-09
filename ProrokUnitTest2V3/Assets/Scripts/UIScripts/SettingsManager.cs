@@ -3,6 +3,9 @@ using System.Globalization;
 using UnityEngine;
 using UnityEngine.UI;
 
+// ReSharper disable UnreachableCode
+#pragma warning disable 162
+
 namespace UIScripts
 {
     [SuppressMessage("ReSharper", "ConditionIsAlwaysTrueOrFalse")]
@@ -137,6 +140,12 @@ namespace UIScripts
         private const float VerticalOffsetMin = 0f;
         private const float VerticalOffsetMax = 90f;
 
+        /*    Server settings    */
+
+        public InputField serverPortField;
+        private const int ServerPortMin = 49152;
+        private const int ServerPortMax = 65535;
+
 
         public static Settings settings;
 
@@ -179,13 +188,16 @@ namespace UIScripts
             rayRangeField.text = settings.rayRange.ToString(CultureInfo.InvariantCulture);
             horizontalRangeField.text = settings.horizontalRange.ToString(CultureInfo.InvariantCulture);
             verticalRangeField.text = settings.verticalRange.ToString(CultureInfo.InvariantCulture);
-            
+
             horizontalStepField.text = settings.horizontalStep.ToString(CultureInfo.InvariantCulture);
             verticalStepField.text = settings.horizontalStep.ToString(CultureInfo.InvariantCulture);
-            
+
             horizontalOffsetField.text = settings.horizontalOffset.ToString(CultureInfo.InvariantCulture);
             verticalOffsetField.text = settings.verticalOffset.ToString(CultureInfo.InvariantCulture);
 
+            /*    Server settings    */
+
+            serverPortField.text = settings.portDefault.ToString(CultureInfo.InvariantCulture);
 
             /*    Convert the value of the settings to a value for scroll bars    */
 
@@ -261,15 +273,15 @@ namespace UIScripts
 
             horizontalStepScroll.value = (settings.horizontalStep - HorizontalStepMin) /
                                          (HorizontalStepMax - HorizontalStepMin);
-            
+
             verticalStepScroll.value = (settings.verticalStep - VerticalStepMin) /
-                                         (VerticalStepMax - VerticalStepMin);
-            
+                                       (VerticalStepMax - VerticalStepMin);
+
             horizontalOffsetScroll.value = (settings.horizontalOffset - HorizontalOffsetMin) /
-                                         (HorizontalOffsetMax - HorizontalOffsetMin);
-            
+                                           (HorizontalOffsetMax - HorizontalOffsetMin);
+
             verticalOffsetScroll.value = (settings.verticalOffset - VerticalOffsetMin) /
-                                       (VerticalOffsetMax - VerticalOffsetMin);
+                                         (VerticalOffsetMax - VerticalOffsetMin);
         }
 
 
@@ -979,8 +991,8 @@ namespace UIScripts
             else if (!rayRangeField.isFocused)
             {
                 rayRangeField.text = 0 > RayRangeMin
-                    ? 0 < RayRangeMax ? "0" : ((int) RayRangeMax).ToString(CultureInfo.InvariantCulture)
-                    : ((int) RayRangeMin).ToString(CultureInfo.InvariantCulture);
+                    ? 0 < RayRangeMax ? "0" : (RayRangeMax).ToString(CultureInfo.InvariantCulture)
+                    : (RayRangeMin).ToString(CultureInfo.InvariantCulture);
             }
 
             if (float.TryParse(
@@ -1019,8 +1031,8 @@ namespace UIScripts
             else if (!horizontalRangeField.isFocused)
             {
                 horizontalRangeField.text = 0 > HorizontalRangeMin
-                    ? 0 < HorizontalRangeMax ? "0" : ((int) HorizontalRangeMax).ToString(CultureInfo.InvariantCulture)
-                    : ((int) HorizontalRangeMin).ToString(CultureInfo.InvariantCulture);
+                    ? 0 < HorizontalRangeMax ? "0" : (HorizontalRangeMax).ToString(CultureInfo.InvariantCulture)
+                    : (HorizontalRangeMin).ToString(CultureInfo.InvariantCulture);
             }
 
             if (float.TryParse(
@@ -1059,8 +1071,8 @@ namespace UIScripts
             else if (!verticalRangeField.isFocused)
             {
                 verticalRangeField.text = 0 > VerticalRangeMin
-                    ? 0 < VerticalRangeMax ? "0" : ((int) VerticalRangeMax).ToString(CultureInfo.InvariantCulture)
-                    : ((int) VerticalRangeMin).ToString(CultureInfo.InvariantCulture);
+                    ? 0 < VerticalRangeMax ? "0" : (VerticalRangeMax).ToString(CultureInfo.InvariantCulture)
+                    : (VerticalRangeMin).ToString(CultureInfo.InvariantCulture);
             }
 
             if (float.TryParse(
@@ -1103,7 +1115,7 @@ namespace UIScripts
                     ? 0 < HorizontalStepMax ? "0" : ((int) HorizontalStepMax).ToString(CultureInfo.InvariantCulture)
                     : ((int) HorizontalStepMin).ToString(CultureInfo.InvariantCulture);
             }
-            
+
             if (float.TryParse(
                     verticalStepField.text == "" ? "0" :
                     verticalStepField.text == "-" ? "0" : verticalStepField.text, NumberStyles.Any,
@@ -1144,7 +1156,7 @@ namespace UIScripts
                     ? 0 < VerticalStepMax ? "0" : ((int) VerticalStepMax).ToString(CultureInfo.InvariantCulture)
                     : ((int) VerticalStepMin).ToString(CultureInfo.InvariantCulture);
             }
-            
+
             if (float.TryParse(
                     horizontalOffsetField.text == "" ? "0" :
                     horizontalOffsetField.text == "-" ? "0" : horizontalOffsetField.text, NumberStyles.Any,
@@ -1185,7 +1197,7 @@ namespace UIScripts
                     ? 0 < HorizontalOffsetMax ? "0" : ((int) HorizontalOffsetMax).ToString(CultureInfo.InvariantCulture)
                     : ((int) HorizontalOffsetMin).ToString(CultureInfo.InvariantCulture);
             }
-            
+
             if (float.TryParse(
                     verticalOffsetField.text == "" ? "0" :
                     verticalOffsetField.text == "-" ? "0" : verticalOffsetField.text, NumberStyles.Any,
@@ -1226,6 +1238,41 @@ namespace UIScripts
                     ? 0 < VerticalOffsetMax ? "0" : ((int) VerticalOffsetMax).ToString(CultureInfo.InvariantCulture)
                     : ((int) VerticalOffsetMin).ToString(CultureInfo.InvariantCulture);
             }
+
+
+            /*    Server settings    */
+
+            if (int.TryParse(
+                    serverPortField.text == "" ? "0" :
+                    serverPortField.text == "-" ? "0" : serverPortField.text,
+                    out var serverPortFieldValue) && serverPortField.isFocused)
+            {
+            }
+            else if (serverPortField.text != "" || serverPortField.text != "-")
+            {
+                serverPortField.text = settings.portDefault.ToString(CultureInfo.InvariantCulture);
+            }
+            else if (!serverPortField.isFocused)
+            {
+                serverPortField.text = 0 > ServerPortMin
+                    ? 0 < ServerPortMax ? "0" : (ServerPortMax).ToString(CultureInfo.InvariantCulture)
+                    : (ServerPortMin).ToString(CultureInfo.InvariantCulture);
+            }
+
+            if (!serverPortField.isFocused)
+            {
+                if (serverPortFieldValue > ServerPortMax)
+                {
+                    serverPortFieldValue = ServerPortMax;
+                    serverPortField.text = ServerPortMax.ToString(CultureInfo.InvariantCulture);
+                }
+                else if (serverPortFieldValue < ServerPortMin)
+                {
+                    serverPortFieldValue = ServerPortMin;
+                    serverPortField.text = ServerPortMin.ToString(CultureInfo.InvariantCulture);
+                }
+            }
+
 
             /*    Convert the value of scroll bars to setting values    */
 
@@ -1298,15 +1345,19 @@ namespace UIScripts
 
             settings.horizontalStep = horizontalStepScroll.value * (HorizontalStepMax - HorizontalStepMin) +
                                       HorizontalStepMin;
-            
+
             settings.verticalStep = verticalStepScroll.value * (VerticalStepMax - VerticalStepMin) +
                                     VerticalStepMin;
-            
+
             settings.horizontalOffset = horizontalOffsetScroll.value * (HorizontalOffsetMax - HorizontalOffsetMin) +
                                         HorizontalOffsetMin;
-            
+
             settings.verticalOffset = verticalOffsetScroll.value * (VerticalOffsetMax - VerticalOffsetMin) +
                                       VerticalOffsetMin;
+
+            /*    Server settings    */
+
+            settings.portDefault = serverPortFieldValue;
         }
     }
 }

@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6510738116261293109}
   - component: {fileID: 3138162059571678643}
   - component: {fileID: 3816949342615940506}
+  - component: {fileID: 120064034680845611}
   - component: {fileID: 8099184113880482784}
   m_Layer: 9
   m_Name: LegFrontLeftTop
@@ -110,6 +111,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &120064034680845611
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 124598161505037644}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 647b071eebd17c747a7a3497baeaa220, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!59 &8099184113880482784
 HingeJoint:
   m_ObjectHideFlags: 0
@@ -311,6 +324,7 @@ GameObject:
   - component: {fileID: 1907437588541018577}
   - component: {fileID: 8586255353834257571}
   - component: {fileID: 4797293322230714566}
+  - component: {fileID: 3522096735796566215}
   - component: {fileID: 3602870743066551906}
   m_Layer: 9
   m_Name: LegBackRightBot
@@ -408,6 +422,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &3522096735796566215
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 419498053089914858}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 647b071eebd17c747a7a3497baeaa220, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!59 &3602870743066551906
 HingeJoint:
   m_ObjectHideFlags: 0
@@ -2308,6 +2334,7 @@ GameObject:
   - component: {fileID: 3940085629968896155}
   - component: {fileID: 2109366822485435788}
   - component: {fileID: 2499946519341300440}
+  - component: {fileID: 1276207944778208871}
   - component: {fileID: 69558518242630605}
   m_Layer: 9
   m_Name: ShoulderFrontLeft
@@ -2405,6 +2432,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &1276207944778208871
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2322656274524031356}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 647b071eebd17c747a7a3497baeaa220, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!59 &69558518242630605
 HingeJoint:
   m_ObjectHideFlags: 0
@@ -3634,6 +3673,7 @@ GameObject:
   - component: {fileID: 7813018621439970642}
   - component: {fileID: 2527303350161255889}
   - component: {fileID: 4446799544808093145}
+  - component: {fileID: 5424286265888683543}
   - component: {fileID: 200455184361056192}
   m_Layer: 9
   m_Name: LegBackLeftBot
@@ -3731,6 +3771,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &5424286265888683543
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3136390258442615498}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 647b071eebd17c747a7a3497baeaa220, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!59 &200455184361056192
 HingeJoint:
   m_ObjectHideFlags: 0
@@ -5096,6 +5148,7 @@ GameObject:
   - component: {fileID: 3934633636434600636}
   - component: {fileID: 4230695238035974611}
   - component: {fileID: 245600744701065024}
+  - component: {fileID: 7812632525252371516}
   - component: {fileID: 8165610937923924138}
   m_Layer: 9
   m_Name: LegFrontRightBot
@@ -5193,6 +5246,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &7812632525252371516
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5135361075379763496}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 647b071eebd17c747a7a3497baeaa220, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!59 &8165610937923924138
 HingeJoint:
   m_ObjectHideFlags: 0
@@ -5822,6 +5887,7 @@ GameObject:
   - component: {fileID: 2573833415717030956}
   - component: {fileID: 3536643105280344705}
   - component: {fileID: 8139150144329996976}
+  - component: {fileID: 7657598307307481986}
   - component: {fileID: 8226490679567715489}
   m_Layer: 9
   m_Name: ShoulderBackLeft
@@ -5919,6 +5985,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &7657598307307481986
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5507741372979792502}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 647b071eebd17c747a7a3497baeaa220, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!59 &8226490679567715489
 HingeJoint:
   m_ObjectHideFlags: 0
@@ -6043,6 +6121,7 @@ GameObject:
   - component: {fileID: 8934577702508082117}
   - component: {fileID: 4361479244380743248}
   - component: {fileID: 9177599830270558920}
+  - component: {fileID: 6005926138163691672}
   - component: {fileID: 4172309300893583702}
   - component: {fileID: 1731771072756813142}
   - component: {fileID: 484407687211964161}
@@ -6278,6 +6357,18 @@ MonoBehaviour:
         angleMax: 20
         speed: 0
         torque: 0
+--- !u!114 &6005926138163691672
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5664980132785214600}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 647b071eebd17c747a7a3497baeaa220, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!54 &4172309300893583702
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -6358,6 +6449,7 @@ GameObject:
   - component: {fileID: 7475799053625019305}
   - component: {fileID: 6915899230240797925}
   - component: {fileID: 2682287271791601922}
+  - component: {fileID: 6055573322083976032}
   - component: {fileID: 8820719593487298376}
   m_Layer: 9
   m_Name: LegBackRightTop
@@ -6455,6 +6547,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &6055573322083976032
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5753286825093709268}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 647b071eebd17c747a7a3497baeaa220, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!59 &8820719593487298376
 HingeJoint:
   m_ObjectHideFlags: 0
@@ -7274,6 +7378,7 @@ GameObject:
   - component: {fileID: 4812178454884219427}
   - component: {fileID: 5534533311097149363}
   - component: {fileID: 2710533652301295884}
+  - component: {fileID: 8305916508299874746}
   - component: {fileID: 5889111565843163343}
   m_Layer: 9
   m_Name: LegFrontRightTop
@@ -7371,6 +7476,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &8305916508299874746
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6454304918212863330}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 647b071eebd17c747a7a3497baeaa220, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!59 &5889111565843163343
 HingeJoint:
   m_ObjectHideFlags: 0
@@ -7528,6 +7645,7 @@ GameObject:
   - component: {fileID: 1696750906962339585}
   - component: {fileID: 371018317737227828}
   - component: {fileID: 5627066611205032552}
+  - component: {fileID: 4412898138605499494}
   - component: {fileID: 5601384765992730641}
   m_Layer: 9
   m_Name: LegBackLeftTop
@@ -7625,6 +7743,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &4412898138605499494
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6690214658274990124}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 647b071eebd17c747a7a3497baeaa220, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!59 &5601384765992730641
 HingeJoint:
   m_ObjectHideFlags: 0
@@ -7905,6 +8035,7 @@ GameObject:
   - component: {fileID: 2706119672759874181}
   - component: {fileID: 1258188197837590707}
   - component: {fileID: 2694794411902538574}
+  - component: {fileID: 7894390538124282071}
   - component: {fileID: 5672336744140850715}
   m_Layer: 9
   m_Name: LegFrontLeftBot
@@ -8002,6 +8133,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &7894390538124282071
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6903749253563032311}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 647b071eebd17c747a7a3497baeaa220, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!59 &5672336744140850715
 HingeJoint:
   m_ObjectHideFlags: 0
@@ -9279,6 +9422,7 @@ GameObject:
   - component: {fileID: 4227842554641063393}
   - component: {fileID: 3151500569630539265}
   - component: {fileID: 4806390040533856740}
+  - component: {fileID: 4034096687060605079}
   - component: {fileID: 108839798047502335}
   m_Layer: 9
   m_Name: ShoulderFrontRight
@@ -9376,6 +9520,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &4034096687060605079
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8034900814900695668}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 647b071eebd17c747a7a3497baeaa220, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!59 &108839798047502335
 HingeJoint:
   m_ObjectHideFlags: 0
@@ -9890,6 +10046,7 @@ GameObject:
   - component: {fileID: 8822558830272338175}
   - component: {fileID: 4084879850664848011}
   - component: {fileID: 1997676523543467550}
+  - component: {fileID: 6494304850492777880}
   - component: {fileID: 8231792302255000706}
   m_Layer: 9
   m_Name: ShoulderBackRight
@@ -9987,6 +10144,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &6494304850492777880
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8637190887215608711}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 647b071eebd17c747a7a3497baeaa220, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!59 &8231792302255000706
 HingeJoint:
   m_ObjectHideFlags: 0

@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine.SceneManagement;
 using UnityEngine;
 
@@ -31,6 +32,9 @@ public class Controller : MonoBehaviour
 
     private int _testStep;
     private static int _score;
+    private static int _timeOut;
+    private static int _isDown;
+    private static int _isColliding;
 
     private static bool _respawnFlag;
     private static int _finished;
@@ -45,9 +49,9 @@ public class Controller : MonoBehaviour
     /*    DEBUG    */
     private int _frameCount;
 
-    IEnumerator CheckForProgress()
+    private IEnumerator CheckForProgress()
     {
-        /*    increase score if the robot progress and dicrease it if it's not moving or moving the wrong way    */
+        /*    increase score if the robot progress and decrease it if it's not moving or moving the wrong way    */
         var finish = _currentMap.GetFinishPoint();
         var prevDistance = Vector3.Distance(generalPurposeSensor.transform.position, finish);
         while (true)
@@ -63,10 +67,43 @@ public class Controller : MonoBehaviour
             yield return new WaitForSeconds(1f);
         }   
     }
+
+    private IEnumerator CheckIfDown()
+    {
+        yield return new WaitForSeconds(0.1f);
+        while (true)
+        {
+            
+            var datas = Manager.datas.GetSensorDatas().ToDictionary(x => x.Key, x => x.Value);
+            if (datas["roll"] > 90f || datas["roll"] < -90f || datas["pitch"] > 90f || datas["pitch"] < -90f )
+            {
+                _isDown = 1;
+            }
+            else
+            {
+                _isDown = 0;
+            }
+            yield return new WaitForSeconds(0.1f);
+        }       
+    }
+
+    private IEnumerator Timer(int time)
+    {
+        var count = time;
+        while (count != 0)
+        {
+            yield return new WaitForSeconds(1);
+            count -= 1;
+        }
+        _timeOut = 1;
+    }
+    
     private void Start()
     {
         _finished = 0;
         _score = 0;
+        _timeOut = 0;
+        _isDown = 0;
         _currentMap = new MapDatas(SceneManager.GetActiveScene().buildIndex);
         InitRobot();
         if (demoWalk & debugMode) InitWalkDemo();
@@ -74,7 +111,8 @@ public class Controller : MonoBehaviour
         RefreshSensorValues();
         _prorokTestUnit2Copy = prorokTestUnit2;
         StartCoroutine(CheckForProgress());
-
+        StartCoroutine(Timer(_currentMap.GetGameDuration()));
+        StartCoroutine(CheckIfDown());
         /*    DEBUG    */
 
         _frameCount = 0;
@@ -97,9 +135,32 @@ public class Controller : MonoBehaviour
         if (_frameCount == 100)
         {
             _frameCount = 0;
-            Debug.Log(_score);
+            //Debug.Log(_score);
+            //Debug.Log(_timeOut);
+            //Debug.Log(_isDown);
+            //Debug.Log(_isColliding);
         }
 
+    }
+
+    public static void SetIsColliding(int val)
+    {
+        _isColliding = val;
+    }
+
+    public static int GetIsColliding()
+    {
+        return _isColliding;
+    }
+
+    public static int GetTimeOut()
+    {
+        return _timeOut;
+    }
+    
+    public static int GetIsDown()
+    {
+        return _isDown;
     }
 
     public static int GetFinished()

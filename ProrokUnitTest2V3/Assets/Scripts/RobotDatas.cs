@@ -10,6 +10,10 @@ public class RobotDatas
 
     private IEnumerable<KeyValuePair<string, float>> SensorDatas { get; set; }
 
+    public IEnumerable<KeyValuePair<string, float>> GetSensorDatas()
+    {
+        return SensorDatas;
+    }
     public void RefreshDatas(IEnumerable<KeyValuePair<string, float>> motorDatas, IEnumerable<LidarPoint> lidarDatas,
         IEnumerable<KeyValuePair<string, float>> sensorValues)
     {
@@ -90,6 +94,9 @@ public class RobotDatas
         json += SensorDatasToJson();
         json += ",\n";
         json += "\"score\": " + Controller.GetScore() + ",\n";
+        json += "\"timeOut\": " + Controller.GetTimeOut() + ",\n";
+        json += "\"isDown\": " + Controller.GetIsDown() + ",\n";
+        json += "\"isColliding\": " + Controller.GetIsColliding() + ",\n";
         json += "\"finished\": " + Controller.GetFinished();
         json += "\n}";
         return json;

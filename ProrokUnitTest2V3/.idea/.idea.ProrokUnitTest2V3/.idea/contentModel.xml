@@ -26,7 +26,6 @@
           <e p="targetPositions.cs" t="Include" />
           <e p="TestScripts" t="Include">
             <e p="ApplyForceToObject.cs" t="Include" />
-            <e p="ElRenamator.cs" t="Include" />
             <e p="moveObject.cs" t="Include" />
           </e>
           <e p="UdpSocket.cs" t="Include" />

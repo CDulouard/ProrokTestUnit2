@@ -132,12 +132,12 @@ namespace UIScripts
 
         public InputField horizontalOffsetField;
         public Scrollbar horizontalOffsetScroll;
-        private const float HorizontalOffsetMin = 0f;
+        private const float HorizontalOffsetMin = -90f;
         private const float HorizontalOffsetMax = 90f;
 
         public InputField verticalOffsetField;
         public Scrollbar verticalOffsetScroll;
-        private const float VerticalOffsetMin = 0f;
+        private const float VerticalOffsetMin = -90f;
         private const float VerticalOffsetMax = 90f;
 
         /*    Server settings    */

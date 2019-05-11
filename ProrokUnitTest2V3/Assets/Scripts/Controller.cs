@@ -100,6 +100,7 @@ public class Controller : MonoBehaviour
     
     private void Start()
     {
+        Application.runInBackground = true;
         _finished = 0;
         _score = 0;
         _timeOut = 0;

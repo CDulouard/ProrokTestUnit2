@@ -3962,7 +3962,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Leg bot angle min :'
+  m_Text: 'Leg bot angle max :'
 --- !u!222 &533609344
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5343,7 +5343,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Leg top angle min :'
+  m_Text: 'Leg top angle max :'
 --- !u!222 &682910191
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -14989,7 +14989,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Shoulder angle min :'
+  m_Text: 'Shoulder angle max :'
 --- !u!222 &1746961348
 CanvasRenderer:
   m_ObjectHideFlags: 0

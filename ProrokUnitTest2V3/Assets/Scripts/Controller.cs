@@ -32,12 +32,12 @@ public class Controller : MonoBehaviour
 
     private int _testStep;
     private static int _score;
-    private static int _timeOut;
-    private static int _isDown;
-    private static int _isColliding;
-
+    private static int _timeOut;    //-10
+    private static int _isDown;    //-10
+    private static int _isColliding;    //-10
     private static bool _respawnFlag;
-    private static int _finished;
+    private static int _finished;    //+100
+    
     private static MapDatas _currentMap;
 
     private static IEnumerable<KeyValuePair<string, float>>
@@ -51,20 +51,32 @@ public class Controller : MonoBehaviour
 
     private IEnumerator CheckForProgress()
     {
-        /*    increase score if the robot progress and decrease it if it's not moving or moving the wrong way    */
+        /*    Refresh the robot's score    */
         var finish = _currentMap.GetFinishPoint();
         var prevDistance = Vector3.Distance(generalPurposeSensor.transform.position, finish);
         while (true)
         {
             var dFromFinish = Vector3.Distance(generalPurposeSensor.transform.position,finish);
-            _score += (int)(prevDistance - dFromFinish - 1);
+            _score = (int)(prevDistance - dFromFinish - 2);
+            if (_isDown == 1)
+            {
+                _score = -10;
+            }
+            if (_isColliding == 1)
+            {
+                _score = -10;
+            }
+            if (_timeOut == 1)
+            {
+                _score = -10;
+            }
             if (dFromFinish <= 30)
             {
-                _score += 1000;
+                _score = 100;
                 _finished = 1;
             }
             prevDistance = dFromFinish;
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(0.1f);
         }   
     }
 
@@ -133,10 +145,10 @@ public class Controller : MonoBehaviour
         
         /*    DEBUG    */
         _frameCount += 1;
-        if (_frameCount == 100)
+        if (_frameCount == 30)
         {
             _frameCount = 0;
-            //Debug.Log(_score);
+            Debug.Log(_score);
             //Debug.Log(_timeOut);
             //Debug.Log(_isDown);
             //Debug.Log(_isColliding);

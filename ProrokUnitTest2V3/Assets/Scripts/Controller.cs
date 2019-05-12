@@ -148,7 +148,7 @@ public class Controller : MonoBehaviour
         if (_frameCount == 30)
         {
             _frameCount = 0;
-            Debug.Log(_score);
+            //Debug.Log(_score);
             //Debug.Log(_timeOut);
             //Debug.Log(_isDown);
             //Debug.Log(_isColliding);

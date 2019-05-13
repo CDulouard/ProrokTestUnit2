@@ -13,8 +13,7 @@ public class Server : MonoBehaviour
     public static void SetupServer(int portNumber)
     {
         /*    Function used to start the server    */
-       
-        
+             
         _server = new UdpSocket();
         _server.StartServer("127.0.0.1", portNumber);
         isActive = _server != null;

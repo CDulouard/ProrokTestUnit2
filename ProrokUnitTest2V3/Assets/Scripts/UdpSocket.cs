@@ -51,7 +51,7 @@ public class UdpSocket{
             {
                 var so = (State) ar.AsyncState;
                 int bytes = _socket.EndSend(ar);
-                Console.WriteLine("SEND: {0}, {1}", bytes, text);
+                //Console.WriteLine("SEND: {0}, {1}", bytes, text);
             }, state);
         }
 
@@ -65,11 +65,13 @@ public class UdpSocket{
 
                 var msg = Encoding.ASCII.GetString(so.buffer, 0, bytes);
                 var from = _epFrom.ToString();
-                
+                /*
                 Console.WriteLine("RECV: {0}: {1}, {2}", from, bytes,
                     msg);
                 Console.WriteLine();
+                */
                 ReadMessage(msg, out var id, out var content);
+                
 
 
                 switch (id)
@@ -90,12 +92,12 @@ public class UdpSocket{
                             _clientPort = x;
                             _clientIp = ReadIp(from);
                         
-                            Console.WriteLine(_clientIp+ ":" + _clientPort);
+                            //Console.WriteLine(_clientIp+ ":" + _clientPort);
                         
                             _client = new UdpSocket();
                             _client.Client(_clientIp, _clientPort);
                             _client.Send("Connected");
-                            Console.WriteLine(_clientIp+ ":" + _clientPort);
+                            //Console.WriteLine(_clientIp+ ":" + _clientPort);
                       
                         }
                         else
@@ -120,7 +122,7 @@ public class UdpSocket{
                         }
                         break;
                     case 1002:
-                        /*    received new target position    */
+                        /*    Respawn   */
                         
                         if (ReadIp(from) == _clientIp && _clientPort != 0)
                         {
@@ -129,7 +131,7 @@ public class UdpSocket{
                         }
                         break;
                     case 1003:
-                        /*    received new target position    */
+                        /*    Get score    */
                         
                         if (ReadIp(from) == _clientIp && _clientPort != 0)
                         {
@@ -141,7 +143,7 @@ public class UdpSocket{
                         Debug.Log("Unknown id");
                         break;
                 }
-                Console.WriteLine();
+                //Console.WriteLine();
             }, state);
         }
 

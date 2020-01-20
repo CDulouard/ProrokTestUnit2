@@ -1,13 +1,26 @@
 # ProrokUnitTest2
-Ce projet s’inscrit dans le cadre du projet inter-majeure PROROK. L’association PROROK
-a pour but de développer un projet de robot humanoïde de grande taille, piloté partiellement
-par intelligence artificielle .
-Afin de mener ce projet à bien, il est primordial de maîtriser un grand nombre de
-technologie. De ce fait, nous avons donc commencé cette année par concevoir un prototype
-de robot humanoïde de 1 m.
-Pour ce faire, nous avons choisi de développer nos compétences sur différents projets
-comme le contrôle de moteurs, la récupération de données auprès d’un opérateur humain,
-et, bien sûr, ce projet de simulateur afin de pouvoir commencer à manipuler des algorithmes
-d’apprentissage automatique.
-Le modèle de robot sur lequel nous avons choisi de travailler est un modèle de robot
-quadripède à douze articulations inspirées du robot SpotMini de Boston Dynamics.
+ProrokUnitTest2 is the first version of a simulated environement for AI training. This simulation provide a realistic environement to train AI or collect data. It works as a server you can connect on using a simple API using UDP protocol.
+
+## Getting Started
+
+To get a copy of the project up and running on your local machine for development and testing purposes just clone the repository and open the project with Unity2018.3 .
+See deployment for notes on how to deploy the project on a live system.
+
+### Prerequisites
+
+The system requirements to run the project are the same than Unity2018.3. See https://docs.unity3d.com/2018.3/Documentation/Manual/index.html .
+
+
+## Deployment
+
+To run the simulation just use one of the compiled file we provided. If none of those works on your system you can also compile the project using the correct Unity compiler for your machine.
+
+
+## Authors
+
+* **Clement Dulouard** - *Initial work* - [CDulouard](https://github.com/CDulouard)
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](https://github.com/CDulouard/ProrokTestUnit2/blob/master/LICENSE) file for details
+
